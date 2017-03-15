@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Autore: Mattia Frongia
+Data: 07/04/2017
+-->
+<html>
+    <head>
+        <title>NerdBook: Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author"
+              content="Mattia Frongia">
+        <meta name="keywords"
+              content="login NerdBook">
+    </head>
+    <body>
+        <div id="divBody">
+            <h1>Benvenuto in <dfn title="Oh yeah!">NerdBook</dfn>!</h1>
+            <nav>
+                <p>
+                    Vai a: 
+                    <a title="Vai alla descrizione di NerdBook."
+                       href="descrizione.html">Descrizione</a>, 
+                    <a title="Vai al tuo profilo."
+                       href="profilo.html">Profilo</a> o 
+                    <a title="Vai alla tua bacheca."
+                       href="bacheca.html">Bacheca</a> 
+                </p>
+            </nav>
+        </div>
+        <br/>
+        <div id="login">
+            <p>Immetti i tuoi dati di accesso</p>
+            <!-- form per inserimento dati -->
+            <form name="user_data" action="profilo.html" method="post">
+                <!-- spazio di inserimento username -->
+                <label for="user">Nome utente o e-mail</label>
+                <br/>
+                <input name="user" id="user" type="text" size="30" maxlength="30" title="Username"/>
+                <br/>
+                <br/>
+                <!-- spazio inserimento password -->
+                <label for="pass">Password</label>
+                <br/>
+                <input name="pass" id="pass" type="password" value="Password" size="30" maxlength="20" title="Password"/>
+                <br/>
+                <br/>
+                <!-- tasto per invio dati -->
+                <input type="submit" value="Login"/>
+                <input type="reset" value="Reset"/>
+            </form>
+        </div>
+        <br/>
+    </body>
+</html>
