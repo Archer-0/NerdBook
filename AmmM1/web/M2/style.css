@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28-mar-2017, 10.00.09
+    Author     : archer
+*/
+
+/* con la seguente regola imposto le regole generali di stile del testo: 
+    - colore 
+    - dimensione caratteri generici
+    - i font da usare
+*/
+body {
+    background-color: #FAFAFA;
+    font: 20px/25px Roboto, Arial, "Open Sans", sans-serif;
+}
+
+/* gli header delle pagine contengono la parte che deve stare in alto.
+    In questa regola si sta disegnando un box colorato contenente i link principali
+    e il nome del sito e si sta impostando una dimensione e un colore per ogni
+    carattere all'interno del tag header.
+    Questo box si allarga con l'allargarsi della finestra e rimane fisso nella stessa
+    posizione anche se si scorre la pagina.
+    Il box genera un' ombra e ha un bordo piu' scuro nella parte sotto.
+*/
+header {
+    background: #00695C;
+    font: 25px/35px Roboto light, Arial, "Open Sans", sans-serif;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+    height: 29px;
+    display: block;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom: 2px solid #004D40;
+    box-sizing: content-box;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3);
+    box-sizing: content-box;
+}
+
+/* In questa regola si impostano i parametri per il titolo del sito.
+    Si imposta un colore bianco con opacita' al 100%, un font style italic con 
+    il bold e lo si posiziona in modo da aderire perfettamente alla barra sopra
+    diminuendo il margine superiore.
+*/
+header h1 {
+    color: #FFFFFF; /* Bianco */
+    opacity: 1;
+    font: 35px/45px Roboto light, Arial, "Open Sans", sans-serif;
+    margin-top: -7px;
+    position: relative;
+    font-style: italic;
+    font-weight: bold;
+}
+
+header ul, header li {
+    display: inline;
+}
+
+/* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
+header h1, header nav {
+    display: inline-block;
+}
+
+/* regola di visualizzazione del link alla pagina attualmente aperta */
+header nav li.active {
+    color: #E84E40;
+    background: #004D40;
+}
+
+/* regole di visualizzazione dei link nell'header */
+header a:link {
+    color: #FFFFFF;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header a:hover {
+    text-decoration: underline;
+    color: #E0F2F1;
+}
+
+/* impostazione delle proprieta' generali dei titoli */
+h1 {
+    color: #000000;
+    font: 35px/45px Roboto light, Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h2 {
+    color: #212121;
+    font: 25px/35px Roboto light, Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h3 {
+    color: #424242;
+    font: 20px/25px Roboto light, Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+/* regola per posizionare nella pagina i link alle pagine principali del sito.
+    E' stata impostanta una visualizzazione della lista di elementi all'interno 
+    del tag 'nav' in modo orizzontale con un ancoramento a destra.
+*/
+#siteMap {
+    position: relative;
+    float: right;
+    display: inline-block;
+    padding: 4px;
+    list-style-type: none;    
+}
+
+/* regole generali di visualizzazione di tutti i link  */
+a:link, a:active, a:visited, a:hover {
+    font: 12px/25px Roboto, Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* regole generali di visualizzazione dei link su tutta la pagina, tranne l'header */
+a:link {
+    color: #00BFA5;
+}
+
+a:visited {
+    color: #90A4AE;
+}
+
+a:hover {
+    color: #90A4AF;
+    text-decoration: underline;
+}
+
+/* spazio tra il corpo dell apagina e l'header */
+#divBody {
+    padding-top: 40px;
+}
+
+/* stil di visualizzazione del sommario sulla pagina di descrizione */
+#sommario ul, #sommario li {
+    list-style-type: none;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+/* linee di divisione della lista */
+#sommario {
+    border-top: 1px #CFD8DC solid;
+    border-bottom: 1px #CFD8DC solid;
+}

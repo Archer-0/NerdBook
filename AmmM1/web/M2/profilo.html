@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+Autore: Mattia Frongia
+Data: 07/04/2017
+-->
+<html>
+    <head>
+        <title>NerdBook: Profilo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author"
+              content="Mattia Frongia">
+        <meta name="keywords"
+              content="profilo NerdBook">
+        <link rel="stylesheet" 
+              type="text/css" 
+              href="style.css"
+              media="screen">
+    </head>
+    <body>
+        <header>
+                <h1><dfn title="Oh yeah!">NerdBook</dfn></h1>
+            <nav id="siteMap">
+                <ul>
+                    <li><a href="bacheca.html" target="bacheca">Bacheca</a></li>
+                    <li><a href="descrizione.html" target="descrizione">Descrizione</a></li>
+                    <li><a href="login.html" target="login">Login</a></li>
+                    <li class="active"><a href="profilo.html" target="Profilo">Profilo</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="divBody">
+            <h2>Il tuo profilo personale</h2>
+            <nav>
+                <p>
+                    Vai a: 
+                    <a title="Vai alla descrizione di NerdBook."
+                       href="descrizione.html">Descrizione</a>, 
+                    <a title="Vai al tuo profilo."
+                       href="profilo.html">Profilo</a> o 
+                    <a title="Vai alla tua bacheca."
+                       href="bacheca.html">Bacheca</a> 
+                </p>
+            </nav>
+        </div>
+        <div id="profileData">
+            <h3> Insrisci le seguenti informazioni per completare il tuo profilo.</h3>
+            <!--
+                Form per impostare i dati dell'utente:
+                -nome
+                -congome
+                -URL di una immagine per il profilo
+                -Frase di presentazione
+                -Data di nascita
+                -Password
+                -Conferma password
+            -->
+            <form action="bacheca.html" method="post" name="profileData">
+                <!-- Nome -->
+                <label for="userName">Nome</label>
+                <br/>
+                <input type="text" name="userName" id="userName" size="30" maxlength="50" title="Nome"/>
+                <br/>
+                <br/>
+                <!-- Cognome -->
+                <label for="userSurname">Cognome</label>
+                <br/>
+                <input type="text" name="userSurname" id="userSurname" size="30" maxlength="50" title="Cognome"/>
+                <br/>
+                <br/>
+                <!-- URL immagine profilo -->
+                <label for="userImgURL">URL immagine del profilo</label>
+                <br/>
+                <input type="url" name="userImgURL" id="userImgURL" size="30" title="Url immagine profilo"/>
+                <br/>
+                <br/>
+                <!-- Frase di presentazione -->
+                <label for="userPresentation">Frase di presentazione</label>
+                <br/>
+                <textarea rows="4" cols="22" 
+                          name="userPresentation" 
+                          id="userPresentation" 
+                          title="Frase di presentazione">Hey, sto usando NerdBook!</textarea>
+                <br/>
+                <br/>
+                <!-- Data di nascita -->
+                <label for="userBDay">Data di nascita</label>
+                <br/>
+                <input type="date" name="userBDay" id="userBDay" size="30" title="Data di nascita"/>
+                <br/>
+                <br/>
+                <!-- Password -->
+                <label for="userPass">Password</label>
+                <br/>
+                <input type="password" name="userPass" id="userPass" size="30" title="Password"/>
+                <br/>
+                <br/>
+                <!-- Conferma password -->
+                <label for="userPassConfirm">Conferma password</label>
+                <br/>
+                <input type="password" name="userPassConfirm" id="userPassConfirm"  size="30" title="Conferma password"/>
+                <br/>
+                <br/>
+                <!-- Tasti invio e reset -->
+                <input type="submit" value="Invia"/>
+                <input type="reset" value="Reset"/>
+            </form>
+        </div>  
+    </body>
+</html>
