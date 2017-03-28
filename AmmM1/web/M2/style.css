@@ -14,8 +14,8 @@ and open the template in the editor.
     - i font da usare
 */
 body {
-    background-color: #FAFAFA;
-    font: 20px/25px Roboto, Arial, "Open Sans", sans-serif;
+    background-color: #ECF0F1;
+    font: 35px/45px "Roboto, Arial", "Open Sans", sans-serif;
 }
 
 /* gli header delle pagine contengono la parte che deve stare in alto.
@@ -28,19 +28,19 @@ body {
 */
 header {
     background: #00695C;
-    font: 25px/35px Roboto light, Arial, "Open Sans", sans-serif;
+    font: 25px/35px "Roboto light", Arial, "Open Sans", sans-serif;
     line-height: normal;
     padding: 0;
     margin: 0;
-    height: 29px;
+    height: 60px;
     display: block;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    border-bottom: 2px solid #004D40;
+    border-bottom: 3px solid #2ECC71;
     box-sizing: content-box;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
     box-sizing: content-box;
 }
 
@@ -52,8 +52,9 @@ header {
 header h1 {
     color: #FFFFFF; /* Bianco */
     opacity: 1;
-    font: 35px/45px Roboto light, Arial, "Open Sans", sans-serif;
-    margin-top: -7px;
+    font: 70px/80px "Roboto light", Arial, "Open Sans", sans-serif;
+    margin-top: -9px;
+    margin-left: 5px;
     position: relative;
     font-style: italic;
     font-weight: bold;
@@ -68,42 +69,34 @@ header h1, header nav {
     display: inline-block;
 }
 
-/* regola di visualizzazione del link alla pagina attualmente aperta */
-header nav li.active {
-    color: #E84E40;
-    background: #004D40;
-}
-
-/* regole di visualizzazione dei link nell'header */
-header a:link {
-    color: #FFFFFF;
-}
-
-header a:visited {
-    color: #FFFFFF;
-}
-
-header a:hover {
-    text-decoration: underline;
-    color: #E0F2F1;
-}
-
 /* impostazione delle proprieta' generali dei titoli */
 h1 {
     color: #000000;
-    font: 35px/45px Roboto light, Arial, "Open Sans", sans-serif;
+    font: 50px/60px "Roboto light", Arial, "Open Sans", sans-serif;
     text-decoration: none;
 }
 
 h2 {
     color: #212121;
-    font: 25px/35px Roboto light, Arial, "Open Sans", sans-serif;
+    font: 45px/55px "Roboto light", Arial, "Open Sans", sans-serif;
     text-decoration: none;
 }
 
 h3 {
     color: #424242;
-    font: 20px/25px Roboto light, Arial, "Open Sans", sans-serif;
+    font: 40px/50px "Roboto light", Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h4 {
+    color: #646464;
+    font: 35px/45px "Roboto light", Arial, "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h5 {
+    color: #868686;
+    font: 25px/35px "Roboto light", Arial, "Open Sans", sans-serif;
     text-decoration: none;
 }
 
@@ -121,9 +114,29 @@ h3 {
 
 /* regole generali di visualizzazione di tutti i link  */
 a:link, a:active, a:visited, a:hover {
-    font: 12px/25px Roboto, Arial, "Open Sans", sans-serif;
+    font: 15px/20px Roboto, Arial, "Open Sans", sans-serif;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* regola di visualizzazione del link alla pagina attualmente aperta */
+header nav li.active a {
+    color: #E84E40;
+    text-decoration: underline;
+}
+
+/* regole di visualizzazione dei link nell'header */
+header a:link {
+    color: #FFFFFF;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header a:hover {
+    text-decoration: underline;
+    color: #E0F2F1;
 }
 
 /* regole generali di visualizzazione dei link su tutta la pagina, tranne l'header */
@@ -142,7 +155,7 @@ a:hover {
 
 /* spazio tra il corpo dell apagina e l'header */
 #divBody {
-    padding-top: 40px;
+    padding-top: 50px;
 }
 
 /* stil di visualizzazione del sommario sulla pagina di descrizione */
@@ -156,4 +169,50 @@ a:hover {
 #sommario {
     border-top: 1px #CFD8DC solid;
     border-bottom: 1px #CFD8DC solid;
+}
+
+
+input, textarea {
+    font: 20px "Roboto light", Arial, "Open sans" , sans-serif;
+    text-indent: 6px;
+    outline: #00695C;
+    width: 300px;
+    height: 26px;
+    box-shadow: 0px 0px 0px;
+    border-radius: 9px;
+    border: 0px #00695C;
+}
+
+input:hover, textarea:hover {
+    box-shadow: .1px .1px 2.5px;
+    border: 1px #00695C;
+}
+
+input:focus, textarea:focus {
+    box-shadow: .2px .2px 2px;
+    border: 0px #00695C;
+}
+
+
+input:focus:hover, textarea:focus:hover {
+    box-shadow: .1px .1px 2.5px;
+    border: 1px #00695C;
+}
+
+textarea {
+    text-indent: 0px;
+    transition: height .50s ease-in-out;
+}
+
+textarea:focus {
+    height: 200px;
+}
+
+input[type=submit] {
+    border-radius: 9px;
+    box-shadow: 0px 0px 0px;
+}
+
+#profileData form h3 {
+    
 }
