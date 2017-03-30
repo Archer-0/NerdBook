@@ -351,13 +351,6 @@ input[type=submit] {
     box-sizing: content-box;
 }
 
-.post {
-    box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
-    border-radius: 5px;
-    width: 900px;
-    margin: 12px;
-    box-sizing: content-box;
-}
 
 #postsDiv .post .accountImage {
     margin: 5px;
@@ -384,9 +377,23 @@ input[type=submit] {
     box-sizing: content-box;
 }
 
+.post {
+    background-color: rgba(46,204,113, .1);
+    box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
+    border-radius: 5px;
+    width: 900px;
+    margin: 12px;
+    box-sizing: content-box;
+}
+
+.post h4 {
+    border-bottom: 1px #CFD8DC solid;
+}
+
 .post a:link {
     font: 20px/30px "Open Sans", sans-serif;
 }
+
 
 /* profilo */
 
@@ -411,11 +418,46 @@ input[type=submit] {
 
 }
 
-#profileImage, #profileData {
-    display: inline-table;
+#profilo #scrollable {
+    width: auto;
+    height: auto;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(46,204,113, .6);
+}
+
+#scrollable #profileImage {
+    position: absolute;
+}
+
+#scrollable #profileData {
+    margin-left: 300px;
+}
+
+#scrollable #profileData h4 {
+    text-align: left;
+    margin-left: 30px;
 }
 
 #profilo #scrollable {
     width: 900px;
     margin-left: 300px;
+}
+
+#profilo input, #profilo textarea {
+    width: 500px;
+}
+
+#profilo textarea {
+    width: 495px;
+    padding-left: 3px;
+}
+
+#profilo input[type=date]::before {
+    content: Data di nascita;
+    
 }
