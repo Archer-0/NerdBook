@@ -18,6 +18,7 @@ Data: 07/04/2017
               media="screen">
     </head>
     <body>
+        <!--
         <header>
             <h1><dfn title="Oh yeah!">NerdBook</dfn></h1>
             <nav id="siteMap">
@@ -29,30 +30,28 @@ Data: 07/04/2017
                 </ul>
             </nav>
         </header>
+        -->
+        <div id="title">
+                <h1><img src="../img/logo_sfondo_verde_108x88.jpg" alt="Logo NerdBook" width="54" height="44" title="Logo NerdBook"/> NerdBook</h1>
+                <h4>Accedi al tuo account NerdBook.</h4>
+        </div>
+        
         <div id="divBody">
             <div id="login">
-                <p>Immetti i tuoi dati di accesso</p>
                 <!-- form per inserimento dati -->
                 <form name="user_data" action="profilo.html" method="post">
                     <!-- spazio di inserimento username -->
-                    <label for="user">Nome utente o e-mail</label>
-                    <br/>
-                    <input name="user" id="user" type="text" size="30" maxlength="30" title="Username"/>
-                    <br/>
+                    <input name="user" placeholder="Nome utente o e-mail" id="user" type="text" size="30" maxlength="30" title="Username"/>
                     <br/>
                     <!-- spazio inserimento password -->
-                    <label for="pass">Password</label>
                     <br/>
-                    <input name="pass" id="pass" type="password" size="30" maxlength="20" title="Password"/>
+                    <input name="pass" placeholder="Password" id="pass" type="password" size="30" maxlength="20" title="Password"/>
                     <br/>
                     <br/>
                     <!-- Tasto per invio dati -->
                     <input type="submit" value="Login"/>
                 </form>
             </div>
-            <h5>
-                
-            </h5>
         </div>
     </body>
 </html>

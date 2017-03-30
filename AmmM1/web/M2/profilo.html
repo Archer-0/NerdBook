@@ -23,68 +23,118 @@ Data: 07/04/2017
             <nav id="siteMap">
                 <ul>
                     <li><a href="bacheca.html" target="bacheca">Bacheca</a></li>
-                    <li><a href="descrizione.html" target="descrizione">Descrizione</a></li>
-                    <li><a href="login.html" target="login">Login</a></li>
                     <li class="active"><a href="profilo.html" target="Profilo">Profilo</a></li>
                 </ul>
             </nav>
         </header>
         <div id="divBody">
-            <div id="profileData">
-                <h3> Insrisci le seguenti informazioni per completare il tuo profilo.</h3>
-                <!--
-                    Form per impostare i dati dell'utente:
-                    -nome
-                    -congome
-                    -URL di una immagine per il profilo
-                    -Frase di presentazione
-                    -Data di nascita
-                    -Password
-                    -Conferma password
-                -->
-                <form action="bacheca.html" method="post" name="profileData">
-                    <!-- Nome -->
-                    <label for="userName">Nome</label>
-                    <br/>
-                    <input type="text" name="userName" id="userName" size="30" maxlength="50" title="Nome"/>
-                    <br/>
-                    <!-- Cognome -->
-                    <label for="userSurname">Cognome</label>
-                    <br/>
-                    <input type="text" name="userSurname" id="userSurname" size="30" maxlength="50" title="Cognome"/>
-                    <br/>
-                    <!-- URL immagine profilo -->
-                    <label for="userImgURL">URL immagine del profilo</label>
-                    <br/>
-                    <input type="url" name="userImgURL" id="userImgURL" size="30" title="Url immagine profilo"/>
-                    <br/>
-                    <!-- Frase di presentazione -->
-                    <label for="userPresentation">Frase di presentazione</label>
-                    <br/>
-                    <textarea rows="4" cols="22" 
-                              name="userPresentation" 
-                              id="userPresentation" 
-                              title="Frase di presentazione">Hey, sto usando NerdBook!</textarea>
-                    <br/>
-                    <!-- Data di nascita -->
-                    <label for="userBDay">Data di nascita</label>
-                    <br/>
-                    <input type="date" name="userBDay" id="userBDay" size="30" title="Data di nascita"/>
-                    <br/>
-                    <!-- Password -->
-                    <label for="userPass">Password</label>
-                    <br/>
-                    <input type="password" name="userPass" id="userPass" size="30" title="Password"/>
-                    <br/>
-                    <!-- Conferma password -->
-                    <label for="userPassConfirm">Conferma password</label>
-                    <br/>
-                    <input type="password" name="userPassConfirm" id="userPassConfirm"  size="30" title="Conferma password"/>
-                    <br/>
-                    <!-- Tasti invio e reset -->
-                    <input type="submit" value="Invia"/>
-                </form>
-            </div> 
+            <div id="profilo">
+                <div id="nonScrollable">
+                    <h3>
+                        Persone
+                    </h3>
+                    <nav id="people">
+                        <ul>
+                            <li><img src="../img/profilo1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Donald Trump</h5></li>
+                            <li><img src="../img/profilo2.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Hilary Clinton</h5></li>
+                            <li><img src="../img/profilo0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>The Salt Guy</h5></li>
+                        </ul>
+                    </nav>
+                    <nav id="groups">
+                        <h3>
+                            Gruppi
+                        </h3>
+                        <ul>
+                            <li><img src="../img/profilo1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Donald Trump</h5></li>
+                            <li><img src="../img/profilo2.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Hilary Clinton</h5></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="scrollable">
+                    <div id="profileImage">
+                        <img src="../img/profiloUser.jpg" title="La tua foto profilo" alt="La tua foto profilo"/>
+                    </div>
+                    <div id="profileData">
+                        <h3> Insrisci le seguenti informazioni per completare il tuo profilo.</h3>
+                        <!--
+                            Form per impostare i dati dell'utente:
+                            -nome
+                            -congome
+                            -URL di una immagine per il profilo
+                            -Frase di presentazione
+                            -Data di nascita
+                            -Password
+                            -Conferma password
+                        -->
+                        <form action="bacheca.html" method="post" name="profileData">
+                            <!-- Nome -->
+                            <input type="text" 
+                                   name="userName" 
+                                   id="userName" 
+                                   size="30" 
+                                   maxlength="50" 
+                                   title="Nome" 
+                                   placeholder="Nome"/>
+                            <br/>
+                            <!-- Cognome -->
+                            <br/>
+                            <input type="text" 
+                                   name="userSurname" 
+                                   id="userSurname" 
+                                   size="30" 
+                                   maxlength="50" 
+                                   title="Cognome" 
+                                   placeholder="Cognome"/>
+                            <br/>
+                            <!-- URL immagine profilo -->
+                            <br/>
+                            <input type="url" 
+                                   name="userImgURL"
+                                   id="userImgURL" 
+                                   size="30" 
+                                   title="Url immagine profilo" 
+                                   placeholder="URL foto profilo"/>
+                            <br/>
+                            <!-- Frase di presentazione -->
+                            <br/>
+                            <textarea rows="4" cols="22" 
+                                      name="userPresentation" 
+                                      id="userPresentation" 
+                                      title="Frase di presentazione">Hey, sto usando NerdBook!</textarea>
+                            <br/>
+                            <!-- Data di nascita -->
+                            <br/>
+                            <input type="date" 
+                                   name="userBDay" 
+                                   id="userBDay" 
+                                   size="30" 
+                                   title="Data di nascita"/>
+                            <br/>
+                            <!-- Password -->
+                            <br/>
+                            <input type="password" 
+                                   name="userPass" 
+                                   id="userPass" 
+                                   size="30" 
+                                   title="Password"
+                                   placeholder="Password"/>
+                            <br/>
+                            <!-- Conferma password -->
+                            <br/>
+                            <input type="password" 
+                                   name="userPassConfirm" 
+                                   id="userPassConfirm"  
+                                   size="30" 
+                                   title="Conferma password"
+                                   placeholder="Conferma password"/>
+                            <br/>
+                            <!-- Tasti invio -->
+                            <br/>
+                            <input type="submit" value="Invia"/>
+                        </form>
+                    </div> 
+                </div>    
+            </div>
         </div>
     </body>
 </html>

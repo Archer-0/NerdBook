@@ -14,8 +14,10 @@ and open the template in the editor.
     - i font da usare
 */
 body {
-    background-color: #ECF0F1;
-    font: 35px/45px "Roboto, Arial", "Open Sans", sans-serif;
+    background: #FFFFFF;
+    font: 25px/35px "Open Sans", sans-serif;
+    font-weight: 400;
+    color: #868686;
 }
 
 /* gli header delle pagine contengono la parte che deve stare in alto.
@@ -28,8 +30,6 @@ body {
 */
 header {
     background: #00695C;
-    font: 25px/35px "Roboto light", Arial, "Open Sans", sans-serif;
-    line-height: normal;
     padding: 0;
     margin: 0;
     height: 60px;
@@ -42,6 +42,7 @@ header {
     box-sizing: content-box;
     box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
     box-sizing: content-box;
+    z-index: 999;
 }
 
 /* In questa regola si impostano i parametri per il titolo del sito.
@@ -52,77 +53,121 @@ header {
 header h1 {
     color: #FFFFFF; /* Bianco */
     opacity: 1;
-    font: 70px/80px "Roboto light", Arial, "Open Sans", sans-serif;
+    font: 70px/80px "Open Sans", sans-serif;
     margin-top: -9px;
     margin-left: 5px;
-    position: relative;
+    position: absolute;
     font-style: italic;
     font-weight: bold;
 }
 
-header ul, header li {
-    display: inline;
+#siteMap ul li{
+    display: inline-table;
+    z-index: 1000;
 }
 
 /* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
-header h1, header nav {
+header h1, header nav{
     display: inline-block;
+    z-index: 1000;
+}
+
+header #logout {
+    float: right;
+    list-style-type: none;
+    margin-right: 10px;
+    margin-top: 0px;
+    padding: 0px; 
+    font-size: 20px;
+    color: #FFFFFF;
+    z-index: 1000;
+}
+
+header #logout img {
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    position: absolute;
+    margin-left: -60px;
+    margin-top: 7px;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5)
+}
+
+#logout #logoutButton {
+    margin-top: -15px;
+}
+
+/* regola per posizionare nella pagina i link alle pagine principali del sito.
+    E' stata impostanta una visualizzazione della lista di elementi all'interno 
+    del tag 'nav' in modo orizzontale..
+*/
+#siteMap {
+    position: relative;
+    display: inline-table;
+    margin-left: 600px;
+    margin-top: -26px;
+    text-align: center;
+}
+
+
+/* regola di visualizzazione del link alla pagina attualmente aperta */
+#siteMap li.active a {
+    color: #FFFFFF;
+}
+
+#siteMap li.active {
+    height: 62px;
+    width: auto;
+    background: #2ECC71;
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
 }
 
 /* impostazione delle proprieta' generali dei titoli */
 h1 {
-    color: #000000;
-    font: 50px/60px "Roboto light", Arial, "Open Sans", sans-serif;
+    color: #00695C;
+    font: 50px/60px "Open Sans", sans-serif;
+    font-style: italic;
+    font-weight: bold;
     text-decoration: none;
 }
 
 h2 {
     color: #212121;
-    font: 45px/55px "Roboto light", Arial, "Open Sans", sans-serif;
+    font: 45px/55px "Open Sans", sans-serif;
     text-decoration: none;
 }
 
 h3 {
     color: #424242;
-    font: 40px/50px "Roboto light", Arial, "Open Sans", sans-serif;
+    font: 40px/50px "Open Sans", sans-serif;
     text-decoration: none;
 }
 
 h4 {
     color: #646464;
-    font: 35px/45px "Roboto light", Arial, "Open Sans", sans-serif;
+    font: 35px/45px "Open Sans", sans-serif;
     text-decoration: none;
 }
 
 h5 {
-    color: #868686;
-    font: 25px/35px "Roboto light", Arial, "Open Sans", sans-serif;
+    color: #555555;
+    font: 25px/35px "Open Sans", sans-serif;
     text-decoration: none;
 }
 
-/* regola per posizionare nella pagina i link alle pagine principali del sito.
-    E' stata impostanta una visualizzazione della lista di elementi all'interno 
-    del tag 'nav' in modo orizzontale con un ancoramento a destra.
-*/
-#siteMap {
-    position: relative;
-    float: right;
-    display: inline-block;
-    padding: 4px;
-    list-style-type: none;    
+p {
+    color: #646464;
+    font: 20px/30px "Open Sans", sans-serif;
+    text-decoration: none;
 }
 
 /* regole generali di visualizzazione di tutti i link  */
 a:link, a:active, a:visited, a:hover {
-    font: 15px/20px Roboto, Arial, "Open Sans", sans-serif;
+    font: 15px/20px "Open Sans", sans-serif;
     text-decoration: none;
     font-weight: bold;
-}
-
-/* regola di visualizzazione del link alla pagina attualmente aperta */
-header nav li.active a {
-    color: #E84E40;
-    text-decoration: underline;
 }
 
 /* regole di visualizzazione dei link nell'header */
@@ -135,8 +180,16 @@ header a:visited {
 }
 
 header a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #E0F2F1;
+}
+
+#sommario ul li a:visited {
+    color: #00BFA5;
+}
+
+#bacheca a:visited, #bacheca a:link {
+    color: #555555;
 }
 
 /* regole generali di visualizzazione dei link su tutta la pagina, tranne l'header */
@@ -151,6 +204,11 @@ a:visited {
 a:hover {
     color: #90A4AF;
     text-decoration: underline;
+}
+
+::selection {
+    background: #00695C;
+    color: #FFFFFF;
 }
 
 /* spazio tra il corpo dell apagina e l'header */
@@ -173,29 +231,33 @@ a:hover {
 
 
 input, textarea {
-    font: 20px "Roboto light", Arial, "Open sans" , sans-serif;
+    font: 20px "Open sans" , sans-serif;
     text-indent: 6px;
     outline: #00695C;
     width: 300px;
-    height: 26px;
-    box-shadow: 0px 0px 0px;
-    border-radius: 9px;
+    height: 44px;
+    box-shadow: 0px 2px 2px 0px rgba(46,204,113, .16);
+    transition: box-shadow 200ms linear;
+    border-radius: 2px;
     border: 0px #00695C;
 }
 
 input:hover, textarea:hover {
-    box-shadow: .1px .1px 2.5px;
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .2),
+                0px 0px 0px 3px rgba(46,204,113, .08);
     border: 1px #00695C;
 }
 
 input:focus, textarea:focus {
-    box-shadow: .2px .2px 2px;
+    box-shadow: 0px 3px 8px 2px rgba(46,204,113, .2),
+                0px 0px 0px 2px rgba(46,204,113, .1);
     border: 0px #00695C;
 }
 
 
 input:focus:hover, textarea:focus:hover {
-    box-shadow: .1px .1px 2.5px;
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .2),
+                0px 0px 0px 3px rgba(46,204,113, .2);
     border: 1px #00695C;
 }
 
@@ -209,10 +271,151 @@ textarea:focus {
 }
 
 input[type=submit] {
-    border-radius: 9px;
+    border-radius: 2px;
+    height: 28px;
     box-shadow: 0px 0px 0px;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
 }
 
-#profileData form h3 {
-    
+/* titolo della pagina di login */
+#title {
+    float: none;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+/* stile di visualizzazione della pagina di login */
+#divBody #login{
+    width: 400px;
+    height: 210px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(46,204,113, .6);
+}
+
+/* stile dei pulsanti submit nell apagina di login e del profilo */
+#login input[type=submit], #profileData input[type=submit] {
+    height: 44px;
+    color: #FFFFFF;
+    background-color: #00695C;
+    opacity: .8;
+}
+
+/* bacheca */
+
+#bacheca {
+    width: 70%;
+    margin: auto;
+    padding: 15px;
+}
+
+#bacheca #nonScrollable {
+    width: 300px;
+    height: 600px;
+    position: fixed;
+}
+
+#nonScrollable nav ul {
+    list-style-type: none;
+    margin: -30px;
+}
+
+#nonScrollable nav ul li img, #nonScrollable nav ul li h5 {
+    display: inline-table;
+    padding-top: 0px;
+    margin: 0px;
+}
+
+#nonScrollable img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+#nonScrollable, #scrollable {
+    display: inline-table;
+}
+
+#bacheca #scrollable {
+    width: 900px;
+    height: auto;
+    margin-bottom: 50px;
+    margin-left: 300px;
+    border-left: 1px solid #2ECC71;
+    border-bottom-left-radius: 2%;
+    box-sizing: content-box;
+}
+
+.post {
+    box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
+    border-radius: 5px;
+    width: 900px;
+    margin: 12px;
+    box-sizing: content-box;
+}
+
+#postsDiv .post .accountImage {
+    margin: 5px;
+    border-radius: 100%;
+}
+
+#postsDiv .post .accountName {
+    margin-top: 21px;
+    margin-left: 5px;
+    font-size: 30px;
+    position: absolute;
+}
+
+#postsDiv .post p {
+    position: relative;
+    margin: 20px;
+    margin-top: -40px;
+    font-size: 25px;
+}
+
+#postsDiv .post p img {
+    position: relative;
+    margin-right: 10px;
+    box-sizing: content-box;
+}
+
+.post a:link {
+    font: 20px/30px "Open Sans", sans-serif;
+}
+
+/* profilo */
+
+#profilo {
+    width: 70%;
+    margin: auto;
+    padding: 15px;
+}
+
+#profilo #nonScrollable {
+    width: 300px;
+    height: 600px;
+    position: fixed;
+}
+
+#profilo #scrollable #profileImage img {
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    position: relative;
+
+}
+
+#profileImage, #profileData {
+    display: inline-table;
+}
+
+#profilo #scrollable {
+    width: 900px;
+    margin-left: 300px;
 }
