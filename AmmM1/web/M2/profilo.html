@@ -26,6 +26,11 @@ Data: 07/04/2017
                     <li class="active"><a href="profilo.html" target="Profilo">Profilo</a></li>
                 </ul>
             </nav>
+            <ul id="logout">
+                <li><img src="../img/profiloUser.jpg" alt="La tua foto profilo" title="La tua foto profilo"/></li>
+                <li id="userName">Archer</li>
+                <li id="logoutButton"><a href="login.html">Logout</a></li>
+            </ul>
         </header>
         <div id="divBody">
             <div id="profilo">
@@ -55,7 +60,7 @@ Data: 07/04/2017
                         <img src="../img/profiloUser.jpg" title="La tua foto profilo" alt="La tua foto profilo"/>
                     </div>
                     <div id="profileData">
-                        <h3> Insrisci le seguenti informazioni per completare il tuo profilo.</h3>
+                        <h4> Insrisci le seguenti informazioni per completare il tuo profilo.</h4>
                         <!--
                             Form per impostare i dati dell'utente:
                             -nome
@@ -92,7 +97,7 @@ Data: 07/04/2017
                                    name="userImgURL"
                                    id="userImgURL" 
                                    size="30" 
-                                   title="Url immagine profilo" 
+                                   title="URL foto profilo" 
                                    placeholder="URL foto profilo"/>
                             <br/>
                             <!-- Frase di presentazione -->
@@ -100,7 +105,8 @@ Data: 07/04/2017
                             <textarea rows="4" cols="22" 
                                       name="userPresentation" 
                                       id="userPresentation" 
-                                      title="Frase di presentazione">Hey, sto usando NerdBook!</textarea>
+                                      title="Frase di presentazione"
+                                      placeholder="Frase di presentazione"></textarea>
                             <br/>
                             <!-- Data di nascita -->
                             <br/>
