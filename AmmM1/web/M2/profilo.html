@@ -40,9 +40,18 @@ Data: 07/04/2017
                     </h3>
                     <nav id="people">
                         <ul>
-                            <li><img src="../img/profilo1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Donald Trump</h5></li>
-                            <li><img src="../img/profilo2.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Hilary Clinton</h5></li>
-                            <li><img src="../img/profilo0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>The Salt Guy</h5></li>
+                            <li><a href="../img/people0.jpg">
+                                    <img src="../img/people0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Matt Bellamy</h5>
+                                </a>
+                            </li>
+                            <li><a href="../img/people1.jpg">
+                                    <img src="../img/people1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Freddy Mercury</h5>
+                                </a>
+                            </li>
+                            <li><a href="../img/people2.jpg">
+                                    <img src="../img/people2.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Gaben</h5>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                     <nav id="groups">
@@ -50,8 +59,14 @@ Data: 07/04/2017
                             Gruppi
                         </h3>
                         <ul>
-                            <li><img src="../img/profilo1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Donald Trump</h5></li>
-                            <li><img src="../img/profilo2.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Hilary Clinton</h5></li>
+                            <li><a href="../img/group0.jpg">
+                                <img src="../img/group0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>The BE SHARPS</h5>
+                                </a>
+                            </li>
+                            <li><a href="../img/group1.jpg">
+                                    <img src="../img/group1.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Sgt. Pepper Lonely Heaarts Club Band</h5>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -74,8 +89,8 @@ Data: 07/04/2017
                         <form action="bacheca.html" method="post" name="profileData">
                             <!-- Nome -->
                             <input type="text" 
-                                   name="userName" 
-                                   id="userName" 
+                                   name="usrName" 
+                                   id="usrName" 
                                    size="30" 
                                    maxlength="50" 
                                    title="Nome" 
@@ -84,8 +99,8 @@ Data: 07/04/2017
                             <!-- Cognome -->
                             <br/>
                             <input type="text" 
-                                   name="userSurname" 
-                                   id="userSurname" 
+                                   name="usrSurname" 
+                                   id="usrSurname" 
                                    size="30" 
                                    maxlength="50" 
                                    title="Cognome" 
@@ -94,8 +109,8 @@ Data: 07/04/2017
                             <!-- URL immagine profilo -->
                             <br/>
                             <input type="url" 
-                                   name="userImgURL"
-                                   id="userImgURL" 
+                                   name="usrImgURL"
+                                   id="usrImgURL" 
                                    size="30" 
                                    title="URL foto profilo" 
                                    placeholder="URL foto profilo"/>
@@ -103,24 +118,24 @@ Data: 07/04/2017
                             <!-- Frase di presentazione -->
                             <br/>
                             <textarea rows="4" cols="22" 
-                                      name="userPresentation" 
-                                      id="userPresentation" 
+                                      name="usrPresentation" 
+                                      id="usrPresentation" 
                                       title="Frase di presentazione"
                                       placeholder="Frase di presentazione"></textarea>
                             <br/>
                             <!-- Data di nascita -->
                             <br/>
                             <input type="date" 
-                                   name="userBDay" 
-                                   id="userBDay" 
+                                   name="usrBDay" 
+                                   id="usrBDay" 
                                    size="30" 
                                    title="Data di nascita"/>
                             <br/>
                             <!-- Password -->
                             <br/>
                             <input type="password" 
-                                   name="userPass" 
-                                   id="userPass" 
+                                   name="usrPass" 
+                                   id="usrPass" 
                                    size="30" 
                                    title="Password"
                                    placeholder="Password"/>
@@ -128,8 +143,8 @@ Data: 07/04/2017
                             <!-- Conferma password -->
                             <br/>
                             <input type="password" 
-                                   name="userPassConfirm" 
-                                   id="userPassConfirm"  
+                                   name="usrPassConfirm" 
+                                   id="usrPassConfirm"  
                                    size="30" 
                                    title="Conferma password"
                                    placeholder="Conferma password"/>
