@@ -20,6 +20,16 @@ body {
     color: #868686;
 }
 
+#divBody {
+    width: 90%;
+    height: 100%;
+    margin-top: 2.2%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+}
+
 /* gli header delle pagine contengono la parte che deve stare in alto.
     In questa regola si sta disegnando un box colorato contenente i link principali
     e il nome del sito e si sta impostando una dimensione e un colore per ogni
@@ -30,10 +40,8 @@ body {
 */
 header {
     background: #00695C;
-    padding: 0;
-    margin: 0;
+    margin: auto;
     height: 60px;
-    display: block;
     width: 100%;
     position: fixed;
     top: 0;
@@ -42,7 +50,11 @@ header {
     box-sizing: content-box;
     box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
     box-sizing: content-box;
-    z-index: 999;
+    z-index: 9;
+}
+
+#index header ul {
+    margin-right: -900%;
 }
 
 /* In questa regola si impostano i parametri per il titolo del sito.
@@ -55,46 +67,48 @@ header h1 {
     opacity: 1;
     font: 70px/80px "Open Sans", sans-serif;
     margin-top: -9px;
-    margin-left: 5px;
+    margin-left: 0.3%;
     position: absolute;
     font-style: italic;
     font-weight: bold;
+    z-index: 10;
 }
 
 #siteMap ul li{
     display: inline-table;
-    z-index: 1000;
+    z-index: 9;
 }
 
 /* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
-header h1, header nav{
+header h1, header nav, header ul{
     display: inline-block;
-    z-index: 1000;
 }
 
 header #logout {
     float: right;
     list-style-type: none;
-    margin-right: 10px;
+    margin-right: auto;
     margin-top: 0px;
-    padding: 0px; 
+    padding-right: 0.5%; 
     font-size: 20px;
     color: #FFFFFF;
-    z-index: 1000;
+    z-index: 9;
+    max-width: 15%;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 header #logout img {
-    height: 45px;
-    width: 45px;
+    height: 70%;
     border-radius: 100%;
     position: absolute;
     margin-left: -60px;
-    margin-top: 7px;
-    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5)
+    margin-top: 8px;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
 }
 
 #logout #logoutButton {
-    margin-top: -15px;
+    margin-top: -20%;
 }
 
 /* regola per posizionare nella pagina i link alle pagine principali del sito.
@@ -104,8 +118,8 @@ header #logout img {
 #siteMap {
     position: relative;
     display: inline-table;
-    margin-left: 600px;
-    margin-top: -26px;
+    margin-left: 350px;
+    margin-top: -31%;
     text-align: center;
 }
 
@@ -198,7 +212,7 @@ a:link {
 }
 
 a:visited {
-    color: #90A4AE;
+    color: #00BFA5;
 }
 
 a:hover {
@@ -211,16 +225,12 @@ a:hover {
     color: #FFFFFF;
 }
 
-/* spazio tra il corpo dell apagina e l'header */
-#divBody {
-    padding-top: 50px;
-}
-
 /* stil di visualizzazione del sommario sulla pagina di descrizione */
 #sommario ul, #sommario li {
     list-style-type: none;
     padding-bottom: 0px;
     padding-top: 0px;
+    text-align: center;
 }
 
 /* linee di divisione della lista */
@@ -278,6 +288,10 @@ input[type=submit] {
     margin-bottom: 20px;
 }
 
+img {
+    border: 2px solid #00695C;
+}
+
 /* titolo della pagina di login */
 #title {
     float: none;
@@ -289,13 +303,20 @@ input[type=submit] {
 /* stile di visualizzazione della pagina di login */
 #divBody #login{
     width: 400px;
-    height: 210px;
+    height: 220px;
     background-color: #f7f7f7;
     border-radius: 4px;
     margin: auto;
     padding: 40px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(46,204,113, .6);
+}
+
+#divBody #login a, #divBody #login p {
+    float: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
 }
 
 /* stile dei pulsanti submit nell apagina di login e del profilo */
@@ -306,33 +327,46 @@ input[type=submit] {
     opacity: .8;
 }
 
-/* bacheca */
-
-#bacheca {
-    width: 70%;
-    margin: auto;
-    padding: 15px;
+#login input[type=submit]:hover, #profileData input[type=submit]:hover {
+    height: 44px;
+    background-color: #FFFFFF;
+    color: #00695C;
+    opacity: .8;
 }
+
+#login input[type=submit]:focus, #profileData input[type=submit]:focus {
+    height: 44px;
+    background-color: #FFFFFF;
+    color: #00695C;
+    opacity: .8;
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .5),
+                0px 0px 0px 3px rgba(46,204,113, .5);
+}
+
+/* parte sinistra fissata della pagina  */
 
 #nonScrollable {
-    width: 300px;
-    height: 600px;
-    position: fixed;
+    width: 400px;
+    height: 100%;
+    float: left;
+    position: relative;
+    margin-left: 10%;
 }
 
-#nonScrollable nav ul {
+#nonScrollable nav ul, #nonScrollable h3 {
     list-style-type: none;
-    margin: -30px;
+    margin-left: 0%;
+    text-align: left;
 }
 
 #nonScrollable nav ul li img, #nonScrollable nav ul li h5 {
     display: inline-table;
     padding-top: 0px;
     margin: 0px;
+    max-width: 350px;
 }
 
 #nonScrollable nav ul li h5 {
-    margin-top: 2px;
     margin-left: 6px;
     position: absolute;
 }
@@ -344,17 +378,26 @@ input[type=submit] {
 }
 
 #nonScrollable, #scrollable {
-    display: inline-table;
+    display: inline-block;
+}
+
+/* bacheca */
+
+#bacheca{
+    width: 90%;
+    margin: auto;
+    padding: 0px;
+    text-align: center;
 }
 
 #bacheca #scrollable {
     width: 900px;
     height: auto;
     margin-bottom: 50px;
-    margin-left: 300px;
+    margin-left: 0%;
     border-left: 1px solid #2ECC71;
-    border-bottom-left-radius: 2%;
-    box-sizing: content-box;
+    border-bottom-left-radius: 0%;
+
 }
 
 
@@ -364,7 +407,7 @@ input[type=submit] {
 }
 
 #postsDiv .post .accountName {
-    margin-top: 21px;
+    margin-top: 15px;
     margin-left: 5px;
     font-size: 30px;
     position: absolute;
@@ -378,13 +421,14 @@ input[type=submit] {
 }
 
 #postsDiv .post p img {
-    position: relative;
-    margin-right: 10px;
-    box-sizing: content-box;
+    display: block;
+    padding: 10px;
+    border-style: none;
+    border-radius: 5%;
 }
 
 .post {
-    background-color: rgba(46,204,113, .1);
+    background-color: #f7f7f7;
     box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
     border-radius: 5px;
     width: 900px;
@@ -400,13 +444,14 @@ input[type=submit] {
     font: 20px/30px "Open Sans", sans-serif;
 }
 
-
 /* profilo */
 
 #profilo {
-    width: 70%;
+    width: 90%;
     margin: auto;
-    padding: 15px;
+    margin-left: 0%;
+    padding: 0%;
+    text-align: center;
 }
 
 #profilo #scrollable #profileImage img {
@@ -419,12 +464,11 @@ input[type=submit] {
 }
 
 #profilo #scrollable {
-    width: auto;
+    width: 900px;
     height: auto;
     background-color: #f7f7f7;
     border-radius: 4px;
-    margin: auto;
-    margin-top: 30px;
+    margin-left: 0%;
     padding: 20px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(46,204,113, .6);
@@ -439,26 +483,24 @@ input[type=submit] {
 }
 
 #scrollable #profileData h4 {
-    text-align: left;
+    text-align: center;
     margin-left: 30px;
     overflow: hidden;
+    margin-top: 0px;
 }
 
-#profilo #scrollable {
-    width: 900px;
-    margin-left: 300px;
-}
-
-#profilo input, #profilo textarea {
+#profilo input {
     width: 500px;
 }
 
-#profilo textarea {
+#profilo textarea, #profilo input[type=date] {
     width: 495px;
     padding-left: 3px;
+    margin-top: 11px;
 }
 
-#profilo input[type=date]::before {
-    content: Data di nascita;
-    
+input {
+    margin: 10px;
 }
+
+
