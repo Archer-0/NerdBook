@@ -21,13 +21,12 @@ body {
 }
 
 #divBody {
-    width: 90%;
+    width: 100%;
     height: 100%;
-    margin-top: 2.2%;
+    margin-top: 5%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    padding: 2%;
 }
 
 /* gli header delle pagine contengono la parte che deve stare in alto.
@@ -350,7 +349,7 @@ img {
     height: 100%;
     float: left;
     position: relative;
-    margin-left: 10%;
+    margin-left: 1%;
 }
 
 #nonScrollable nav ul, #nonScrollable h3 {
@@ -384,7 +383,7 @@ img {
 /* bacheca */
 
 #bacheca{
-    width: 90%;
+    width: 100%;
     margin: auto;
     padding: 0px;
     text-align: center;
@@ -447,7 +446,7 @@ img {
 /* profilo */
 
 #profilo {
-    width: 90%;
+    width: 100%;
     margin: auto;
     margin-left: 0%;
     padding: 0%;
@@ -464,7 +463,7 @@ img {
 }
 
 #profilo #scrollable {
-    width: 900px;
+    width: 850px;
     height: auto;
     background-color: #f7f7f7;
     border-radius: 4px;
@@ -503,4 +502,10 @@ input {
     margin: 10px;
 }
 
+@media screen and (min-width: 480px) and (max-width: 1024px) {
+    
+}
 
+@media screen and (max-width: 480px) {
+    
+}
