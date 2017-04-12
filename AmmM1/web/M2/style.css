@@ -189,6 +189,10 @@ header h1 {
     z-index: 10;
 }
 
+header h5 {
+    display: none;
+}
+
 #siteMap ul li{
     display: inline-table;
     z-index: 9;
@@ -549,6 +553,10 @@ header #logout img {
     margin-bottom: 0px;
 }
 
+#sommario ul {
+    padding: 0px;
+}
+
 @media only screen and (min-width: 480px) and (max-width: 1023px) {
 
     header {
@@ -624,6 +632,10 @@ header #logout img {
 }
 
 @media only screen and (max-width: 480px) {
+    #divBody {
+        width: 95%;
+    }
+    
     header {
         transition: height .50s ease-in-out;
         position: absolute;
@@ -631,22 +643,26 @@ header #logout img {
         display: block;
         position: absolute;
         overflow: hidden;
-    }
-
-    #divBody {
-        width: 95%;
+        height: 50px;
     }
 
     header:hover {
         height: 120px;
     }
 
-    header nav#sitemap {
+    header #sitemap {
         display: block;
         position: absolute;
-        float: left;
+        padding: 0px;
+        float: right;
+        clear: right;
     }
-
+    
+    header nav#siteMap ul {
+        padding-left: 0%;
+        margin-left: 20%;
+    }
+    
     header #logout {
         float: left;
         position: static;
@@ -654,6 +670,19 @@ header #logout img {
         margin-left: 30px;
     }
 
+    header h5 {
+        display: block;
+        color: #FFFFFF;
+        margin-top: 70px;
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    header h1 {
+        font-size: 40px;
+        margin-top: -15px;
+    }
+    
     #bacheca {
         width: 100%;
     }
@@ -662,11 +691,19 @@ header #logout img {
         width: 100%;
     }
     #sideBarSx nav {
+        display: block;
+    }
+    
+    #profilo #sideBarSx {
         display: none;
     }
-
+    
     #bacheca #content {
         border-left: none;
+    }
+    
+    #bacheca #content {
+        width: 100%;
     }
 
     #profilo #content {
