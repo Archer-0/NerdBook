@@ -85,11 +85,12 @@ a:hover {
     text-decoration: underline;
 }
 
-body::selection {
+/*
+::selection {
     background: #00695C;
     color: #FFFFFF;
 }
-
+*/
 /* gestione delle aree di input */
 input, textarea {
     font: 20px "Open sans" , sans-serif;
