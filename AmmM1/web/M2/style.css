@@ -1,143 +1,9 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
     Created on : 28-mar-2017, 10.00.09
     Author     : archer
 */
 
-/* con la seguente regola imposto le regole generali di stile del testo: 
-    - colore 
-    - dimensione caratteri generici
-    - i font da usare
-*/
-body {
-    background: #FFFFFF;
-    font: 25px/35px "Open Sans", sans-serif;
-    font-weight: 400;
-    color: #868686;
-}
-
-#divBody {
-    width: 100%;
-    height: 100%;
-    margin-top: 5%;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* gli header delle pagine contengono la parte che deve stare in alto.
-    In questa regola si sta disegnando un box colorato contenente i link principali
-    e il nome del sito e si sta impostando una dimensione e un colore per ogni
-    carattere all'interno del tag header.
-    Questo box si allarga con l'allargarsi della finestra e rimane fisso nella stessa
-    posizione anche se si scorre la pagina.
-    Il box genera un' ombra e ha un bordo piu' scuro nella parte sotto.
-*/
-header {
-    background: #00695C;
-    margin: auto;
-    height: 60px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    border-bottom: 3px solid #2ECC71;
-    box-sizing: content-box;
-    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
-    box-sizing: content-box;
-    z-index: 9;
-}
-
-#index header ul {
-    margin-right: -900%;
-}
-
-/* In questa regola si impostano i parametri per il titolo del sito.
-    Si imposta un colore bianco con opacita' al 100%, un font style italic con 
-    il bold e lo si posiziona in modo da aderire perfettamente alla barra sopra
-    diminuendo il margine superiore.
-*/
-header h1 {
-    color: #FFFFFF; /* Bianco */
-    opacity: 1;
-    font: 70px/80px "Open Sans", sans-serif;
-    margin-top: -9px;
-    margin-left: 0.3%;
-    position: absolute;
-    font-style: italic;
-    font-weight: bold;
-    z-index: 10;
-}
-
-#siteMap ul li{
-    display: inline-table;
-    z-index: 9;
-}
-
-/* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
-header h1, header nav, header ul{
-    display: inline-block;
-}
-
-header #logout {
-    float: right;
-    list-style-type: none;
-    margin-right: auto;
-    margin-top: 0px;
-    padding-right: 0.5%; 
-    font-size: 20px;
-    color: #FFFFFF;
-    z-index: 9;
-    max-width: 15%;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-header #logout img {
-    height: 70%;
-    border-radius: 100%;
-    position: absolute;
-    margin-left: -60px;
-    margin-top: 8px;
-    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
-}
-
-#logout #logoutButton {
-    margin-top: -20%;
-}
-
-/* regola per posizionare nella pagina i link alle pagine principali del sito.
-    E' stata impostanta una visualizzazione della lista di elementi all'interno 
-    del tag 'nav' in modo orizzontale..
-*/
-#siteMap {
-    position: relative;
-    display: inline-table;
-    margin-left: 350px;
-    margin-top: -31%;
-    text-align: center;
-}
-
-
-/* regola di visualizzazione del link alla pagina attualmente aperta */
-#siteMap li.active a {
-    color: #FFFFFF;
-}
-
-#siteMap li.active {
-    height: 62px;
-    width: auto;
-    background: #2ECC71;
-    position: relative;
-    text-align: center;
-    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
-}
-
-/* impostazione delle proprieta' generali dei titoli */
+/* regole generali generali dei titoli */
 h1 {
     color: #00695C;
     font: 50px/60px "Open Sans", sans-serif;
@@ -205,7 +71,7 @@ header a:hover {
     color: #555555;
 }
 
-/* regole generali di visualizzazione dei link su tutta la pagina, tranne l'header */
+/* regole dei link */
 a:link {
     color: #00BFA5;
 }
@@ -219,26 +85,12 @@ a:hover {
     text-decoration: underline;
 }
 
-::selection {
+body::selection {
     background: #00695C;
     color: #FFFFFF;
 }
 
-/* stil di visualizzazione del sommario sulla pagina di descrizione */
-#sommario ul, #sommario li {
-    list-style-type: none;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    text-align: center;
-}
-
-/* linee di divisione della lista */
-#sommario {
-    border-top: 1px #CFD8DC solid;
-    border-bottom: 1px #CFD8DC solid;
-}
-
-
+/* gestione delle aree di input */
 input, textarea {
     font: 20px "Open sans" , sans-serif;
     text-indent: 6px;
@@ -271,6 +123,7 @@ input:focus:hover, textarea:focus:hover {
 }
 
 textarea {
+    resize: none;
     text-indent: 0px;
     transition: height .50s ease-in-out;
 }
@@ -291,6 +144,132 @@ img {
     border: 2px solid #00695C;
 }
 
+body {
+    background: #FFFFFF;
+    font: 25px/35px "Open Sans", sans-serif;
+    font-weight: 400;
+    color: #868686;
+    width: 95%;
+}
+
+/* header per ogni pagina */
+#divBody {
+    width: 100%;
+    height: 100%;
+    margin-top: 80px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    margin: auto;
+    position: fixed;
+    background: #00695C;
+    border-bottom: 3px solid #2ECC71;
+    box-sizing: content-box;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    box-sizing: content-box;
+    z-index: 10;
+}
+
+header h1 {
+    color: #FFFFFF; /* Bianco */
+    opacity: 1;
+    font: 70px/80px "Open Sans", sans-serif;
+    margin-top: -9px;
+    margin-left: 0.3%;
+    position: absolute;
+    font-style: italic;
+    font-weight: bold;
+    z-index: 10;
+}
+
+#siteMap ul li{
+    display: inline-table;
+    z-index: 9;
+}
+
+#siteMap {
+    position: relative;
+    display: inline-table;
+    margin-left: 350px;
+    margin-top: -25px;
+    text-align: center;
+}
+
+#siteMap li.active a {
+    color: #FFFFFF;
+}
+
+#siteMap li.active {
+    height: 62px;
+    width: auto;
+    background: #2ECC71;
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+}
+
+/* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
+header h1, header nav, header ul {
+    display: inline-block;
+}
+
+header #logout {
+    float: right;
+    list-style-type: none;
+    margin-right: 1px;
+    margin-top: 0px;
+    padding-right: 2px;
+    padding-left: 0px;
+    font-size: 20px;
+    color: #FFFFFF;
+    position: relative;
+    width: 95px;
+}
+
+header #logout img {
+    float: left;
+    height: 40px;
+    border-radius: 100%;
+    position: relative;
+    margin-left: -16px;
+    margin-top: 8px;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+}
+
+#logout #userName {
+    position: relative;
+    margin-left: 34px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#logout #logoutButton {
+    position: relative;
+    margin-top: -12px;
+    margin-left: 33px;
+}
+
+/* stil di visualizzazione del sommario sulla pagina di descrizione */
+#sommario ul, #sommario li {
+    list-style-type: none;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    text-align: center;
+}
+
+/* linee di divisione della lista */
+#sommario {
+    border-top: 1px #CFD8DC solid;
+    border-bottom: 1px #CFD8DC solid;
+}
+
 /* titolo della pagina di login */
 #title {
     float: none;
@@ -306,7 +285,7 @@ img {
     background-color: #f7f7f7;
     border-radius: 4px;
     margin: auto;
-    padding: 40px;
+    padding: 10px 30px 40px 30px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(46,204,113, .6);
 }
@@ -316,6 +295,10 @@ img {
     text-align: center;
     display: inline-block;
     font-size: 15px;
+}
+
+#login input, #profileData input, #profileData textarea {
+    margin-top: 20px;
 }
 
 /* stile dei pulsanti submit nell apagina di login e del profilo */
@@ -342,61 +325,99 @@ img {
                 0px 0px 0px 3px rgba(46,204,113, .5);
 }
 
-/* parte sinistra fissata della pagina  */
 
-#nonScrollable {
-    width: 400px;
+/* gestione elementi in comune nelle pagine bacheca e profilo */
+#sideBarSx {
+    width: 300px;
     height: 100%;
-    float: left;
-    position: relative;
-    margin-left: 1%;
-}
-
-#nonScrollable nav ul, #nonScrollable h3 {
-    list-style-type: none;
     margin-left: 0%;
-    text-align: left;
+    position: static;
+    box-sizing: content-box;
 }
-
-#nonScrollable nav ul li img, #nonScrollable nav ul li h5 {
-    display: inline-table;
-    padding-top: 0px;
+/* barra di ricerca */
+#divBody #bacheca #sideBarSx #searchBar {
+    height: auto;
+    width: auto;
+    padding: 0px;
+    text-align: center;
+    border-radius: 3px;
     margin: 0px;
-    max-width: 350px;
 }
 
-#nonScrollable nav ul li h5 {
-    margin-left: 6px;
-    position: absolute;
+#divBody #bacheca #sideBarSx #searchBar form input {
+    width: 100%;
 }
 
-#nonScrollable img {
-    width: 40px;
+#sideBarSx nav ul, #sideBarSx h3 {
+    list-style-type: none;
+    margin: 0%;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 30px;
+}
+
+#sideBarSx nav ul, #sideBarSx nav ul li h5 {
+    padding-top: 0px;
+    margin-top: 0px;
+    max-width: 95%;
+    overflow: hidden;
+    font-size: 20px;
+    padding-left: 10px;
+
+}
+
+#sideBarSx img {
+    width:  40px;
     height: 40px;
     border-radius: 100%;
+    float: left;
 }
 
-#nonScrollable, #scrollable {
+#sideBarSx nav ul li img, #sideBarSx nav ul li h5 {
     display: inline-block;
+    padding-top: 0px;
+    margin: 0px;
+    max-width: 220px;
+}
+
+#sideBarSx nav ul li h5 {
+    margin-left: 6px;
+}
+
+#sideBarSx nav ul li {
+    margin-top: 5px;
+}
+
+#sideBarDx {
+    width: 300px;
+    height: 100%;
+    text-align: right;
+    position: relative;
+}
+
+#sideBarSx, #content, #sideBarDx {
+    display: inline-table;
 }
 
 /* bacheca */
 
 #bacheca{
-    width: 100%;
-    margin: auto;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0px;
     text-align: center;
+    position: relative;
 }
 
-#bacheca #scrollable {
-    width: 900px;
+#bacheca #content {
+    width: 60%;
     height: auto;
     margin-bottom: 50px;
-    margin-left: 0%;
+    margin-left: auto;
     border-left: 1px solid #2ECC71;
     border-bottom-left-radius: 0%;
-
+    position: static;
 }
 
 
@@ -408,7 +429,7 @@ img {
 #postsDiv .post .accountName {
     margin-top: 15px;
     margin-left: 5px;
-    font-size: 30px;
+    font-size: 20px;
     position: absolute;
 }
 
@@ -416,7 +437,7 @@ img {
     position: relative;
     margin: 20px;
     margin-top: -40px;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 #postsDiv .post p img {
@@ -430,9 +451,10 @@ img {
     background-color: #f7f7f7;
     box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
     border-radius: 5px;
-    width: 900px;
-    margin: 12px;
+    width: 95%;
+    margin: auto;
     box-sizing: content-box;
+    text-align: left;
 }
 
 .post h4 {
@@ -446,24 +468,62 @@ img {
 /* profilo */
 
 #profilo {
-    width: 100%;
+    width: 90%;
     margin: auto;
-    margin-left: 0%;
-    padding: 0%;
     text-align: center;
 }
 
-#profilo #scrollable #profileImage img {
-    width: 300px;
-    height: 300px;
-    border-radius: 100%;
-    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
-    position: relative;
-
+#profilo #content form {
+    list-style-type: none;
+    display: inline-block;
 }
 
-#profilo #scrollable {
-    width: 850px;
+#profilo #content {
+    margin: auto;
+}
+
+#profilo #content label {
+    float: left;
+    clear: left;
+    margin-top: 20px;
+    font: 25px/60px "Open Sans", sans-serif;
+}
+
+#profilo #content input {
+    float: right;
+    clear: right;
+    width: 50%;
+    margin: 0px 0px 0px 30px;
+    margin-top: 20px;
+}
+
+#profilo #content textarea {
+    float: right;
+    clear: right;
+    width: 49.5%;
+    margin-top: 20px;
+    transition: height .60s ease-in-out, width .60s ease-in-out;
+}
+
+#profilo #content textarea:focus {
+    width: 100%;
+    height: 200px;
+}
+
+#profilo #content input[type=submit] {
+    width: 100%;
+}
+
+#profilo #content #profileImage img {
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    position: relative;
+}
+
+#profilo #content {
+    width: 60%;
     height: auto;
     background-color: #f7f7f7;
     border-radius: 4px;
@@ -473,39 +533,182 @@ img {
     box-shadow: 0px 0px 10px rgba(46,204,113, .6);
 }
 
-#scrollable #profileImage {
-    position: absolute;
+#content #profileImage {
+    position: relative;
 }
 
-#scrollable #profileData {
-    margin-left: 300px;
+#content #profileData {
+    margin-left: 0px;
 }
 
-#scrollable #profileData h4 {
+#content #profileData h4 {
     text-align: center;
-    margin-left: 30px;
+    margin-left: 0px;
     overflow: hidden;
     margin-top: 0px;
+    margin-bottom: 0px;
 }
 
-#profilo input {
-    width: 500px;
+@media only screen and (min-width: 480px) and (max-width: 1023px) {
+
+    header {
+        overflow: hidden;
+    }
+
+    #sideBarDx {
+        display: none;
+    }
+
+    #sideBarSx #people, #sideBarSx #groups {
+        display: inline-table;
+        margin-top: 20px;
+        float: left;
+    }
+
+    #sideBarSx {
+        width: 90%;
+        max-width: 90%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #sideBarSx #people {
+        float: left;
+        clear: left;
+        margin-left: 5%;
+    }
+
+    #sideBarSx #groups {
+        padding-left: 20px;
+        position: relative;
+        float: right;
+        clear: right;
+        margin-right: 25%;
+    }
+
+    #sideBarSx #groups ul li h5, #sideBarSx #people ul li h5 {
+        max-width: 300px;
+        max-height: 20px;
+        overflow: auto;
+        font: 15px/20px "Open Sans", sans-serif;
+        margin-top: 12px;
+    }
+
+    #sideBarSx #searchBar form input {
+        width: 90%;
+    }
+
+    /* bacheca */
+    #bacheca {
+        width: 95%;
+    }
+
+    #bacheca #content {
+        border: none;
+    }
+
+
+    /* profilo */
+    #profilo {
+        width: 99%;
+    }
+    #profilo #content {
+        width: 90%;
+    }
+
+    header nav#logout {
+        float: none;
+    }
+
 }
 
-#profilo textarea, #profilo input[type=date] {
-    width: 495px;
-    padding-left: 3px;
-    margin-top: 11px;
+@media only screen and (max-width: 480px) {
+    header {
+        transition: height .50s ease-in-out;
+        position: absolute;
+        word-wrap: break-word;
+        display: block;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    #divBody {
+        width: 95%;
+    }
+
+    header:hover {
+        height: 120px;
+    }
+
+    header nav#sitemap {
+        display: block;
+        position: absolute;
+        float: left;
+    }
+
+    header #logout {
+        float: left;
+        position: static;
+        margin-top: -65px;
+        margin-left: 30px;
+    }
+
+    #bacheca {
+        width: 100%;
+    }
+
+    #sideBarSx {
+        width: 100%;
+    }
+    #sideBarSx nav {
+        display: none;
+    }
+
+    #bacheca #content {
+        border-left: none;
+    }
+
+    #profilo #content {
+        box-shadow: none;
+        text-align: center;
+        width: 90%;
+    }
+
+    #profilo #content #profileData h4 {
+        font-size: 25px;
+    }
+
+    #profilo #content #profileData form label {
+        float: none;
+        font-size: 20px;
+    }
+
+    #profilo #content #profileData form input, #profilo #content #profileData form textarea {
+        float: none;
+        width: 95%;
+        margin: 0px;
+    }
+
+    #profilo #content #profileData form input[type=submit] {
+        margin-top: 20px;
+    }
+
+    #divBody #login {
+        box-shadow: none;
+        width: 95%;
+        margin: auto;
+        padding: 2px;
+    }
+
+    #title h4 {
+        font-size: 25px;
+    }
+
+    #divBody #login input {
+        width: 95%;
+    }
+
 }
 
-input {
-    margin: 10px;
-}
-
-@media screen and (min-width: 480px) and (max-width: 1024px) {
-    
-}
-
-@media screen and (max-width: 480px) {
-    
-}
+/*  */

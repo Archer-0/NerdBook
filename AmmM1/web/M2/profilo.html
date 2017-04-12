@@ -12,8 +12,8 @@ Data: 07/04/2017
               content="Mattia Frongia">
         <meta name="keywords"
               content="profilo NerdBook">
-        <link rel="stylesheet" 
-              type="text/css" 
+        <link rel="stylesheet"
+              type="text/css"
               href="style.css"
               media="screen">
     </head>
@@ -22,8 +22,8 @@ Data: 07/04/2017
                 <h1><dfn title="Oh yeah!">NerdBook</dfn></h1>
             <nav id="siteMap">
                 <ul>
-                    <li><a href="bacheca.html" target="bacheca">Bacheca</a></li>
                     <li class="active"><a href="profilo.html" target="Profilo">Profilo</a></li>
+                    <li><a href="bacheca.html" target="bacheca">Bacheca</a></li>
                 </ul>
             </nav>
             <ul id="logout">
@@ -34,14 +34,14 @@ Data: 07/04/2017
         </header>
         <div id="divBody">
             <div id="profilo">
-                <div id="nonScrollable">
+                <div id="sideBarSx">
                     <div id="searchBar">
                         <!-- da aggiungere -->
                     </div>
+                    <nav id="people">
                     <h3>
                         Persone
                     </h3>
-                    <nav id="people">
                         <ul>
                             <li><a href="../img/people0.jpg">
                                     <img src="../img/people0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Matt Bellamy</h5>
@@ -73,7 +73,7 @@ Data: 07/04/2017
                         </ul>
                     </nav>
                 </div>
-                <div id="scrollable">
+                <div id="content">
                     <div id="profileImage">
                         <img src="../img/profiloUser.jpg" title="La tua foto profilo" alt="La tua foto profilo"/>
                     </div>
@@ -90,60 +90,64 @@ Data: 07/04/2017
                             -Conferma password
                         -->
                         <form action="bacheca.html" method="post" name="profileData">
-                            <!-- Nome -->
-                            <input type="text" 
-                                   name="usrName" 
-                                   id="usrName" 
-                                   size="30" 
-                                   maxlength="50" 
-                                   title="Nome" 
-                                   placeholder="Nome"/>
-                            <!-- Cognome -->
-                            <input type="text" 
-                                   name="usrSurname" 
-                                   id="usrSurname" 
-                                   size="30" 
-                                   maxlength="50" 
-                                   title="Cognome" 
-                                   placeholder="Cognome"/>
-                            <!-- URL immagine profilo -->
-                            <input type="url" 
-                                   name="usrImgURL"
-                                   id="usrImgURL" 
-                                   size="30" 
-                                   title="URL foto profilo" 
-                                   placeholder="URL foto profilo"/>
-                            <!-- Frase di presentazione -->
-                            <textarea rows="4" cols="22" 
-                                      name="usrPresentation" 
-                                      id="usrPresentation" 
-                                      title="Frase di presentazione"
-                                      placeholder="Frase di presentazione"></textarea>
-                            <!-- Data di nascita -->
-                            <input type="date" 
-                                   name="usrBDay" 
-                                   id="usrBDay" 
-                                   size="30" 
-                                   title="Data di nascita"/>
-                            <!-- Password -->
-                            <input type="password" 
-                                   name="usrPass" 
-                                   id="usrPass" 
-                                   size="30" 
-                                   title="Password"
-                                   placeholder="Password"/>
-                            <!-- Conferma password -->
-                            <input type="password" 
-                                   name="usrPassConfirm" 
-                                   id="usrPassConfirm"  
-                                   size="30" 
-                                   title="Conferma password"
-                                   placeholder="Conferma password"/>
+                                <!-- Nome -->
+                                    <label for="usrName">Nome</label>
+                                    <input type="text"
+                                           name="usrName"
+                                           id="usrName"
+                                           size="30"
+                                           maxlength="50"
+                                           title="Nome"/>
+                                <!-- Cognome -->
+                                    <label for="usrSurname">Cognome</label>
+                                    <input type="text"
+                                           name="usrSurname"
+                                           id="usrSurname"
+                                           size="30"
+                                           maxlength="50"
+                                           title="Cognome"/>
+                                <!-- URL immagine profilo -->
+                                    <label for="usrImgURL">URL foto profilo</label>
+                                    <input type="url"
+                                           name="usrImgURL"
+                                           id="usrImgURL"
+                                           size="30"
+                                           title="URL foto profilo"/>
+                                <!-- Data di nascita -->
+                                    <label for="usrBDay">Data di nascita</label>
+                                    <input type="date"
+                                           name="usrBDay"
+                                           id="usrBDay"
+                                           size="30"
+                                           title="Data di nascita"/>
+                                <!-- Frase di presentazione -->
+                                    <label for="usrPresentation">Frase di presentazione</label>
+                                    <textarea rows="4" cols="22"
+                                              name="usrPresentation"
+                                              id="usrPresentation"
+                                              title="Frase di presentazione"></textarea>
+                                <!-- Password -->
+                                    <label for="usrPass">Password</label>
+                                    <input type="password"
+                                           name="usrPass"
+                                           id="usrPass"
+                                           size="30"
+                                           title="Password"/>
+                                <!-- Conferma password -->
+                                    <label for="usrPassConfirm">Conferma password</label>
+                                    <input type="password"
+                                           name="usrPassConfirm"
+                                           id="usrPassConfirm"
+                                           size="30"
+                                           title="Conferma password"/>
                             <!-- Tasti invio -->
                             <input type="submit" value="Invia"/>
                         </form>
-                    </div> 
-                </div>    
+                    </div>
+                </div>
+                <div id="sideBarDx">
+                    <!-- Da aggiungere -->
+                </div>
             </div>
         </div>
     </body>

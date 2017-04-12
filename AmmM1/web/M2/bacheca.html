@@ -12,8 +12,8 @@ Data: 07/04/2017
               content="Mattia Frongia">
         <meta name="keywords"
               content="bacheca NerdBook">
-        <link rel="stylesheet" 
-              type="text/css" 
+        <link rel="stylesheet"
+              type="text/css"
               href="style.css"
               media="screen">
     </head>
@@ -34,14 +34,20 @@ Data: 07/04/2017
         </header>
         <div id="divBody">
             <div id="bacheca">
-                <div id="nonScrollable">
+                <div id="sideBarSx">
                     <div id="searchBar">
-                        <!-- da aggiungere -->
+                        <form action="#" method="get">
+                            <input type="text"
+                                   placeholder="Cerca..."
+                                   title="Cerca su NerdBook"
+                                   name="searchBox"
+                                   id="searchBox"/>
+                        </form>
                     </div>
+                    <nav id="people">
                     <h3>
                         Persone
                     </h3>
-                    <nav id="people">
                         <ul>
                             <li><a href="../img/people0.jpg">
                                     <img src="../img/people0.jpg" alt="Foto profilo" title="Foto profilo"/> <h5>Matt Bellamy</h5>
@@ -73,7 +79,7 @@ Data: 07/04/2017
                         </ul>
                     </nav>
                 </div>
-                <div id="scrollable">
+                <div id="content">
                     <div id="writeStatus">
                         <!-- da aggiungere -->
                     </div>
@@ -96,13 +102,13 @@ Data: 07/04/2017
                         </div>
                         <div class="post">
                             <h4>
-                                <a href="../img/profilo1.jpg" target="fotoProfilo1"><img src="../img/profilo1.jpg" 
-                                                                                         title="Foto profilo" 
-                                                                                         alt="Foto profilo" 
+                                <a href="../img/profilo1.jpg" target="fotoProfilo1"><img src="../img/profilo1.jpg"
+                                                                                         title="Foto profilo"
+                                                                                         alt="Foto profilo"
                                                                                          height="50"
                                                                                          class="accountImage"/>
                                 </a>
-                                <a href="https://it.wikipedia.org/wiki/Donald_Trump" 
+                                <a href="https://it.wikipedia.org/wiki/Donald_Trump"
                                    title="Donald"
                                    class="accountName">Donald</a>
                             </h4>
@@ -133,6 +139,9 @@ Data: 07/04/2017
                             </p>
                         </div>
                     </div>
+                </div>
+                <div id="sideBarDx">
+                    <!-- Da aggiungere -->
                 </div>
             </div>
         </div>
