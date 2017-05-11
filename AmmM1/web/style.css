@@ -1,0 +1,767 @@
+/*
+    Created on : 28-mar-2017, 10.00.09
+    Author     : archer
+*/
+
+/* regole generali generali dei titoli */
+h1 {
+    color: #00695C;
+    font: 50px/60px "Open Sans", sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+h2 {
+    color: #212121;
+    font: 45px/55px "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h3 {
+    color: #424242;
+    font: 40px/50px "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h4 {
+    color: #646464;
+    font: 35px/45px "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+h5 {
+    color: #555555;
+    font: 25px/35px "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+p {
+    color: #646464;
+    font: 20px/30px "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+/* regole generali di visualizzazione di tutti i link  */
+a:link, a:active, a:visited, a:hover {
+    font: 15px/20px "Open Sans", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* regole di visualizzazione dei link nell'header */
+header a:link {
+    color: #FFFFFF;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header a:hover {
+    text-decoration: none;
+    color: #E0F2F1;
+}
+
+#sommario ul li a:visited {
+    color: #00BFA5;
+}
+
+#bacheca a:visited, #bacheca a:link {
+    color: #555555;
+}
+
+/* regole dei link */
+a:link {
+    color: #00BFA5;
+}
+
+a:visited {
+    color: #00BFA5;
+}
+
+a:hover {
+    color: #90A4AF;
+    text-decoration: underline;
+}
+
+/*
+::selection {
+    background: #00695C;
+    color: #FFFFFF;
+}
+*/
+/* gestione delle aree di input */
+input, textarea {
+    font: 20px "Open sans" , sans-serif;
+    text-indent: 6px;
+    outline: #00695C;
+    width: 300px;
+    height: 44px;
+    box-shadow: 0px 2px 2px 0px rgba(46,204,113, .16);
+    transition: box-shadow 200ms linear;
+    border-radius: 2px;
+    border: 0px #00695C;
+}
+
+input:hover, textarea:hover {
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .2),
+                0px 0px 0px 3px rgba(46,204,113, .08);
+    border: 1px #00695C;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0px 3px 8px 2px rgba(46,204,113, .2),
+                0px 0px 0px 2px rgba(46,204,113, .1);
+    border: 0px #00695C;
+}
+
+
+input:focus:hover, textarea:focus:hover {
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .2),
+                0px 0px 0px 3px rgba(46,204,113, .2);
+    border: 1px #00695C;
+}
+
+textarea {
+    resize: none;
+    text-indent: 0px;
+    transition: height .50s ease-in-out;
+}
+
+textarea:focus {
+    height: 200px;
+}
+
+input[type=submit] {
+    border-radius: 2px;
+    height: 28px;
+    box-shadow: 0px 0px 0px;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+
+img {
+    border: 2px solid #00695C;
+}
+
+body {
+    background: #FFFFFF;
+    font: 25px/35px "Open Sans", sans-serif;
+    font-weight: 400;
+    color: #868686;
+    width: 95%;
+}
+
+/* header per ogni pagina */
+#divBody {
+    width: 100%;
+    height: 100%;
+    margin-top: 80px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    margin: auto;
+    position: fixed;
+    background: #00695C;
+    border-bottom: 3px solid #2ECC71;
+    box-sizing: content-box;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    box-sizing: content-box;
+    z-index: 10;
+}
+
+header h1 {
+    color: #FFFFFF; /* Bianco */
+    opacity: 1;
+    font: 70px/80px "Open Sans", sans-serif;
+    margin-top: -9px;
+    margin-left: 0.3%;
+    position: absolute;
+    font-style: italic;
+    font-weight: bold;
+    z-index: 10;
+}
+
+header h5 {
+    display: none;
+}
+
+#siteMap ul li{
+    display: inline-table;
+    z-index: 9;
+}
+
+#siteMap {
+    position: relative;
+    display: inline-table;
+    margin-left: 350px;
+    margin-top: -25px;
+    text-align: center;
+}
+
+#siteMap li.active a {
+    color: #FFFFFF;
+}
+
+#siteMap li.active {
+    height: 62px;
+    width: auto;
+    background: #2ECC71;
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+}
+
+/* viene impostata la visualizzazione sulla stessa linea di piu' elementi */
+header h1, header nav, header ul {
+    display: inline-block;
+}
+
+header #logout {
+    float: right;
+    list-style-type: none;
+    margin-right: 1px;
+    margin-top: 0px;
+    padding-right: 2px;
+    padding-left: 0px;
+    font-size: 20px;
+    color: #FFFFFF;
+    position: relative;
+    width: 95px;
+}
+
+header #logout img {
+    float: left;
+    height: 40px;
+    border-radius: 100%;
+    position: relative;
+    margin-left: -16px;
+    margin-top: 8px;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+}
+
+#logout #userName {
+    position: relative;
+    margin-left: 34px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#logout #logoutButton {
+    position: relative;
+    margin-top: -12px;
+    margin-left: 33px;
+}
+
+/* stil di visualizzazione del sommario sulla pagina di descrizione */
+#sommario ul, #sommario li {
+    list-style-type: none;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    text-align: center;
+}
+
+/* linee di divisione della lista */
+#sommario {
+    border-top: 1px #CFD8DC solid;
+    border-bottom: 1px #CFD8DC solid;
+}
+
+/* titolo della pagina di login */
+#title {
+    float: none;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+/* stile di visualizzazione della pagina di login */
+#divBody #login{
+    width: 400px;
+    height: 220px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    margin: auto;
+    padding: 10px 30px 40px 30px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(46,204,113, .6);
+}
+
+#divBody #login a, #divBody #login p {
+    float: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+}
+
+#login input, #profileData input, #profileData textarea {
+    margin-top: 20px;
+}
+
+/* stile dei pulsanti submit nell apagina di login e del profilo */
+#login input[type=submit], #profileData input[type=submit] {
+    height: 44px;
+    color: #FFFFFF;
+    background-color: #00695C;
+    opacity: .8;
+}
+
+#login input[type=submit]:hover, #profileData input[type=submit]:hover {
+    height: 44px;
+    background-color: #FFFFFF;
+    color: #00695C;
+    opacity: .8;
+}
+
+#login input[type=submit]:focus, #profileData input[type=submit]:focus {
+    height: 44px;
+    background-color: #FFFFFF;
+    color: #00695C;
+    opacity: .8;
+    box-shadow: 0px 3px 8px 3px rgba(46,204,113, .5),
+                0px 0px 0px 3px rgba(46,204,113, .5);
+}
+
+
+/* gestione elementi in comune nelle pagine bacheca e profilo */
+#sideBarSx {
+    width: 300px;
+    height: 100%;
+    margin-left: 0%;
+    position: static;
+    box-sizing: content-box;
+}
+/* barra di ricerca */
+#divBody #bacheca #sideBarSx #searchBar {
+    height: auto;
+    width: auto;
+    padding: 0px;
+    text-align: center;
+    border-radius: 3px;
+    margin: 0px;
+}
+
+#divBody #bacheca #sideBarSx #searchBar form input {
+    width: 100%;
+}
+
+#sideBarSx nav ul, #sideBarSx h3 {
+    list-style-type: none;
+    margin: 0%;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 30px;
+}
+
+#sideBarSx nav ul, #sideBarSx nav ul li h5 {
+    padding-top: 0px;
+    margin-top: 0px;
+    max-width: 95%;
+    overflow: hidden;
+    font-size: 20px;
+    padding-left: 10px;
+
+}
+
+#sideBarSx img {
+    width:  40px;
+    height: 40px;
+    border-radius: 100%;
+    float: left;
+}
+
+#sideBarSx nav ul li img, #sideBarSx nav ul li h5 {
+    display: inline-block;
+    padding-top: 0px;
+    margin: 0px;
+    max-width: 220px;
+}
+
+#sideBarSx nav ul li h5 {
+    margin-left: 6px;
+}
+
+#sideBarSx nav ul li {
+    margin-top: 5px;
+}
+
+#sideBarDx {
+    width: 300px;
+    height: 100%;
+    text-align: right;
+    position: relative;
+}
+
+#sideBarSx, #content, #sideBarDx {
+    display: inline-table;
+}
+
+/* bacheca */
+
+#bacheca{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    text-align: center;
+    position: relative;
+}
+
+#bacheca #content {
+    width: 60%;
+    height: auto;
+    margin-bottom: 50px;
+    margin-left: auto;
+    border-left: 1px solid #2ECC71;
+    border-bottom-left-radius: 0%;
+    position: static;
+}
+
+
+#postsDiv .post .accountImage {
+    margin: 5px;
+    border-radius: 100%;
+}
+
+#postsDiv .post .accountName {
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 20px;
+    position: absolute;
+}
+
+#postsDiv .post p {
+    position: relative;
+    margin: 20px;
+    margin-top: -40px;
+    font-size: 15px;
+}
+
+#postsDiv .post p img {
+    display: block;
+    padding: 10px;
+    border-style: none;
+    border-radius: 5%;
+}
+
+.post {
+    background-color: #f7f7f7;
+    box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
+    border-radius: 5px;
+    width: 95%;
+    margin: auto;
+    box-sizing: content-box;
+    text-align: left;
+}
+
+.post h4 {
+    border-bottom: 1px #CFD8DC solid;
+}
+
+.post a:link {
+    font: 20px/30px "Open Sans", sans-serif;
+}
+
+/* profilo */
+
+#profilo {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+#profilo #content form {
+    list-style-type: none;
+    display: inline-block;
+}
+
+#profilo #content {
+    margin: auto;
+}
+
+#profilo #content label {
+    float: left;
+    clear: left;
+    margin-top: 20px;
+    font: 25px/60px "Open Sans", sans-serif;
+}
+
+#profilo #content input {
+    float: right;
+    clear: right;
+    width: 50%;
+    margin: 0px 0px 0px 30px;
+    margin-top: 20px;
+}
+
+#profilo #content textarea {
+    float: right;
+    clear: right;
+    width: 49.5%;
+    margin-top: 20px;
+    transition: height .60s ease-in-out, width .60s ease-in-out;
+}
+
+#profilo #content textarea:focus {
+    width: 100%;
+    height: 200px;
+}
+
+#profilo #content input[type=submit] {
+    width: 100%;
+}
+
+#profilo #content #profileImage img {
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    position: relative;
+}
+
+#profilo #content {
+    width: 60%;
+    height: auto;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    margin-left: 0%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(46,204,113, .6);
+}
+
+#content #profileImage {
+    position: relative;
+}
+
+#content #profileData {
+    margin-left: 0px;
+}
+
+#content #profileData h4 {
+    text-align: center;
+    margin-left: 0px;
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#sommario ul {
+    padding: 0px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 1023px) {
+
+    header {
+        overflow: hidden;
+    }
+
+    #sideBarDx {
+        display: none;
+    }
+
+    #sideBarSx #people, #sideBarSx #groups {
+        display: inline-table;
+        margin-top: 20px;
+        float: left;
+    }
+
+    #sideBarSx {
+        width: 90%;
+        max-width: 90%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #sideBarSx #people {
+        float: left;
+        clear: left;
+        margin-left: 5%;
+    }
+
+    #sideBarSx #groups {
+        padding-left: 20px;
+        position: relative;
+        float: right;
+        clear: right;
+        margin-right: 25%;
+    }
+
+    #sideBarSx #groups ul li h5, #sideBarSx #people ul li h5 {
+        max-width: 300px;
+        max-height: 20px;
+        overflow: auto;
+        font: 15px/20px "Open Sans", sans-serif;
+        margin-top: 12px;
+    }
+
+    #sideBarSx #searchBar form input {
+        width: 90%;
+    }
+
+    /* bacheca */
+    #bacheca {
+        width: 95%;
+    }
+
+    #bacheca #content {
+        border: none;
+    }
+
+
+    /* profilo */
+    #profilo {
+        width: 99%;
+    }
+    #profilo #content {
+        width: 90%;
+    }
+
+    header nav#logout {
+        float: none;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    #divBody {
+        width: 95%;
+    }
+    
+    header {
+        transition: height .50s ease-in-out;
+        position: absolute;
+        word-wrap: break-word;
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        height: 50px;
+    }
+
+    header:hover {
+        height: 120px;
+    }
+
+    header #sitemap {
+        display: block;
+        position: absolute;
+        padding: 0px;
+        float: right;
+        clear: right;
+    }
+    
+    header nav#siteMap ul {
+        padding-left: 0%;
+        margin-left: 20%;
+    }
+    
+    header #logout {
+        float: left;
+        position: static;
+        margin-top: -65px;
+        margin-left: 30px;
+    }
+
+    header h5 {
+        display: block;
+        color: #FFFFFF;
+        margin-top: 70px;
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    header h1 {
+        font-size: 40px;
+        margin-top: -15px;
+    }
+    
+    #bacheca {
+        width: 100%;
+    }
+
+    #sideBarSx {
+        width: 100%;
+    }
+    #sideBarSx nav {
+        display: block;
+    }
+    
+    #profilo #sideBarSx {
+        display: none;
+    }
+    
+    #bacheca #content {
+        border-left: none;
+    }
+    
+    #bacheca #content {
+        width: 100%;
+    }
+
+    #profilo #content {
+        box-shadow: none;
+        text-align: center;
+        width: 90%;
+    }
+
+    #profilo #content #profileData h4 {
+        font-size: 25px;
+    }
+
+    #profilo #content #profileData form label {
+        float: none;
+        font-size: 20px;
+    }
+
+    #profilo #content #profileData form input, #profilo #content #profileData form textarea {
+        float: none;
+        width: 95%;
+        margin: 0px;
+    }
+
+    #profilo #content #profileData form input[type=submit] {
+        margin-top: 20px;
+    }
+
+    #divBody #login {
+        box-shadow: none;
+        width: 95%;
+        margin: auto;
+        padding: 2px;
+    }
+
+    #title h4 {
+        font-size: 25px;
+    }
+
+    #divBody #login input {
+        width: 95%;
+    }
+
+}
+
+#invalidAccountData, #illegalAccess {
+    background: rgba(255, 0, 12, 0.27);
+    width: inherit;
+    border-radius: 4px;
+    text-align: center;
+    float: none;
+    display: block;
+    margin: auto;
+    box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38)
+}
+
+#invalidAccountData>p, #illegalAccess>p {
+    font: 24px/25px "Open Sans", sans-serif;
+    text-decoration: none;
+    color: #646464;
+}

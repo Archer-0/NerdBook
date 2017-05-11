@@ -5,8 +5,6 @@
  */
 package amm.nerdbook.classi;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author archer
@@ -15,14 +13,14 @@ public class Gruppo {
     private int id;
     private int nUtenti;
     private String nome;
-    private String urlImaggine;
+    private String urlImmaggine;
     /*    private ArrayList<Integer> idUtentiAderenti;*/
 
     public Gruppo() {
         this.id = 0;
         this.nUtenti = 0;
         this.nome = "";
-        this.urlImaggine = "";
+        this.urlImmaggine = "";
     }
     
 /**
@@ -70,15 +68,15 @@ public class Gruppo {
     /**
      * @return the urlImaggine
      */
-    public String getUrlImaggine() {
-        return urlImaggine;
+    public String getUrlImmaggine() {
+        return urlImmaggine;
     }
 
     /**
      * @param urlImaggine the urlImaggine to set
      */
-    public void setUrlImaggine(String urlImaggine) {
-        this.urlImaggine = urlImaggine;
+    public void setUrlImmaggine(String urlImaggine) {
+        this.urlImmaggine = urlImaggine;
     }
 
 /*

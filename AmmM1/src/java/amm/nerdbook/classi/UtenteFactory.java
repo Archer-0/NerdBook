@@ -70,6 +70,39 @@ public class UtenteFactory {
         u2.setPassword("LovinNuke");
         
         listaUtenti.add(u2);
+        
+        Utente u3 = new Utente();
+        u3.setId(3);
+        u3.setNome("Matt");
+        u3.setCognome("Bellamy");
+        u3.setDataNascita("09/06/1978");
+        u3.setEmail("mattbellamy@nope.com");
+        u3.setUrlFotoProfilo("img/people0.jpg");
+        u3.setPassword("Drones123");
+        
+        listaUtenti.add(u3);
+        
+        Utente u4 = new Utente();
+        u4.setId(4);
+        u4.setNome("Freddie");
+        u4.setCognome("Mercury");
+        u4.setDataNascita("05/09/1946");
+        u4.setEmail("freddie@nope.com");
+        u4.setUrlFotoProfilo("img/people1");
+        u4.setPassword("BreakFree");
+        
+        listaUtenti.add(u4);
+        
+        Utente u5 = new Utente();
+        u5.setId(5);
+        u5.setNome("Gabe");
+        u5.setCognome("Newell");
+        u5.setDataNascita("03/11/1962");
+        u5.setEmail("gaben@nope.com");
+        u5.setUrlFotoProfilo("img/people2");
+        u5.setPassword("hl3");
+       
+        listaUtenti.add(u5);
     }
     
     public Utente getUtenteById(int id) {

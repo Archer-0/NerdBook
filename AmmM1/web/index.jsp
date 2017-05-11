@@ -1,8 +1,13 @@
+<%-- 
+    Document   : index
+    Created on : 11-mag-2017, 19.04.09
+    Author     : archer
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Autore: Mattia Frongia
-Data: 07/04/2017
--->
+
 <html>
     <head>
         <title>Nerdbook: Start Page</title>
@@ -40,3 +45,5 @@ Data: 07/04/2017
         </div>
     </body>
 </html>
+
+

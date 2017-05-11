@@ -30,36 +30,32 @@ public class PostFactory {
         // Creazione dei post
         Post p0 = new Post();
         p0.setId(0);
-        p0.setIdAutore(0);
-        p0.setAutore(uFactory.getUtenteById(p0.getIdAutore()));
+        p0.setAutore(uFactory.getUtenteById(0));
         p0.setContenuto("Ci siamo stufati di questo meme. Basta. Non ne possiamo piu");
-        p0.setUrlImmagine("");
-        p0.setUrlLink("");
-        p0.setPostType(Post.Type.OTHER);
+        p0.setUrlAllegato("");
+        p0.setPostType(Post.Type.TEXT);
         
         listaPost.add(p0);
         
         Post p1 = new Post();
         p1.setId(1);
-        p1.setIdAutore(1);
-        p1.setAutore(uFactory.getUtenteById(p0.getIdAutore()));
+        p1.setAutore(uFactory.getUtenteById(1));
         p1.setContenuto("Io suggerirei di cambiarla con un'altra migliore.");
-        p1.setUrlImmagine("img/post0.jpg");
-        p1.setUrlLink("");
-        p1.setPostType(Post.Type.OTHER);
+        p1.setUrlAllegato("img/post0.jpg");
+        p1.setPostType(Post.Type.TEXT_AND_IMAGE);
         
         listaPost.add(p1);
         
         Post p2 = new Post();
         p2.setId(2);
-        p2.setIdAutore(2);
-        p2.setAutore(uFactory.getUtenteById(p0.getIdAutore()));
+        p2.setAutore(uFactory.getUtenteById(2));
         p2.setContenuto("Pff, dilettante.");
-        p2.setUrlImmagine("");
-        p2.setUrlLink("https://www.youtube.com/watch?v=WkNL_cfVyWU");
-        p2.setPostType(Post.Type.OTHER);
+        p2.setUrlAllegato("https://www.youtube.com/watch?v=WkNL_cfVyWU");
+        p2.setPostType(Post.Type.TEXT_AND_LINK);
         
         listaPost.add(p2);
+        
+        
     }
     
     public Post getPostById(int id) {

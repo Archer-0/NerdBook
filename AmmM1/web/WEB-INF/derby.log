@@ -1,0 +1,33 @@
+Mon May 08 11:48:47 CEST 2017 : Server di rete Apache Derby: 10.11.1.2 - (1629631) avviato e pronto ad accettare connessioni sulla porta 1527
+----------------------------------------------------------------
+Mon May 08 11:48:48 CEST 2017:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): istanza a816c00e-015b-e776-152a-00007ff5fa1f
+sulla directory di database /home/archer/NetBeansProjects/AmmM1/web/WEB-INF/ammdb con caricatore classi sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Caricato da file:/usr/lib/jvm/jdk1.8.0_131/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=/usr/lib/jvm/jdk1.8.0_131/db
+os.name=Linux
+os.arch=amd64
+os.version=4.9.0-deepin4-amd64
+derby.system.home=/home/archer/NetBeansProjects/AmmM1/web/WEB-INF
+Programma di caricamento classe database avviato - derby.database.classpath=''
+----------------------------------------------------------------
+Mon May 08 11:49:00 CEST 2017:
+Arresto dell'istanza a816c00e-015b-e776-152a-00007ff5fa1f nella directory del database /home/archer/NetBeansProjects/AmmM1/web/WEB-INF/ammdb con il caricatore di classi sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Mon May 08 11:49:00 CEST 2017 Thread[DRDAConnThread_3,5,main] (DATABASE = ammdb), (DRDAID = {2}), Chiusura del database 'ammdb'.
+----------------------------------------------------------------
+Mon May 08 11:51:25 CEST 2017:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): istanza a65c80ac-015b-e776-152a-00007ff5fa1f
+sulla directory di database /home/archer/NetBeansProjects/AmmM1/web/WEB-INF/ammdb con caricatore classi sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Caricato da file:/usr/lib/jvm/jdk1.8.0_131/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=/usr/lib/jvm/jdk1.8.0_131/db
+os.name=Linux
+os.arch=amd64
+os.version=4.9.0-deepin4-amd64
+derby.system.home=/home/archer/NetBeansProjects/AmmM1/web/WEB-INF
+Programma di caricamento classe database avviato - derby.database.classpath=''
+----------------------------------------------------------------
+Mon May 08 14:18:28 CEST 2017: arresto in corso del motore di Derby

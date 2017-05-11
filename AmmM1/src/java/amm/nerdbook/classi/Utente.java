@@ -5,8 +5,6 @@
  */
 package amm.nerdbook.classi;
 
-import java.util.Objects;
-
 /**
  *
  * @author archer
@@ -19,6 +17,7 @@ public class Utente {
     private String email;
     private String password;
     private String urlFotoProfilo;
+    private String citazione;
     
     public Utente() {
         this.id = 0;
@@ -28,6 +27,7 @@ public class Utente {
         this.email = "";
         this.password = "";
         this.urlFotoProfilo = "";
+        this.citazione = "NerdBook do it better!";
     }
 
     /**
@@ -138,6 +138,20 @@ public class Utente {
                 return true;
         }
         return false;
+    }
+
+    /**
+     * @return the citazione
+     */
+    public String getCitazione() {
+        return citazione;
+    }
+
+    /**
+     * @param citazione the citazione to set
+     */
+    public void setCitazione(String citazione) {
+        this.citazione = citazione;
     }
     
 }

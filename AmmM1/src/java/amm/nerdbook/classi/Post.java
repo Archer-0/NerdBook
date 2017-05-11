@@ -11,14 +11,12 @@ package amm.nerdbook.classi;
  */
 public class Post {
     
-    public enum Type {TEXT, IMAGE, LINK, HIBRID, OTHER};
+    public enum Type {TEXT, TEXT_AND_IMAGE, TEXT_AND_LINK};
     
     private int id;
-    private int idAutore;
     private Utente autore;
     private String contenuto;
-    private String urlImmagine;
-    private String urlLink;
+    private String urlAllegato;
     private Type postType;
     
     public Post() {
@@ -40,20 +38,6 @@ public class Post {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return the idAutore
-     */
-    public int getIdAutore() {
-        return idAutore;
-    }
-
-    /**
-     * @param idAutore the idAutore to set
-     */
-    public void setIdAutore(int idAutore) {
-        this.idAutore = idAutore;
     }
 
     /**
@@ -87,29 +71,15 @@ public class Post {
     /**
      * @return the urlImmagine
      */
-    public String getUrlImmagine() {
-        return urlImmagine;
+    public String getUrlAllegato() {
+        return urlAllegato;
     }
 
     /**
-     * @param urlImmagine the urlImmagine to set
+     * @param urlAllegato the urlImmagine to set
      */
-    public void setUrlImmagine(String urlImmagine) {
-        this.urlImmagine = urlImmagine;
-    }
-
-    /**
-     * @return the urlLink
-     */
-    public String getUrlLink() {
-        return urlLink;
-    }
-
-    /**
-     * @param urlLink the urlLink to set
-     */
-    public void setUrlLink(String urlLink) {
-        this.urlLink = urlLink;
+    public void setUrlAllegato(String urlAllegato) {
+        this.urlAllegato = urlAllegato;
     }
 
     /**

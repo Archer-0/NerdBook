@@ -29,7 +29,7 @@ public class GruppoFactory {
         Gruppo g0 = new Gruppo();
         g0.setId(0);
         g0.setNome("The BE SHARPS");
-        g0.setUrlImaggine("img/group0.jpg");
+        g0.setUrlImmaggine("img/group0.jpg");
         g0.setnUtenti(1);
         
         listaGruppi.add(g0);
@@ -37,7 +37,7 @@ public class GruppoFactory {
         Gruppo g1 = new Gruppo();
         g1.setId(1);
         g1.setNome("Sgt. Pepper Lonely Hearts Club Band");
-        g1.setUrlImaggine("img/group1.jpg");
+        g1.setUrlImmaggine("img/group1.jpg");
         g1.setnUtenti(2);
         
         listaGruppi.add(g1);

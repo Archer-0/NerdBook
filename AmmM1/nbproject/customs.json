@@ -1,8 +1,11 @@
 {
-    "elements": {},
+    "elements": {
+        "c:": {}
+    },
     "attributes": {
         "heigth": {
             "context": "img"
-        }
+        },
+        "<li": {}
     }
 }
