@@ -22,17 +22,17 @@
     </head>
     <body>
         <div id="title">
-                <h1><img src="img/logo_sfondo_verde_108x88.jpg" alt="Logo NerdBook" width="54" height="44" title="Logo NerdBook"/> NerdBook</h1>
+                <h1><img src="/img/logo_sfondo_verde_108x88.jpg" alt="Logo NerdBook" width="54" height="44" title="Logo NerdBook"/> NerdBook</h1>
                 <h4>Accedi al tuo account NerdBook.</h4>
         </div>
         
         <div id="divBody">
-            <c:if test="${invalidAccountData==true}">
+            <c:if test="${invalidAccountData == true}">
                 <div id="invalidAccountData">
                     Username e/o password non sono corretti
                 </div>
             </c:if>
-            <c:if test="${IllegalAccess==true}">
+            <c:if test="${IllegalAccess == true}">
                 <div id="illegalAccess">
                     Devi prima effettuare il login
                 </div>
@@ -41,7 +41,7 @@
                 <!-- form per inserimento dati -->
                 <form name="user_data" action="profilo.html" method="post">
                     <!-- spazio di inserimento username -->
-                    <input name="user" placeholder="Nome utente o e-mail" id="user" type="text" size="30" maxlength="30" title="Username"/>
+                    <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="30" title="Username"/>
                     <!-- spazio inserimento password -->
                     <input name="pass" placeholder="Password" id="pass" type="password" size="30" maxlength="20" title="Password"/>
                     <!-- Tasto per invio dati -->
