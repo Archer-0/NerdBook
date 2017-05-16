@@ -15,6 +15,7 @@ public class Post {
     
     private int id;
     private Utente autore;
+    private Gruppo gruppo;
     private String contenuto;
     private String urlAllegato;
     private Type postType;
@@ -52,6 +53,20 @@ public class Post {
      */
     public void setAutore(Utente autore) {
         this.autore = autore;
+    }
+
+    /**
+     * @return the gruppo
+     */
+    public Gruppo getGruppo() {
+        return gruppo;
+    }
+
+    /**
+     * @param gruppo the gruppo to set
+     */
+    public void setGruppo(Gruppo gruppo) {
+        this.gruppo = gruppo;
     }
 
     /**

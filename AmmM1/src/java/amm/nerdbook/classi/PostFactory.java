@@ -67,7 +67,7 @@ public class PostFactory {
         return null;
     }
     
-    public List getPostListByUser(Utente user) {
+    public List<Post> getPostListByUser(Utente user) {
         List<Post> listaPostUser = new ArrayList<>();
         
         for(Post post : this.listaPost) {
@@ -76,6 +76,17 @@ public class PostFactory {
             }
         }
         return listaPostUser;
+    }
+    
+    public List<Post> getPostListByGroup(Gruppo group) {
+        List<Post> listaPostGroup = new ArrayList<>();
+        
+        for(Post post: this.listaPost) {
+            if (post.getGruppo().equals(group)) {
+                listaPostGroup.add(post);
+            }
+        }
+        return listaPostGroup;
     }
     
 }

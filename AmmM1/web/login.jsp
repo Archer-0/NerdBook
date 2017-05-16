@@ -39,7 +39,7 @@
                 </c:if>
             <div id="login">
                 <!-- form per inserimento dati -->
-                <form name="user_data" action="Login" method="post">
+                <form name="user_data" action="Login" method="get">
                     <!-- spazio di inserimento username -->
                     <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="70" title="Inserisci la tua e-mail"/>
                     <!-- spazio inserimento password -->

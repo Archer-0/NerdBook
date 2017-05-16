@@ -38,8 +38,8 @@ public class Profilo extends HttpServlet {
         HttpSession session = request.getSession(false);
         
         // inizializzazione attributo utenti per essere visualizzati nella sidebar
-        ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
-        request.setAttribute("users", users);
+        ArrayList<Utente> utenti = UtenteFactory.getInstance().getListaUtenti();
+        request.setAttribute("utenti", utenti);
         
         ArrayList<Gruppo> gruppi = GruppoFactory.getInstance().getListaGruppi();
         request.setAttribute("gruppi", gruppi);
@@ -48,22 +48,20 @@ public class Profilo extends HttpServlet {
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
             // 
             String user = request.getParameter("user");
-            int userId;
+            int loggedUserId;
             
-            // se 
             if (user != null) {
-                userId = Integer.parseInt(user);
+                loggedUserId = (int)Integer.parseInt(user);
             }
             else {
-                Integer loggedUserId = (Integer)session.getAttribute("loggedUserId");
-                userId = loggedUserId;
+                loggedUserId = (int)session.getAttribute("loggedUserId");
             }
             
-            Utente utente = UtenteFactory.getInstance().getUtenteById(userId);
+            Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
             
-            if (utente != null) {
+            if (loggedUser != null) {
                 if (request.getParameter("userDetailsUpdated") == null) {
-                    request.setAttribute("utente", utente);
+                    request.setAttribute("loggedUser", loggedUser);
                 }
                 else {
                     // finche' le password non sono uguali ripeto la richiesta dei parametri
@@ -92,25 +90,25 @@ public class Profilo extends HttpServlet {
                         }
                     }
                     if (request.getParameter("usrName").equals("") == false) {
-                        utente.setNome(request.getParameter("ursName"));
+                        loggedUser.setNome(request.getParameter("ursName"));
                     }
                     if (request.getParameter("usrSurname").equals("") == false) {
-                        utente.setCognome(request.getParameter("usrSurname"));
+                        loggedUser.setCognome(request.getParameter("usrSurname"));
                     }
                     if (request.getParameter("usrBDay").equals("") == false) {
-                        utente.setDataNascita(request.getParameter("usrBDay"));
+                        loggedUser.setDataNascita(request.getParameter("usrBDay"));
                     }
                     if (request.getParameter("usrImgURL").equals("") == false) {
-                        utente.setUrlFotoProfilo(request.getParameter("usrImgURL"));
+                        loggedUser.setUrlFotoProfilo(request.getParameter("usrImgURL"));
                     }
                     if (request.getParameter("usrPresentation").equals("") == false) {
-                        utente.setCitazione(request.getParameter("usrPresentation"));
+                        loggedUser.setCitazione(request.getParameter("usrPresentation"));
                     }
                     if (request.getParameter("usrPass").equals("") == false) {
-                        utente.setPassword(request.getParameter("usrPass"));
+                        loggedUser.setPassword(request.getParameter("usrPass"));
                     }
                 }
-                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                request.getRequestDispatcher("Login").forward(request, response);
             }
             else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);

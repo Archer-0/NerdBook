@@ -53,27 +53,26 @@ public class Bacheca extends HttpServlet {
 
             // se e' impostato il parametro "utente", viene visualizzata la bacheca di quell'utente
             // controllo se user e' impostato
-            String user = request.getParameter("utente");
-            Integer loggedUserId;
+            String user = request.getParameter("user");
+            int loggedUserId;
             
             // se user e' impostato metto nella variabile userId il valore di user
             if (user != null) {
-                loggedUserId = Integer.parseInt(user);
+                loggedUserId = (int)Integer.parseInt(user);
             }
             // se user non e' ancora impostato prelevo il valore della sessione
             else {
-                loggedUserId = (Integer) session.getAttribute("loggedUserId");
+                loggedUserId = (int)session.getAttribute("loggedUserId");
             }
             
             //salvo in "utente" tutta la struttura utente 
-            Utente utente = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-            Utente userToVisit;
+            Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
             
-// se l'id dell'utente esiste, esiste anche l'utente e posso prelevare i propri post
-            if (utente != null) {
-                request.setAttribute("utente", utente);
-
-                List<Post> posts = PostFactory.getInstance().getPostListByUser(utente);
+            // se l'id dell'utente esiste, esiste anche l'utente e posso prelevare i propri post
+            if (loggedUser != null) {
+                request.setAttribute("loggedUser", loggedUser);
+                
+                List<Post> posts = PostFactory.getInstance().getPostListByUser(loggedUser);
                 request.setAttribute("posts", posts);
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);

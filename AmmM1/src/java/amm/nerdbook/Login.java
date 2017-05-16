@@ -37,70 +37,69 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         // apertura sessione
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         
         // Se e' gia stato richiesto un logout distruggo la sessione
         if (request.getParameter("logout") != null) {
             session.invalidate();
             request.setAttribute("loggedIn", false);
-            session.setAttribute("loggedUser", null);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        
+
         // se l'utente e' loggato e "loggedIn" vale true
         if (session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
-            Utente loggedUser = (Utente)session.getAttribute("loggedUser");
+            Utente loggedUser;
+            int usrId;
+
+            usrId = (int)session.getAttribute("loggedUserId");
+            loggedUser = UtenteFactory.getInstance().getUtenteById(usrId);
             
-            // rimando l'utente al profilo o alla bacheca dipendentemente dai dettagli dell'account
-            if (userDetailsCompleted(loggedUser) == false) {
-                request.getRequestDispatcher("Profilo").forward(request, response);
-            }
-            else {
-                request.getRequestDispatcher("Bacheca").forward(request, response);
-            }
+            session.setAttribute("loggedUser", loggedUser);
+            
+            request.getRequestDispatcher("Bacheca").forward(request, response);
             return;
         }
         // se l'utente non e' loggato, si carica la pagina di login e si effettuano i controlli 
         else {
-            
-            loginVerifier(request, response, session, request.getParameter("email"), request.getParameter("pass"));
             // si salvano i dati inseriti nel form in variabili
-//            String email = request.getParameter("email");
-//            String password = request.getParameter("pass");
-//            
-//            // se sono stati inseriti tutti i campi nel form di login si verificano
-//            if (email != null && password != null) {
-//                // cerco l'utente tramite email e password
-//                int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, password);
-//                // se la funzioutentene restituisce un valore != -2 vuol dire che l'utente esiste ed e' valido
-//                if (loggedUserId != -2) {
-//                    // cerco l'utente trmite il suo id
-//                    Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-//                    // imposto il flag di avvenuto login a true
-//                    session.setAttribute("loggedIn", true);
-//                    // imposo la variabile di sessione di loggedUser in modo da poter recuperare qualsiasi attributo direttamente dalle jsp
-//                    session.setAttribute("loggedUser", loggedUser);
-//                    
-//                    // se si rileva che i dettagli dell'account non sono completi si rimanda l'utente alla pagina di login
-//                    if (userDetailsCompleted(loggedUser) == false) {
-//                        request.getRequestDispatcher("Profilo").forward(request, response);
-//                    }
-//                    // altrimenti si rimanda l'utente alla propria bacheca
-//                    else {
-//                        request.getRequestDispatcher("Bacheca").forward(request, response);
-//                    }
-//                    return;
-//                }
-//                // se la coppia email e password non e' valida
-//                else {
-//                    // imposto il flag di per stampare l'avviso sulla pagina
-//                    request.setAttribute("invalidAccountData", true);
-//                    // ricarico la pagina di login
-//                    request.getRequestDispatcher("Login").forward(request, response);
-//                    return;
-//                }
-//            }
+            String email = request.getParameter("email");
+            String password = request.getParameter("pass");
+            
+            // se sono stati inseriti tutti i campi nel form di login si verificano
+            if (email != null && password != null) {
+                // cerco l'utente tramite email e password
+                int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, password);
+                
+                // se la funzioutentene restituisce un valore != -2 vuol dire che l'utente esiste ed e' valido
+                if (loggedUserId != -2) {
+                    // cerco l'utente tramite il suo id
+                    Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
+                    // imposto il flag di avvenuto login a true
+                    session.setAttribute("loggedIn", true);
+                    session.setAttribute("loggedUserId", loggedUserId);
+                    // imposo la variabile di sessione di loggedUser in modo da poter recuperare qualsiasi attributo direttamente dalle jsp
+                    session.setAttribute("loggedUser", loggedUser);
+                    
+                    // se si rileva che i dettagli dell'account non sono completi si rimanda l'utente alla pagina di login
+                    if (userDetailsCompleted(loggedUser) == false) {
+                        request.getRequestDispatcher("Profilo").forward(request, response);
+                    }
+                    // altrimenti si rimanda l'utente alla propria bacheca
+                    else {
+                        request.getRequestDispatcher("Bacheca").forward(request, response);
+                    }
+                    return;
+                }
+                // se la coppia email e password non e' valida
+                else {
+                    // imposto il flag di per stampare l'avviso sulla pagina
+                    request.setAttribute("invalidAccountData", true);
+                    // ricarico la pagina di login
+                    request.getRequestDispatcher("Login").forward(request, response);
+                    return;
+                }
+            }
         }
         // se l'attributo loggedIn e' null o non e' true ricarico la pagina di login
         request.getRequestDispatcher("Login").forward(request, response);
@@ -145,8 +144,8 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    // controlla se tutti i dettagli di un account sono completi
     /**
+     * Controlla se tutti i dettagli di un account sono completi
      * @param utente un oggetto di tipo Utente
      * @return boolean true se tutti i dettagli dell'oggetto utente sono completi o false se anche solo uno e' vuoto
      */
@@ -158,38 +157,4 @@ public class Login extends HttpServlet {
         return true;
     }
     
-    public boolean loginVerifier (HttpServletRequest request, HttpServletResponse response, HttpSession session, String email, String password) throws ServletException, IOException {
-        if (email != null && password != null) {
-            // cerco l'utente tramite email e password
-            int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, password);
-            // se la funzioutentene restituisce un valore != -2 vuol dire che l'utente esiste ed e' valido
-            if (loggedUserId != -2) {
-                // cerco l'utente trmite il suo id
-                Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-                // imposto il flag di avvenuto login a true
-                session.setAttribute("loggedIn", true);
-                // imposo la variabile di sessione di loggedUser in modo da poter recuperare qualsiasi attributo direttamente dalle jsp
-                session.setAttribute("loggedUser", loggedUser);
-
-                // se si rileva che i dettagli dell'account non sono completi si rimanda l'utente alla pagina di login
-                if (userDetailsCompleted(loggedUser) == false) {
-                    request.getRequestDispatcher("Profilo").forward(request, response);
-                }
-                // altrimenti si rimanda l'utente alla propria bacheca
-                else {
-                    request.getRequestDispatcher("Bacheca").forward(request, response);
-                }
-                return true;
-            }
-            // se la coppia email e password non e' valida
-            else {
-                // imposto il flag di per stampare l'avviso sulla pagina
-                request.setAttribute("invalidAccountData", true);
-                // ricarico la pagina di login
-                request.getRequestDispatcher("Login").forward(request, response);
-                return false;
-            }
-        }
-        return false;
-    }
 }
