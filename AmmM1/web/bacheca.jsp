@@ -45,7 +45,7 @@
                                              height="50"
                                              class="accountImage"/>
                                     </a>
-                                             <a href="bacheca.html?user${post.autore.id}">${post.autore.nome}</a>
+                                             <a href="bacheca.jsp?user${post.autore.id}">${post.autore.nome}</a>
                                 </h4>
                                 <c:if test="${post.postType == 'TEXT'}">
                                     <p>${post.contenuto}</p>

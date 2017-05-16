@@ -22,35 +22,35 @@
     </head>
     <body>
         <div id="title">
-                <h1><img src="/img/logo_sfondo_verde_108x88.jpg" alt="Logo NerdBook" width="54" height="44" title="Logo NerdBook"/> NerdBook</h1>
+                <h1><img src="img/logo_sfondo_verde_108x88.jpg" alt="Logo NerdBook" width="54" height="44" title="Logo NerdBook"/> NerdBook</h1>
                 <h4>Accedi al tuo account NerdBook.</h4>
         </div>
         
         <div id="divBody">
-            <c:if test="${invalidAccountData == true}">
-                <div id="invalidAccountData">
-                    Username e/o password non sono corretti
-                </div>
-            </c:if>
-            <c:if test="${IllegalAccess == true}">
-                <div id="illegalAccess">
-                    Devi prima effettuare il login
-                </div>
-            </c:if>
+                <c:if test="${invalidAccountData == true}">
+                    <div id="invalidAccountData">
+                        <p>E-mail e/o password non sono corretti</p>
+                    </div>
+                </c:if>
+                <c:if test="${IllegalAccess == true}">
+                    <div id="illegalAccess">
+                        <p>Devi prima effettuare il login</p>
+                    </div>
+                </c:if>
             <div id="login">
                 <!-- form per inserimento dati -->
-                <form name="user_data" action="profilo.html" method="post">
+                <form name="user_data" action="Login" method="post">
                     <!-- spazio di inserimento username -->
-                    <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="30" title="Username"/>
+                    <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="70" title="Inserisci la tua e-mail"/>
                     <!-- spazio inserimento password -->
-                    <input name="pass" placeholder="Password" id="pass" type="password" size="30" maxlength="20" title="Password"/>
+                    <input name="pass" placeholder="Password" id="pass" type="password" size="30" maxlength="70" title="Inserisci la tua password"/>
                     <!-- Tasto per invio dati -->
-                    <input type="submit" value="Login"/>
+                    <input type="submit" value="Login" title="Accedi a NerdBook"/>
                 </form>
                 <p>
-                    Non conosci NerdBook?
+                    Sei capitato qui per caso?
                 </p>
-                <a href="descrizione.jsp">Clicca Qu&igrave;.</a>
+                <a href="descrizione.jsp">Scopri NerdBook</a>
             </div>
         </div>
     </body>

@@ -23,11 +23,11 @@ public class Utente {
         this.id = 0;
         this.nome = "";
         this.cognome = "";
-        this.dataNascita = "";
+        this.dataNascita = "0000-00-00";
         this.email = "";
         this.password = "";
-        this.urlFotoProfilo = "";
-        this.citazione = "NerdBook do it better!";
+        this.urlFotoProfilo = "img/default.jpg";
+        this.citazione = "NerdBook does it better!";
     }
 
     /**

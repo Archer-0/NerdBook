@@ -19,12 +19,13 @@
               content="index NerdBook">
         <link rel="stylesheet"
               type="text/css"
-              href="M2/style.css"
+              href="style.css"
               media="screen">
     </head>
     <body>
         <div id="index">
-            <c:set var="page" value="bacheca" scope="request"/>
+            <c:redirect url="descrizione.jsp"/>
+            <c:set var="page" value="descrizione" scope="request"/>
             <jsp:include page="header.jsp"/>
             <div id="divBody">
                 <h2>

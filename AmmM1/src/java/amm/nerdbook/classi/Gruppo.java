@@ -13,14 +13,14 @@ public class Gruppo {
     private int id;
     private int nUtenti;
     private String nome;
-    private String urlImmaggine;
+    private String urlImmagine;
     /*    private ArrayList<Integer> idUtentiAderenti;*/
 
     public Gruppo() {
         this.id = 0;
         this.nUtenti = 0;
         this.nome = "";
-        this.urlImmaggine = "";
+        this.urlImmagine = "";
     }
     
 /**
@@ -68,15 +68,15 @@ public class Gruppo {
     /**
      * @return the urlImaggine
      */
-    public String getUrlImmaggine() {
-        return urlImmaggine;
+    public String getUrlImmagine() {
+        return urlImmagine;
     }
 
     /**
-     * @param urlImaggine the urlImaggine to set
+     * @param urlImmagine the urlImmagine to set
      */
-    public void setUrlImmaggine(String urlImaggine) {
-        this.urlImmaggine = urlImaggine;
+    public void setUrlImmaggine(String urlImmagine) {
+        this.urlImmagine = urlImmagine;
     }
 
 /*

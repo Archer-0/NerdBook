@@ -24,7 +24,6 @@ public class GruppoFactory {
     private ArrayList<Gruppo> listaGruppi = new ArrayList<>();
     
     private GruppoFactory() {
-        GruppoFactory gruppoFactory = GruppoFactory.getInstance();
         
         Gruppo g0 = new Gruppo();
         g0.setId(0);
@@ -59,6 +58,10 @@ public class GruppoFactory {
             }
         }
         return null;
+    }
+
+    public ArrayList<Gruppo> getListaGruppi() {        
+        return listaGruppi;
     }
     
 }

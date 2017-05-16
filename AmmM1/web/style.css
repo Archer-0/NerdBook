@@ -102,6 +102,7 @@ input, textarea {
     transition: box-shadow 200ms linear;
     border-radius: 2px;
     border: 0px #00695C;
+    color: #00695c;
 }
 
 input:hover, textarea:hover {
@@ -184,6 +185,7 @@ header h1 {
     font: 70px/80px "Open Sans", sans-serif;
     margin-top: -9px;
     margin-left: 0.3%;
+    margin-bottom: 0px;
     position: absolute;
     font-style: italic;
     font-weight: bold;
@@ -241,6 +243,7 @@ header #logout {
 header #logout img {
     float: left;
     height: 40px;
+    width: 40px;
     border-radius: 100%;
     position: relative;
     margin-left: -16px;
@@ -280,7 +283,18 @@ header #logout img {
     float: none;
     display: block;
     margin: auto;
+    margin-bottom: 0px;
     text-align: center;
+}
+
+#title>h4 {
+    margin: 0px;
+    margin-top: 10px;
+    font: 35px/35px "Open Sans", sans-serif;
+}
+
+#title>h1 {
+    margin: 0px;
 }
 
 /* stile di visualizzazione della pagina di login */
@@ -358,7 +372,7 @@ header #logout img {
     margin: 0%;
     margin-top: 10px;
     text-align: left;
-    font-size: 30px;
+    font-size: 17px;
 }
 
 #sideBarSx nav ul, #sideBarSx nav ul li h5 {
@@ -751,13 +765,41 @@ header #logout img {
 
 #invalidAccountData, #illegalAccess {
     background: rgba(255, 0, 12, 0.27);
-    width: inherit;
+    box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38);
+    width: 462px;
     border-radius: 4px;
     text-align: center;
     float: none;
     display: block;
     margin: auto;
-    box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38)
+}
+
+#userDetailsUpdated {
+    background: rgba(0, 255, 12, 0.27);
+    box-shadow: 0px 0px 8px 0px rgba(0, 255, 94, 0.38);
+    width: 100%;
+    border-radius: 4px;
+    text-align: center;
+    float: right;
+    clear: right;
+    margin-top: 20px;
+}
+
+#passConfirmError {
+    background: rgba(255, 0, 12, 0.27);
+    box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38);
+    border-radius: 4px;
+    text-align: center;
+    float: right;
+    clear: right;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#passConfirmError>p, #userDetailsUpdated>p {
+    font: 20px/0px "Open Sans", sans-serif;
+    text-decoration: none;
+    color: #646464;
 }
 
 #invalidAccountData>p, #illegalAccess>p {

@@ -6,6 +6,9 @@
         "heigth": {
             "context": "img"
         },
-        "<li": {}
+        "<li": {},
+        "profiledata\"": {
+            "context": "img"
+        }
     }
 }

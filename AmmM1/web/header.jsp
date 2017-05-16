@@ -9,20 +9,20 @@
 
 <header>
     <h1><dfn title="Oh yeah!">NerdBook</dfn></h1>
-    <c:if test="${page!=descrizione}">
+    <c:if test="${page != 'descrizione'}">
         <nav id="siteMap">
             <ul>
-                <li <c:if test="${page=='bacheca'}"> class="active"</c:if>><a href="bacheca.html">Bacheca</a></li>
-                <li <c:if test="${page=='profilo'}"> class="active"</c:if>><a href="profilo.html">Profilo</a></li>
+                <li <c:if test="${page == 'bacheca'}"> class="active"</c:if>><a href="bacheca.jsp?user=${utente.id}">Bacheca</a></li>
+                <li <c:if test="${page == 'profilo'}"> class="active"</c:if>><a href="profilo.jsp?user=${utente.id}">Profilo</a></li>
             </ul>
         </nav>
         <ul id="logout">
-            <li><img src="${utente.urlFotoProfilo}" alt="La tua foto profilo" title="La tua foto profilo"/></li>
+            <li><img src="${utente.urlFotoProfilo}" alt="La tua foto profilo" title="La tua foto profilo" width="40" height="40"/></li>
             <li id="userName">${utente.nome}</li>
-            <li id="logoutButton"><a href="login.html">Logout</a></li>
+            <li id="logoutButton"><a href="Login?logout=true">Logout</a></li>
         </ul>
     </c:if>
-    <c:if test="${page==descrizione}">
-        <h5>Non c'&egrave; nulla da vedere qu&igrave;!</h5>
+    <c:if test="${page == 'descrizione'}">
+        <h5>Non c'&egrave; nulla da vedere qui!</h5>
     </c:if>
 </header>

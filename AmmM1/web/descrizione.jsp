@@ -11,15 +11,10 @@
         <title>NerdBook: Descrizione</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author"
-              content="Mattia Frongia">
-        <meta name="keywords"
-              content="descrizione NerdBook">
-        <base href="/progettoAMM/">
-        <link rel="stylesheet" 
-              type="text/css" 
-              href="style.css"
-              media="screen">
+        <meta name="author" content="Mattia Frongia">
+        <meta name="keywords" content="descrizione NerdBook">
+        <base href="/AmmM1/">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     </head>
     <body>
         <c:set var="page" value="descrizione" scope="request"/>
@@ -60,7 +55,7 @@
                         <br/>tutte le persone che vuoi.
                         <br/>
                         <br/><a title="Accedi al tuo profilo."
-                          href="login.html">Clicca quì per il login.</a>
+                          href="login.jsp">Clicca qui per il login.</a>
                     </p>
                 </div>
                 <div id="chi_siamo">
