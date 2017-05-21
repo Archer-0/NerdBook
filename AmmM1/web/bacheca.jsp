@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>NerdBook: Bacheca</title>
+        <title>NerdBook: Bacheca di ${loggedUser.nome} ${loggedUser.cognome}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author"
@@ -37,7 +37,7 @@
                     <div id="postsDiv">
                         <c:forEach var="post" items="${posts}">
                             <div class="post">
-                                <h4>
+                                <h4 id='img'>
                                     <a href="${post.autore.urlFotoProfilo}">
                                         <img src="${post.autore.urlFotoProfilo}"
                                              title="Foto profilo di ${post.autore.nome}"
@@ -45,7 +45,13 @@
                                              height="50"
                                              class="accountImage"/>
                                     </a>
-                                             <a href="bacheca.jsp?user${post.autore.id}">${post.autore.nome}</a>
+                                             <a href="bacheca.jsp?userIdToVisit=${post.autore.id}">${post.autore.nome}</a>
+                                             <c:if test="${not empty post.toGroup && post.toUser == null}"> >>>
+                                                 <a href='bacheca.jsp?groupIdToVisit=${post.toGroup.id}'>${post.toGroup.nome}</a> (Gruppo)
+                                             </c:if>
+                                             <c:if test="${post.toGroup == null && not empty post.toUser}"> >>> 
+                                                 <a href='bacheca.jsp?userIdToVisit=${post.toUser.id}'>${post.toUser.nome}</a> (Utente)
+                                             </c:if>
                                 </h4>
                                 <c:if test="${post.postType == 'TEXT'}">
                                     <p>${post.contenuto}</p>

@@ -40,50 +40,52 @@ public class Bacheca extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         
-        // inizializzazione attributo utenti per essere visualizzati nella sidebar
-        ArrayList<Utente> utenti = UtenteFactory.getInstance().getListaUtenti();
-        request.setAttribute("utenti", utenti);
+//        ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
+//        request.setAttribute("users", users);
+//        
+//        ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
+//        request.setAttribute("groups", groups);
         
-        ArrayList<Gruppo> gruppi = GruppoFactory.getInstance().getListaGruppi();
-        request.setAttribute("gruppi", gruppi);
-        
-        
-        // se la sessione esiste e l'attributo loggedIn == true
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
-
-            // se e' impostato il parametro "utente", viene visualizzata la bacheca di quell'utente
-            // controllo se user e' impostato
-            String user = request.getParameter("user");
-            int loggedUserId;
+            // salvo l'utente per un utilizzo futuro
+            Utente utente = (Utente)session.getAttribute("loggedUser");
             
-            // se user e' impostato metto nella variabile userId il valore di user
-            if (user != null) {
-                loggedUserId = (int)Integer.parseInt(user);
-            }
-            // se user non e' ancora impostato prelevo il valore della sessione
-            else {
-                loggedUserId = (int)session.getAttribute("loggedUserId");
-            }
-            
-            //salvo in "utente" tutta la struttura utente 
-            Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-            
-            // se l'id dell'utente esiste, esiste anche l'utente e posso prelevare i propri post
-            if (loggedUser != null) {
-                request.setAttribute("loggedUser", loggedUser);
+            // visualizzazione dei post di un utente
+            if (request.getParameter("userIdToVisit") != null && request.getParameter("groupIdToVisit") == null) {
+                int userIdToVisit = Integer.parseInt(request.getParameter("userIdToVisit"));
+                Utente userToVisit = UtenteFactory.getInstance().getUtenteById(userIdToVisit);
                 
-                List<Post> posts = PostFactory.getInstance().getPostListByUser(loggedUser);
-                request.setAttribute("posts", posts);
-
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-            } // altrimenti se l'id dell'utente non e' presente negli id conosciuti viene visualizzata ina pagina di errore
+                if (userToVisit != null && userToVisit.getId() != -1) {
+                    request.setAttribute("userToVisit", userToVisit);
+                    List<Post>posts = PostFactory.getInstance().getPostListByUser(userToVisit);
+                    request.setAttribute("posts", posts);
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                }
+                else {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            } // visualizzazione dei post di un gruppo
+            else if (request.getParameter("groupIdToVisit") != null && request.getParameter("userIdToVisit") == null) {
+                int groupIdToVisit = Integer.parseInt(request.getParameter("groupIdToVisit"));
+                Gruppo groupToVisit = GruppoFactory.getInstance().getGroupById(groupIdToVisit);
+            
+                if (groupToVisit != null) {
+                    request.setAttribute("groupToVisit", groupToVisit);
+                    List<Post>posts = PostFactory.getInstance().getPostListByGroup(groupToVisit);
+                    request.setAttribute("posts", posts);
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                }
+                else {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            }
             else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            }
-        } // se non esiste la sessione o l'utente non e' loggato ( o entrambi)
+                }
+        }
         else {
             request.setAttribute("illegalAccess", true);
-            request.getRequestDispatcher("Login").forward(request, response);
+            request.getRequestDispatcher("lo[gin.jsp").forward(request, response);
         }
     }
 
@@ -123,7 +125,7 @@ public class Bacheca extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "This is a Servlet. Yeah!";
     }// </editor-fold>
 
 }

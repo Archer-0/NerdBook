@@ -9,9 +9,9 @@
 <div id="sideBarSx">
     <%--
     <div id="searchBar">
-        <form action="#" method="get">
+        <form action="Search" method="get">
             <input type="text"
-                   placeholder="Cerca..."
+                   placeholder="Cerca su nNerdBook"
                    title="Cerca su NerdBook"
                    name="searchBox"
                    id="searchBox"/>
@@ -23,9 +23,9 @@
             Potresti conoscere: 
         </h3>
         <ul>
-            <c:forEach var="utente" items="${utenti}">
+            <c:forEach var="utente" items="${users}">
                 <c:if test="${utente.id != '-1' && utente.id != loggedUserId}">
-                    <li><a href="Bacheca?user=${utente.id}">
+                    <li><a href="Bacheca?userIdToVisit=${utente.id}">
                             <img src="${utente.urlFotoProfilo}" alt="Foto profilo di ${utente.nome} " title="Foto profilo di ${utente.nome}"/> <h5>${utente.nome}</h5>
                         </a>
                     </li>
@@ -38,8 +38,8 @@
             Potrebbero interessarti: 
         </h3>
         <ul>
-            <c:forEach var="gruppo" items="${gruppi}">
-            <li><a href="Bacheca?gruppo=${gruppo.id}">
+            <c:forEach var="gruppo" items="${groups}">
+            <li><a href="Bacheca?groupIdToVisit=${gruppo.id}">
                     <img src="${gruppo.urlImmagine}" alt="Immagine di ${gruppo.nome}" title="Immagine di ${gruppo.nome}"/> <h5>${gruppo.nome}</h5>
                 </a>
             </li>

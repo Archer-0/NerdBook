@@ -12,13 +12,14 @@
     <c:if test="${page != 'descrizione'}">
         <nav id="siteMap">
             <ul>
-                <li <c:if test="${page == 'bacheca'}"> class="active"</c:if>><a href="bacheca.jsp?user=${utente.id}">Bacheca</a></li>
-                <li <c:if test="${page == 'profilo'}"> class="active"</c:if>><a href="profilo.jsp?user=${utente.id}">Profilo</a></li>
+                <li <c:if test="${page == 'bacheca'}"> class="active"</c:if>><a href="bacheca.jsp?user=${loggedUser.id}">Bacheca</a></li>
+                <li <c:if test="${page == 'profilo'}"> class="active"</c:if>><a href="profilo.jsp?user=${loggedUser.id}">Profilo</a></li>
             </ul>
         </nav>
         <ul id="logout">
-            <li><img src="${utente.urlFotoProfilo}" alt="La tua foto profilo" title="La tua foto profilo" width="40" height="40"/></li>
-            <li id="userName">${utente.nome}</li>
+            <li><a href="profilo.jsp?user=${loggedUser.id}">
+                    <img src="${loggedUser.urlFotoProfilo}" alt="La tua foto profilo" title="La tua foto profilo" width="40" height="40"/></a></li>
+                    <li id="userName"><a href="profilo.jsp?user=${loggedUser.id}">${loggedUser.nome}</a></li>
             <li id="logoutButton"><a href="Login?logout=true">Logout</a></li>
         </ul>
     </c:if>

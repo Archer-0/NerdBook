@@ -28,7 +28,7 @@
             <jsp:include page="sideBarSx.jsp"/>
             <div id="content">
                 <div id="profileImage">
-                    <img src="${utente.urlFotoProfilo}"
+                    <img src="${loggedUser.urlFotoProfilo}"
                          title="La tua foto profilo" 
                          alt="La tua foto profilo" 
                          height="104" 
@@ -56,7 +56,7 @@
                                        size="30"
                                        maxlength="50"
                                        title="Nome"
-                                           placeholder="${utente.nome}"/>
+                                           placeholder="${loggedUser.nome}"/>
                             <!-- Cognome -->
                                 <label for="usrSurname">Cognome</label>
                                 <input type="text"
@@ -65,7 +65,7 @@
                                        size="30"
                                        maxlength="50"
                                        title="Cognome"
-                                           placeholder="${utente.cognome}">
+                                           placeholder="${loggedUser.cognome}">
                             <!-- URL immagine profilo -->
                                 <label for="usrImgURL">URL foto profilo</label>
                                 <input type="url"
@@ -73,8 +73,13 @@
                                        id="usrImgURL"
                                        size="30"
                                        title="URL foto profilo"
-                                           placeholder="${utente.urlFotoProfilo}"/>
-                            <!-- Data di nascita -->
+                                       <c:if test="${loggedUser.urlFotoProfilo != 'img/default.jpg'}">
+                                           placeholder="${loggedUser.urlFotoProfilo}"/>
+                                       </c:if>
+                                       <c:if test="${loggedUser.urlFotoProfilo == 'img/default.jpg'}">
+                                           placeholder="Inserisci l'URL di un' immagine"/>
+                                       </c:if>
+                                <!-- Data di nascita -->
                                 <label for="usrBDay">Data di nascita</label>
                                 <input type="date"
                                        name="usrBDay"
@@ -87,7 +92,7 @@
                                           name="usrPresentation"
                                           id="usrPresentation"
                                           title="Frase di presentazione"
-                                           placeholder="${utente.citazione}"></textarea>
+                                           placeholder="${loggedUser.citazione}"></textarea>
                             <!-- Password -->
                                 <label for="usrPass">Password</label>
                                 <input type="password"
@@ -106,12 +111,12 @@
                                            placeholder="Conferma nuova password"/>
                                 <c:if test="${passConfirmError == true}">
                                     <div id="passConfirmError">
-                                        <p>Le password non coincidono</p>
+                                        <p>Le password inserite non coincidono</p>
                                     </div>
                                 </c:if>
                                 <c:if test="${userDetailsUpdated == true}">
                                     <div id="userDetailsUpdated">
-                                        <p>Informazioni aggiornate</p>
+                                        <p>Dettagli del profilo aggiornati</p>
                                     </div>
                                 </c:if>
                         <!-- Tasti invio -->

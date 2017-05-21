@@ -32,14 +32,14 @@
                         <p>E-mail e/o password non sono corretti</p>
                     </div>
                 </c:if>
-                <c:if test="${IllegalAccess == true}">
+                <c:if test="${illegalAccess == true}">
                     <div id="illegalAccess">
                         <p>Devi prima effettuare il login</p>
                     </div>
                 </c:if>
             <div id="login">
                 <!-- form per inserimento dati -->
-                <form name="user_data" action="Login" method="get">
+                <form name="user_data" action="Login" method="post">
                     <!-- spazio di inserimento username -->
                     <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="70" title="Inserisci la tua e-mail"/>
                     <!-- spazio inserimento password -->

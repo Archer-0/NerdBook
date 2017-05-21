@@ -264,6 +264,10 @@ header #logout img {
     margin-left: 33px;
 }
 
+#logoutButton>a:hover {
+    color: #FF4626;
+}
+
 /* stil di visualizzazione del sommario sulla pagina di descrizione */
 #sommario ul, #sommario li {
     list-style-type: none;

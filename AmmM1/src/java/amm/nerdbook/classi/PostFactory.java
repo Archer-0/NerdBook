@@ -26,6 +26,7 @@ public class PostFactory {
     
     private PostFactory() {
         UtenteFactory uFactory = UtenteFactory.getInstance();
+        GruppoFactory gFactory = GruppoFactory.getInstance();
         
         // Creazione dei post
         Post p0 = new Post();
@@ -55,7 +56,15 @@ public class PostFactory {
         
         listaPost.add(p2);
         
+        Post p3 = new Post();
+        p3.setId(2);
+        p3.setAutore(uFactory.getUtenteById(4));
+        p3.setContenuto("Vorrei essere come voih!!!11!!1!");
+        p3.setUrlAllegato("");
+        p3.setPostType(Post.Type.TEXT);
+        p3.setToGroup(gFactory.getGroupById(0));
         
+        listaPost.add(p3);
     }
     
     public Post getPostById(int id) {
@@ -82,11 +91,10 @@ public class PostFactory {
         List<Post> listaPostGroup = new ArrayList<>();
         
         for(Post post: this.listaPost) {
-            if (post.getGruppo().equals(group)) {
+            if (post.getToGroup().equals(group)) {
                 listaPostGroup.add(post);
             }
         }
         return listaPostGroup;
-    }
-    
+    }    
 }

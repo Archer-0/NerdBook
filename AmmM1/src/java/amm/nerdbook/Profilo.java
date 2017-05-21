@@ -37,78 +37,57 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
-        // inizializzazione attributo utenti per essere visualizzati nella sidebar
-        ArrayList<Utente> utenti = UtenteFactory.getInstance().getListaUtenti();
-        request.setAttribute("utenti", utenti);
+//        ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
+//        request.setAttribute("users", users);
+//        
+//        ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
+//        request.setAttribute("groups", groups);
         
-        ArrayList<Gruppo> gruppi = GruppoFactory.getInstance().getListaGruppi();
-        request.setAttribute("gruppi", gruppi);
-        
-        // se la sessione esiste gia' e l'utente e' loggato
-        if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
-            // 
-            String user = request.getParameter("user");
-            int loggedUserId;
+        if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {        
+            Utente utente = (Utente)session.getAttribute("loggedUser");
             
-            if (user != null) {
-                loggedUserId = (int)Integer.parseInt(user);
-            }
-            else {
-                loggedUserId = (int)session.getAttribute("loggedUserId");
-            }
-            
-            Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-            
-            if (loggedUser != null) {
-                if (request.getParameter("userDetailsUpdated") == null) {
-                    request.setAttribute("loggedUser", loggedUser);
+            if (utente != null) {
+                if (request.getParameter("userDetailsUpdated") != null) {
+                    if (request.getParameter("usrName").equals("") == false && request.getParameter("usrName").equals(utente.getNome()) == false) {
+                        utente.setNome((String)request.getParameter("usrName"));
+                        request.setAttribute("userDetailsUpdated", true);
+                    }
+                    if (request.getParameter("usrSurname").equals("") == false && request.getParameter("usrSurname").equals(utente.getCognome()) == false) {
+                        utente.setCognome((String)request.getParameter("usrSurname"));
+                        request.setAttribute("userDetailsUpdated", true);
+                    }
+                    if (request.getParameter("usrBDay").equals("") == false && request.getParameter("usrBDay").equals(utente.getDataNascita()) == false) {
+                        utente.setDataNascita((String)request.getParameter("usrBDay"));
+                        request.setAttribute("userDetailsUpdated", true);
+                    }
+                    if (request.getParameter("usrImgURL").equals("") == false && request.getParameter("usrImgURL").equals(utente.getUrlFotoProfilo()) == false) {
+                        utente.setUrlFotoProfilo((String)request.getParameter("usrImgURL"));
+                        request.setAttribute("userDetailsUpdated", true);
+                    }
+                    if (request.getParameter("usrPresentation").equals("") == false && request.getParameter("usrPresentation").equals(utente.getCitazione()) == false) {
+                        utente.setCitazione((String)request.getParameter("usrPresentation"));
+                        request.setAttribute("userDetailsUpdated", true);
+                    }
+                    
+                    String passwd = request.getParameter("usrPass");
+                    String passwdConfirm = request.getParameter("usrPassConfirm");
+                    if (request.getParameter("usrPass").equals("") == false) {
+                        if (passwd.equals(passwdConfirm) == true) {
+                            utente.setPassword(passwd);
+                            request.setAttribute("userDetailsUpdated", true);
+                        }
+                        else {
+                            request.setAttribute("passConfirmError", true);
+                        }
+                    }
                 }
                 else {
-                    // finche' le password non sono uguali ripeto la richiesta dei parametri
-                    while(request.getParameter("passConfirmError").equals("true")) {
-                        //request.setAttribute("updatedUsrName", request.getParameter("usrName"));
-                        //request.setAttribute("updatedUsrSurname", request.getParameter("usrSurname"));
-                        //request.setAttribute("updatedUsrImgURL", request.getParameter("usrImgURL"));
-                        //request.setAttribute("updatedUsrBDay", request.getParameter("usrBDay"));
-                        //request.setAttribute("updatedUsrPresentation", request.getParameter("usrPresentation")); 
-                        //request.setAttribute("updatedUsrPass", request.getParameter("usrPass"));
-                        //request.setAttribute("updatedUsrPassConfirm", request.getParameter("usrPassConfirm"));
-
-                        String password = request.getParameter("usrPass");
-                        String passwordConfirm = request.getParameter("usrPassConfirm");
-                        
-                        // se le password coincidono vado a vanti
-                        if (password.equals(passwordConfirm) == true) {
-                            request.setAttribute("userDetailsUpdated", true);
-                            request.setAttribute("passConfirmError", false);
-                        }
-                        // se non coincidono stampo un avviso e ricarico la pagina
-                        else {
-                            request.setAttribute("userDetailsUpdated", false);
-                            request.setAttribute("passConfirmError", true);
-                            request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                        }
-                    }
-                    if (request.getParameter("usrName").equals("") == false) {
-                        loggedUser.setNome(request.getParameter("ursName"));
-                    }
-                    if (request.getParameter("usrSurname").equals("") == false) {
-                        loggedUser.setCognome(request.getParameter("usrSurname"));
-                    }
-                    if (request.getParameter("usrBDay").equals("") == false) {
-                        loggedUser.setDataNascita(request.getParameter("usrBDay"));
-                    }
-                    if (request.getParameter("usrImgURL").equals("") == false) {
-                        loggedUser.setUrlFotoProfilo(request.getParameter("usrImgURL"));
-                    }
-                    if (request.getParameter("usrPresentation").equals("") == false) {
-                        loggedUser.setCitazione(request.getParameter("usrPresentation"));
-                    }
-                    if (request.getParameter("usrPass").equals("") == false) {
-                        loggedUser.setPassword(request.getParameter("usrPass"));
-                    }
+                    request.getRequestDispatcher("profilo.jsp?userDetailsUpdated=false").forward(request, response);
+                    return;
                 }
-                request.getRequestDispatcher("Login").forward(request, response);
+//                request.setAttribute("loggedUser", utente);
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                
             }
             else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -118,8 +97,9 @@ public class Profilo extends HttpServlet {
             request.setAttribute("loggedIn", false);
             request.setAttribute("illegalAccess", true);
             request.getRequestDispatcher("Login").forward(request, response);
-        }        
-    }
+            return;
+        }
+    }  
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -159,5 +139,13 @@ public class Profilo extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
+
+
+
+
+
+
+
+
+

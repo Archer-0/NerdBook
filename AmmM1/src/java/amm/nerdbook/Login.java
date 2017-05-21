@@ -5,9 +5,12 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.classi.Gruppo;
+import amm.nerdbook.classi.GruppoFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,73 +39,68 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        // apertura sessione
-        HttpSession session = request.getSession();
+       HttpSession session = request.getSession(true);
         
-        // Se e' gia stato richiesto un logout distruggo la sessione
         if (request.getParameter("logout") != null) {
             session.invalidate();
             request.setAttribute("loggedIn", false);
+            request.setAttribute("loggedUserId", "");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-
-        // se l'utente e' loggato e "loggedIn" vale true
-        if (session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
-            Utente loggedUser;
-            int usrId;
-
-            usrId = (int)session.getAttribute("loggedUserId");
-            loggedUser = UtenteFactory.getInstance().getUtenteById(usrId);
-            
+        
+        // se l'utente e' loggato
+        if (session.getAttribute("loggedIn") !=  null && session.getAttribute("loggedIn").equals(true)) {
+            int userId = (int)session.getAttribute("loggedUserId");
+            Utente loggedUser = UtenteFactory.getInstance().getUtenteById(userId);
             session.setAttribute("loggedUser", loggedUser);
-            
-            request.getRequestDispatcher("Bacheca").forward(request, response);
-            return;
+            request.getRequestDispatcher("Bacehca").forward(request, response);
         }
-        // se l'utente non e' loggato, si carica la pagina di login e si effettuano i controlli 
         else {
-            // si salvano i dati inseriti nel form in variabili
             String email = request.getParameter("email");
-            String password = request.getParameter("pass");
+            String passwd = request.getParameter("pass");
             
-            // se sono stati inseriti tutti i campi nel form di login si verificano
-            if (email != null && password != null) {
-                // cerco l'utente tramite email e password
-                int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, password);
+            if (email != null && passwd != null) {
+                int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, passwd);
                 
-                // se la funzioutentene restituisce un valore != -2 vuol dire che l'utente esiste ed e' valido
+                // errore e' indicato con -2 perche' -1 e' l'utente root
                 if (loggedUserId != -2) {
-                    // cerco l'utente tramite il suo id
                     Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
-                    // imposto il flag di avvenuto login a true
+                    
                     session.setAttribute("loggedIn", true);
                     session.setAttribute("loggedUserId", loggedUserId);
-                    // imposo la variabile di sessione di loggedUser in modo da poter recuperare qualsiasi attributo direttamente dalle jsp
                     session.setAttribute("loggedUser", loggedUser);
-                    
-                    // se si rileva che i dettagli dell'account non sono completi si rimanda l'utente alla pagina di login
-                    if (userDetailsCompleted(loggedUser) == false) {
-                        request.getRequestDispatcher("Profilo").forward(request, response);
-                    }
-                    // altrimenti si rimanda l'utente alla propria bacheca
-                    else {
-                        request.getRequestDispatcher("Bacheca").forward(request, response);
-                    }
-                    return;
                 }
-                // se la coppia email e password non e' valida
+                
+                ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
+                session.setAttribute("users", users);
+        
+                ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
+                session.setAttribute("groups", groups);
+                
+                if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
+                    request.getRequestDispatcher("Profilo").forward(request, response);
+                }
                 else {
-                    // imposto il flag di per stampare l'avviso sulla pagina
-                    request.setAttribute("invalidAccountData", true);
-                    // ricarico la pagina di login
-                    request.getRequestDispatcher("Login").forward(request, response);
-                    return;
+                    request.getRequestDispatcher("Bacheca").forward(request, response);
                 }
+                return;
+            }
+            else {
+                request.setAttribute("invalidAccountData", true);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
             }
         }
-        // se l'attributo loggedIn e' null o non e' true ricarico la pagina di login
-        request.getRequestDispatcher("Login").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+    
+    public boolean userDetailsComplete(Utente loggedUser) {
+        if (loggedUser.getNome().equals("") || loggedUser.getCognome().equals("") || loggedUser.getUrlFotoProfilo().equals("img/default.jpg") 
+                || loggedUser.getCitazione().equals("") || loggedUser.getDataNascita().equals("")) {
+            return false;
+        }
+        return true;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -149,12 +147,4 @@ public class Login extends HttpServlet {
      * @param utente un oggetto di tipo Utente
      * @return boolean true se tutti i dettagli dell'oggetto utente sono completi o false se anche solo uno e' vuoto
      */
-    public boolean userDetailsCompleted (Utente utente) {
-        if (utente.getNome().equals("") || utente.getCognome().equals("") || utente.getUrlFotoProfilo().equals("") 
-                || utente.getCitazione().equals("") || utente.getDataNascita().equals("")) {
-            return false;
-        }
-        return true;
-    }
-    
 }

@@ -15,15 +15,19 @@ public class Post {
     
     private int id;
     private Utente autore;
-    private Gruppo gruppo;
+    private Utente toUser;
+    private Gruppo toGroup;
     private String contenuto;
     private String urlAllegato;
     private Type postType;
     
     public Post() {
-        this.id = 0;
+        this.id = -1;
         this.autore = null;
+        this.toUser = null;
+        this.toGroup = null;
         this.contenuto = "";
+        this.urlAllegato = "";
         this.postType = Type.TEXT;
     }
 
@@ -56,17 +60,31 @@ public class Post {
     }
 
     /**
-     * @return the gruppo
+     * @return the toUser
      */
-    public Gruppo getGruppo() {
-        return gruppo;
+    public Utente getToUser() {
+        return toUser;
     }
 
     /**
-     * @param gruppo the gruppo to set
+     * @param toUser the toUser to set
      */
-    public void setGruppo(Gruppo gruppo) {
-        this.gruppo = gruppo;
+    public void setToUser(Utente toUser) {
+        this.toUser = toUser;
+    }
+
+    /**
+     * @return the gruppo
+     */
+    public Gruppo getToGroup() {
+        return toGroup;
+    }
+
+    /**
+     * @param toGroup the gruppo to set
+     */
+    public void setToGroup(Gruppo toGroup) {
+        this.toGroup = toGroup;
     }
 
     /**

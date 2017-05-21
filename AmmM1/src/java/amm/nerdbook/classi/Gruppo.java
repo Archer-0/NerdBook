@@ -14,7 +14,7 @@ public class Gruppo {
     private int nUtenti;
     private String nome;
     private String urlImmagine;
-    /*    private ArrayList<Integer> idUtentiAderenti;*/
+    /*    private ArrayList<int> idUtentiAderenti;*/
 
     public Gruppo() {
         this.id = 0;
