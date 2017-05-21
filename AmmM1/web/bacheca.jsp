@@ -46,10 +46,10 @@
                                              class="accountImage"/>
                                     </a>
                                              <a href="bacheca.jsp?userIdToVisit=${post.autore.id}">${post.autore.nome}</a>
-                                             <c:if test="${not empty post.toGroup && post.toUser == null}"> >>>
+                                             <c:if test="${post.toGroup != null && post.toUser == null}"> >>>
                                                  <a href='bacheca.jsp?groupIdToVisit=${post.toGroup.id}'>${post.toGroup.nome}</a> (Gruppo)
                                              </c:if>
-                                             <c:if test="${post.toGroup == null && not empty post.toUser}"> >>> 
+                                             <c:if test="${post.toGroup == null && post.toUser != null}"> >>> 
                                                  <a href='bacheca.jsp?userIdToVisit=${post.toUser.id}'>${post.toUser.nome}</a> (Utente)
                                              </c:if>
                                 </h4>

@@ -79,10 +79,10 @@ public class Login extends HttpServlet {
                 session.setAttribute("groups", groups);
                 
                 if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
-                    request.getRequestDispatcher("Profilo").forward(request, response);
+                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 }
                 else {
-                    request.getRequestDispatcher("Bacheca").forward(request, response);
+                    request.getRequestDispatcher("Bacheca?userIdToVisit=" + loggedUserId).forward(request, response);
                 }
                 return;
             }

@@ -459,7 +459,7 @@ header #logout img {
 #postsDiv .post p {
     position: relative;
     margin: 20px;
-    margin-top: -40px;
+    margin-top: -25px;
     font-size: 15px;
 }
 
@@ -482,6 +482,7 @@ header #logout img {
 
 .post h4 {
     border-bottom: 1px #CFD8DC solid;
+    font-size: 20px;
 }
 
 .post a:link {

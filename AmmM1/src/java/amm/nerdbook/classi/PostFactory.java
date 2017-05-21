@@ -65,6 +65,24 @@ public class PostFactory {
         p3.setToGroup(gFactory.getGroupById(0));
         
         listaPost.add(p3);
+        
+        Post p4 = new Post();
+        p4.setAutore(uFactory.getUtenteById(3));
+        p4.setContenuto("DIG DOOOOOOOOWWWWN");
+        p4.setUrlAllegato("https://www.youtube.com/watch?v=b4ozdiGys5g");
+        p4.setPostType(Post.Type.TEXT_AND_LINK);
+        p4.setToGroup(gFactory.getGroupById(0));
+        
+        listaPost.add(p4);
+        
+        Post p5 = new Post();
+        p5.setAutore(uFactory.getUtenteById(5));
+        p5.setContenuto("Gaben");
+        p5.setUrlAllegato("");
+        p5.setPostType(Post.Type.TEXT);
+        p5.setToUser(uFactory.getUtenteById(0));
+        
+        listaPost.add(p5);
     }
     
     public Post getPostById(int id) {

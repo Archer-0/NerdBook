@@ -73,7 +73,7 @@ public class Bacheca extends HttpServlet {
                     request.setAttribute("groupToVisit", groupToVisit);
                     List<Post>posts = PostFactory.getInstance().getPostListByGroup(groupToVisit);
                     request.setAttribute("posts", posts);
-                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    request.getRequestDispatcher("Bacehca").forward(request, response);
                 }
                 else {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
