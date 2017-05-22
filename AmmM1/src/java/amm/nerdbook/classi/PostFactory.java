@@ -30,7 +30,7 @@ public class PostFactory {
         
         // Creazione dei post
         Post p0 = new Post();
-        p0.setId(0);
+        p0.setId(listaPost.size());
         p0.setAutore(uFactory.getUtenteById(0));
         p0.setContenuto("Ci siamo stufati di questo meme. Basta. Non ne possiamo piu");
         p0.setUrlAllegato("");
@@ -39,7 +39,7 @@ public class PostFactory {
         listaPost.add(p0);
         
         Post p1 = new Post();
-        p1.setId(1);
+        p1.setId(listaPost.size());
         p1.setAutore(uFactory.getUtenteById(1));
         p1.setContenuto("Io suggerirei di cambiarla con un'altra migliore.");
         p1.setUrlAllegato("img/post0.jpg");
@@ -48,7 +48,7 @@ public class PostFactory {
         listaPost.add(p1);
         
         Post p2 = new Post();
-        p2.setId(2);
+        p2.setId(listaPost.size());
         p2.setAutore(uFactory.getUtenteById(2));
         p2.setContenuto("Pff, dilettante.");
         p2.setUrlAllegato("https://www.youtube.com/watch?v=WkNL_cfVyWU");
@@ -57,7 +57,7 @@ public class PostFactory {
         listaPost.add(p2);
         
         Post p3 = new Post();
-        p3.setId(2);
+        p3.setId(listaPost.size());
         p3.setAutore(uFactory.getUtenteById(4));
         p3.setContenuto("Vorrei essere come voih!!!11!!1!");
         p3.setUrlAllegato("");
@@ -67,6 +67,7 @@ public class PostFactory {
         listaPost.add(p3);
         
         Post p4 = new Post();
+        p4.setId(listaPost.size());
         p4.setAutore(uFactory.getUtenteById(3));
         p4.setContenuto("DIG DOOOOOOOOWWWWN");
         p4.setUrlAllegato("https://www.youtube.com/watch?v=b4ozdiGys5g");
@@ -76,8 +77,9 @@ public class PostFactory {
         listaPost.add(p4);
         
         Post p5 = new Post();
+        p5.setId(listaPost.size());
         p5.setAutore(uFactory.getUtenteById(5));
-        p5.setContenuto("Gaben");
+        p5.setContenuto("SAS");
         p5.setUrlAllegato("");
         p5.setPostType(Post.Type.TEXT);
         p5.setToUser(uFactory.getUtenteById(0));
@@ -92,6 +94,10 @@ public class PostFactory {
             }
         }
         return null;
+    }
+    
+    public List<Post> getPostList() {
+        return this.listaPost;
     }
     
     public List<Post> getPostListByUser(Utente user) {
@@ -114,5 +120,36 @@ public class PostFactory {
             }
         }
         return listaPostGroup;
-    }    
+    }
+    
+    public boolean newPost(int idAutore, int idToUser, int idToGroup, String content, String urlAllegato, Post.Type postType) {
+        Post postToAdd = new Post();
+        
+        // aggiunta elementi del post
+        postToAdd.setId(listaPost.size());
+        postToAdd.setAutore(UtenteFactory.getInstance().getUtenteById(idAutore));
+        postToAdd.setContenuto(content);
+        postToAdd.setUrlAllegato(urlAllegato);
+        postToAdd.setPostType(postType);
+        
+        if (idToUser == -1 && idToGroup == -1) {
+            postToAdd.setToGroup(null);
+            postToAdd.setToUser(null);
+        }
+        else {
+            if (idToUser != -1 && idToGroup == -1) {
+                postToAdd.setToUser(UtenteFactory.getInstance().getUtenteById(idToUser));
+            }
+            else {
+                if (idToUser == -1 && idToGroup != -1) {
+                    postToAdd.setToGroup(GruppoFactory.getInstance().getGroupById(idToGroup));
+                }
+            }
+        }
+        return this.listaPost.add(postToAdd);
+    }
+    
+    public boolean removePost(int postId) {
+        return this.listaPost.remove(this.getPostById(postId));
+    }
 }

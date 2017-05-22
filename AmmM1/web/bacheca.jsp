@@ -4,7 +4,7 @@
     Author     : archer
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,42 +32,42 @@
                 <jsp:include page="sideBarSx.jsp"/>
                 <div id="content">
                     <div id="writeStatus">
-                        <!-- da aggiungere -->
+                        <!-- postmaker -->
+                        <jsp:include page="newPost.jsp"/>
                     </div>
                     <div id="postsDiv">
                         <c:forEach var="post" items="${posts}">
                             <div class="post">
                                 <h4 id='img'>
-                                    <a href="${post.autore.urlFotoProfilo}">
+                                    <a id="userImg" href="${post.autore.urlFotoProfilo}">
                                         <img src="${post.autore.urlFotoProfilo}"
                                              title="Foto profilo di ${post.autore.nome}"
                                              alt="Foto profilo di ${post.autore.nome}"
                                              height="50"
-                                             class="accountImage"/>
-                                    </a>
-                                             <a href="bacheca.jsp?userIdToVisit=${post.autore.id}">${post.autore.nome}</a>
-                                             <c:if test="${post.toGroup != null && post.toUser == null}"> >>>
-                                                 <a href='bacheca.jsp?groupIdToVisit=${post.toGroup.id}'>${post.toGroup.nome}</a> (Gruppo)
+                                             class="accountImage"/></a>
+                                             <a id="userName" href="Bacheca?userIdToVisit=${post.autore.id}">${post.autore.nome}</a>
+                                             <!-- se nel post sono taggate persone o gruppi -->
+                                             <c:if test="${post.toGroup != null && post.toUser == null}">
+                                                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?groupIdToVisit=${post.toGroup.id}">${post.toGroup.nome}</a> <a class="addOn">(Gruppo)</a>
                                              </c:if>
-                                             <c:if test="${post.toGroup == null && post.toUser != null}"> >>> 
-                                                 <a href='bacheca.jsp?userIdToVisit=${post.toUser.id}'>${post.toUser.nome}</a> (Utente)
+                                             <c:if test="${post.toGroup == null && post.toUser != null}">
+                                                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?userIdToVisit=${post.toUser.id}">${post.toUser.nome}</a> <a class="addOn">(Utente)</a>
                                              </c:if>
                                 </h4>
-                                <c:if test="${post.postType == 'TEXT'}">
+                                <c:if test="${post.postType == 'TEXT' || empty post.urlAllegato}">
                                     <p>${post.contenuto}</p>
                                 </c:if>
-                                <c:if test="${post.postType == 'TEXT_AND_IMAGE'}">
+                                <c:if test="${post.postType == 'TEXT_AND_IMAGE' && not empty post.urlAllegato}">
                                     <p>
                                         ${post.contenuto}
                                         <a href="${post.urlAllegato}">
                                             <img src="${post.urlAllegato}"
                                                  title="Immagine postata da ${post.autore.nome}"
                                                  alt="Immagine postata da ${post.autore.nome}"
-                                                 height="200"/>
-                                        </a>
+                                                 height="200"/></a>
                                     </p>
                                 </c:if>
-                                <c:if test="${post.postType == 'TEXT_AND_LINK'}">
+                                <c:if test="${post.postType == 'TEXT_AND_LINK' && not empty post.urlAllegato}">
                                     <p>
                                         ${post.contenuto} 
                                         <a href="${post.urlAllegato}">${post.urlAllegato}</a>

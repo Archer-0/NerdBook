@@ -3,6 +3,10 @@
     Author     : archer
 */
 
+html {
+    zoom: 98%;
+}
+
 /* regole generali generali dei titoli */
 h1 {
     color: #00695C;
@@ -92,7 +96,7 @@ a:hover {
 }
 */
 /* gestione delle aree di input */
-input, textarea {
+input, textarea, button {
     font: 20px "Open sans" , sans-serif;
     text-indent: 6px;
     outline: #00695C;
@@ -134,7 +138,7 @@ textarea:focus {
     height: 200px;
 }
 
-input[type=submit] {
+input[type=submit], button {
     border-radius: 2px;
     height: 28px;
     box-shadow: 0px 0px 0px;
@@ -325,21 +329,21 @@ header #logout img {
 }
 
 /* stile dei pulsanti submit nell apagina di login e del profilo */
-#login input[type=submit], #profileData input[type=submit] {
+#login input[type=submit], #profileData input[type=submit], #writeStatus input[type=submit], button {
     height: 44px;
     color: #FFFFFF;
     background-color: #00695C;
     opacity: .8;
 }
 
-#login input[type=submit]:hover, #profileData input[type=submit]:hover {
+#login input[type=submit]:hover, #profileData input[type=submit]:hover, #writeStatus input[type=submit]:hover, button:hover {
     height: 44px;
     background-color: #FFFFFF;
     color: #00695C;
     opacity: .8;
 }
 
-#login input[type=submit]:focus, #profileData input[type=submit]:focus {
+#login input[type=submit]:focus, #profileData input[type=submit]:focus, #writeStatus input[type=submit]:focus, button:focus {
     height: 44px;
     background-color: #FFFFFF;
     color: #00695C;
@@ -433,6 +437,92 @@ header #logout img {
     position: relative;
 }
 
+div#writeStatus {
+    margin: auto;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #f7f7f7;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 96%;
+    height: 180px;
+    overflow: hidden;
+    box-sizing: content-box;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 10px;
+    transition: height .70s cubic-bezier(0.7, -0.06, 0.35, 1.21);
+}
+
+div#writeStatus:hover {
+    height: 380px;
+    overflow-y: scroll;
+}
+
+#writeStatus input[type=submit], #writeStatus button {
+    margin-bottom: 0px;
+}
+
+#writeStatus h4 {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    overflow-wrap: break-word;
+}
+
+#writeStatus form textarea {
+    width: 98.3%;
+    margin-bottom: 5%;
+}
+
+#writeStatus form textarea:focus {
+    height: 100px;
+}
+
+#writeStatus form input[type=radio] {
+    display: block;
+    height: 20px;
+    width: 20px;
+    border: none;
+    box-shadow: none;
+}
+
+#writeStatus form p {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+#writeStatus form input[type=radio] {
+    display: inline-block;
+    clear: right;
+}
+
+#writeStatus form input[type=url], #writeStatus form input[type=text] {
+    display: inline-block;
+    margin-top: 10px;
+    width: 48.7%;
+}
+
+#writeStatus form input[type=url] {
+    margin-left: 0.1%;
+}
+
+#writeStatus form input[type=text] {
+    margin-right: 0.1%;
+}
+
+#writeStatus form input[type=submit]{
+    margin-top: 10px;
+    width: 98.3%;
+}
+
+#writeStatus form button {
+    margin-top: 10px;
+    width: 48.7%;
+    display: inline-block;
+}
+
+
 #bacheca #content {
     width: 60%;
     height: auto;
@@ -444,26 +534,20 @@ header #logout img {
 }
 
 
-#postsDiv .post .accountImage {
-    margin: 5px;
+.post .accountImage {
+    margin: 13px;
     border-radius: 100%;
+    margin-right: 8px;
 }
 
-#postsDiv .post .accountName {
-    margin-top: 15px;
-    margin-left: 5px;
-    font-size: 20px;
-    position: absolute;
-}
-
-#postsDiv .post p {
+.post p {
     position: relative;
     margin: 20px;
-    margin-top: -25px;
+    margin-top: 1px;
     font-size: 15px;
 }
 
-#postsDiv .post p img {
+.post p img {
     display: block;
     padding: 10px;
     border-style: none;
@@ -483,6 +567,12 @@ header #logout img {
 .post h4 {
     border-bottom: 1px #CFD8DC solid;
     font-size: 20px;
+    margin-bottom: 0px;
+    height: 80px;
+}
+
+.post h4#img a#userName, .post h4#img a.addOn, .post h4#img a.toWho {
+    vertical-align: 34px;
 }
 
 .post a:link {
@@ -576,6 +666,8 @@ header #logout img {
 #sommario ul {
     padding: 0px;
 }
+
+
 
 @media only screen and (min-width: 480px) and (max-width: 1023px) {
 

@@ -20,6 +20,8 @@ public class Post {
     private String contenuto;
     private String urlAllegato;
     private Type postType;
+    private String oraPubblicazione;
+    private String dataPubblicazione;
     
     public Post() {
         this.id = -1;
@@ -29,6 +31,8 @@ public class Post {
         this.contenuto = "";
         this.urlAllegato = "";
         this.postType = Type.TEXT;
+        this.oraPubblicazione = "hh:mm:ss";
+        this.dataPubblicazione = "yyyy:mm:dd";
     }
 
     /**
@@ -127,6 +131,34 @@ public class Post {
      */
     public void setPostType(Type postType) {
         this.postType = postType;
+    }
+
+    /**
+     * @return the oraPubblicazione
+     */
+    public String getOraPubblicazione() {
+        return oraPubblicazione;
+    }
+
+    /**
+     * @param oraPubblicazione the oraPubblicazione to set
+     */
+    public void setOraPubblicazione(String oraPubblicazione) {
+        this.oraPubblicazione = oraPubblicazione;
+    }
+
+    /**
+     * @return the dataPubblicazione
+     */
+    public String getDataPubblicazione() {
+        return dataPubblicazione;
+    }
+
+    /**
+     * @param dataPubblicazione the dataPubblicazione to set
+     */
+    public void setDataPubblicazione(String dataPubblicazione) {
+        this.dataPubblicazione = dataPubblicazione;
     }
     
 }
