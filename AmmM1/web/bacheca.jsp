@@ -62,7 +62,7 @@
                                         ${post.contenuto}
                                         <a href="${post.urlAllegato}">
                                             <img src="${post.urlAllegato}"
-                                                 title="Immagine postata da ${post.autore.nome}"
+                                                 title="${post.nomeAllegato}"
                                                  alt="Immagine postata da ${post.autore.nome}"
                                                  height="200"/></a>
                                     </p>
@@ -70,7 +70,7 @@
                                 <c:if test="${post.postType == 'TEXT_AND_LINK' && not empty post.urlAllegato}">
                                     <p>
                                         ${post.contenuto} 
-                                        <a href="${post.urlAllegato}">${post.urlAllegato}</a>
+                                        <a href="${post.urlAllegato}">${post.nomeAllegato}</a>
                                     </p>
                                 </c:if>
                             </div>

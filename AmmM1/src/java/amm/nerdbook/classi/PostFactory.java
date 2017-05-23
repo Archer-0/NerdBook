@@ -43,6 +43,7 @@ public class PostFactory {
         p1.setAutore(uFactory.getUtenteById(1));
         p1.setContenuto("Io suggerirei di cambiarla con un'altra migliore.");
         p1.setUrlAllegato("img/post0.jpg");
+        p1.setNomeAllegato("Me me me me me me me me");
         p1.setPostType(Post.Type.TEXT_AND_IMAGE);
         
         listaPost.add(p1);
@@ -52,6 +53,7 @@ public class PostFactory {
         p2.setAutore(uFactory.getUtenteById(2));
         p2.setContenuto("Pff, dilettante.");
         p2.setUrlAllegato("https://www.youtube.com/watch?v=WkNL_cfVyWU");
+        p2.setNomeAllegato("Guarda qui!");
         p2.setPostType(Post.Type.TEXT_AND_LINK);
         
         listaPost.add(p2);
@@ -69,8 +71,9 @@ public class PostFactory {
         Post p4 = new Post();
         p4.setId(listaPost.size());
         p4.setAutore(uFactory.getUtenteById(3));
-        p4.setContenuto("DIG DOOOOOOOOWWWWN");
+        p4.setContenuto("DIG");
         p4.setUrlAllegato("https://www.youtube.com/watch?v=b4ozdiGys5g");
+        p4.setNomeAllegato("DOWWWWWWWWWN");
         p4.setPostType(Post.Type.TEXT_AND_LINK);
         p4.setToGroup(gFactory.getGroupById(0));
         
@@ -146,10 +149,24 @@ public class PostFactory {
                 }
             }
         }
-        return this.listaPost.add(postToAdd);
+        if (this.listaPost.add(postToAdd) == true) {
+            System.out.println("[Post-Factory-class]-New post added (ID: " + postToAdd.getId() + ")");
+            return true;
+        }
+        else {
+            System.out.println("[Post-Factory-class]-Internal error while creating new post");
+            return false;
+        }
     }
     
     public boolean removePost(int postId) {
-        return this.listaPost.remove(this.getPostById(postId));
+        if (this.listaPost.remove(this.getPostById(postId)) == true) {
+            System.out.println("[Post-Factory-class]-Post removed by root");
+            return true;
+        }
+        else {
+            System.out.println("[Post-Factory-class]-Internal error while deleting post (ID: " + postId + ")");
+            return false;
+        }
     }
 }

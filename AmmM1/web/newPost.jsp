@@ -17,7 +17,7 @@
     </c:if>
     <c:if test="${newPostRequest == true}">
         <c:if test="${userToVisit.id != loggedUserId}">
-            Riepilogo post per <strong>${userToVisit.nome} ${userToVisit.cognome}</strong>
+            Riepilogo post per <strong>${userToVisit.nome}</strong>
         </c:if>
         <c:if test="${userToVisit.id == loggedUserId}">
             Riepilogo post
@@ -25,7 +25,7 @@
     </c:if>
 </h4>
     
-    <form action="Bacheca?newPostRequest=true" method="post" name="newPost">
+    <form action="Bacheca?newPostRequest=true" method="get" name="newPost">
         <c:if test="${newPostRequest == null}">
             <textarea rows="4" cols="22"  
                       title="Scrivi un nuovo post" 
@@ -40,11 +40,15 @@
                 <input type="radio" id="radio3" name="allegatoType" value="link"><label for="radio3"> Link</label>
             </div>
             <input type="url" id="urlAllegato" name="urlAllegato" placeholder="URL allegato">
-            <input type="text" id="nomeAllegato" name="nomeAllegato" placeholder="Titolo allegato">
-
-            <input type="submit" value="Riepilogo e invia"/>
+            <input type="text" id="nomeAllegato" name="nomeAllegato" title="Dai un nome al tuo allegato" placeholder="Titolo allegato">
+            <c:if test="${userToVisit != null && groupToVIsit == null}">
+                <button class="fullSizeButton" type="submit" name="userIdToVisit" value="${userToVisit.id}">Riepilogo e invia</button>
+            </c:if>
+            <c:if test="${userToVisit == null && groupToVIsit != null}">
+                <button class="fullSizeButton" type="submit" name="groupIdToVisit" value="${groupToVisit.id}">Riepilogo e invia</button>
+            </c:if>
         </c:if>
-            
+
         <!-- revisione del post -->
         <c:if test="${newPostRequest == true}">
             <textarea rows="4" cols="22"  

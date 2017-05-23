@@ -19,6 +19,7 @@ public class Post {
     private Gruppo toGroup;
     private String contenuto;
     private String urlAllegato;
+    private String nomeAllegato;
     private Type postType;
     private String oraPubblicazione;
     private String dataPubblicazione;
@@ -30,6 +31,7 @@ public class Post {
         this.toGroup = null;
         this.contenuto = "";
         this.urlAllegato = "";
+        this.nomeAllegato = "";
         this.postType = Type.TEXT;
         this.oraPubblicazione = "hh:mm:ss";
         this.dataPubblicazione = "yyyy:mm:dd";
@@ -117,6 +119,20 @@ public class Post {
      */
     public void setUrlAllegato(String urlAllegato) {
         this.urlAllegato = urlAllegato;
+    }
+
+    /**
+     * @return the nomeAllegato
+     */
+    public String getNomeAllegato() {
+        return nomeAllegato;
+    }
+
+    /**
+     * @param nomeAllegato the nomeAllegato to set
+     */
+    public void setNomeAllegato(String nomeAllegato) {
+        this.nomeAllegato = nomeAllegato;
     }
 
     /**

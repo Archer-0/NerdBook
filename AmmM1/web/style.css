@@ -522,6 +522,9 @@ div#writeStatus:hover {
     display: inline-block;
 }
 
+#writeStatus form button.fullSizeButton {
+    width: 98.7%;
+}
 
 #bacheca #content {
     width: 60%;
