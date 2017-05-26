@@ -118,14 +118,14 @@ public class PostFactory {
         List<Post> listaPostGroup = new ArrayList<>();
         
         for(Post post: this.listaPost) {
-            if (post.getToGroup().equals(group)) {
+            if (group.equals(post.getToGroup())) {
                 listaPostGroup.add(post);
             }
         }
         return listaPostGroup;
     }
     
-    public boolean newPost(int idAutore, int idToUser, int idToGroup, String content, String urlAllegato, Post.Type postType) {
+    public boolean newPost(int idAutore, int idToUser, int idToGroup, String content, String urlAllegato, String nomeAllegato, Post.Type postType) {
         Post postToAdd = new Post();
         
         // aggiunta elementi del post
@@ -133,6 +133,7 @@ public class PostFactory {
         postToAdd.setAutore(UtenteFactory.getInstance().getUtenteById(idAutore));
         postToAdd.setContenuto(content);
         postToAdd.setUrlAllegato(urlAllegato);
+        postToAdd.setNomeAllegato(nomeAllegato);
         postToAdd.setPostType(postType);
         
         if (idToUser == -1 && idToGroup == -1) {

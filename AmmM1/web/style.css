@@ -4,7 +4,7 @@
 */
 
 html {
-    zoom: 98%;
+    zoom: 95%;
 }
 
 /* regole generali generali dei titoli */
@@ -437,7 +437,7 @@ header #logout img {
     position: relative;
 }
 
-div#writeStatus {
+div#writeStatus, div#writeStatusFullSize {
     margin: auto;
     margin-top: 0px;
     margin-left: 0px;
@@ -460,6 +460,11 @@ div#writeStatus:hover {
     overflow-y: scroll;
 }
 
+div#writeStatusFullSize {
+    height: 380px;
+    overflow-y: scroll;
+}
+
 #writeStatus input[type=submit], #writeStatus button {
     margin-bottom: 0px;
 }
@@ -470,12 +475,17 @@ div#writeStatus:hover {
     overflow-wrap: break-word;
 }
 
-#writeStatus form textarea {
+#writeStatus form textarea, #writeStatusFullSize form textarea {
     width: 98.3%;
+    height: 40px;
     margin-bottom: 5%;
 }
 
-#writeStatus form textarea:focus {
+#writeStatus form textarea:focus:hover {
+    height: 100px;
+}
+
+#writeStatusFullSize form textarea {
     height: 100px;
 }
 
@@ -497,10 +507,14 @@ div#writeStatus:hover {
     clear: right;
 }
 
-#writeStatus form input[type=url], #writeStatus form input[type=text] {
+#writeStatus form input[type=url], #writeStatus form div #allegatoFields input[type=text], #writeStatusFullSize form button {
     display: inline-block;
     margin-top: 10px;
     width: 48.7%;
+}
+
+.hidden {
+    display: none;
 }
 
 #writeStatus form input[type=url] {
@@ -529,7 +543,7 @@ div#writeStatus:hover {
 #bacheca #content {
     width: 60%;
     height: auto;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     margin-left: auto;
     border-left: 1px solid #2ECC71;
     border-bottom-left-radius: 0%;
@@ -863,40 +877,37 @@ div#writeStatus:hover {
 
 }
 
-#invalidAccountData, #illegalAccess {
+.error {
     background: rgba(255, 0, 12, 0.27);
     box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38);
-    width: 462px;
     border-radius: 4px;
     text-align: center;
-    float: none;
     display: block;
+}
+
+#invalidAccountData, #illegalAccess {
+    width: 462px;
+    float: none;
     margin: auto;
 }
 
 #userDetailsUpdated {
-    background: rgba(0, 255, 12, 0.27);
-    box-shadow: 0px 0px 8px 0px rgba(0, 255, 94, 0.38);
     width: 100%;
-    border-radius: 4px;
-    text-align: center;
     float: right;
     clear: right;
     margin-top: 20px;
 }
 
 #passConfirmError {
-    background: rgba(255, 0, 12, 0.27);
-    box-shadow: 0px 0px 8px 0px rgba(255, 0, 94, 0.38);
-    border-radius: 4px;
-    text-align: center;
     float: right;
     clear: right;
     width: 100%;
     margin-top: 20px;
 }
 
-#passConfirmError>p, #userDetailsUpdated>p {
+
+
+#passConfirmError>p, #userDetailsUpdated>p, #postContentEmptyError>p {
     font: 20px/0px "Open Sans", sans-serif;
     text-decoration: none;
     color: #646464;

@@ -110,7 +110,7 @@
                                        title="Conferma password"
                                            placeholder="Conferma nuova password"/>
                                 <c:if test="${passConfirmError == true}">
-                                    <div id="passConfirmError">
+                                    <div class="error" id="passConfirmError">
                                         <p>Le password inserite non coincidono</p>
                                     </div>
                                 </c:if>

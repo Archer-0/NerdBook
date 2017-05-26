@@ -107,7 +107,7 @@ public class UtenteFactory {
        
         listaUtenti.add(u5);
         
-        System.out.println("Utenti creati.");
+        System.out.println("[Utente-Factory-class]-User creation completed");
     }
     
     public Utente getUtenteById(int id) {

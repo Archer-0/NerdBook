@@ -28,12 +28,12 @@
         
         <div id="divBody">
                 <c:if test="${invalidAccountData == true}">
-                    <div id="invalidAccountData">
+                    <div class="error" id="invalidAccountData">
                         <p>E-mail e/o password non sono corretti</p>
                     </div>
                 </c:if>
                 <c:if test="${illegalAccess == true}">
-                    <div id="illegalAccess">
+                    <div class="error" id="illegalAccess">
                         <p>Devi prima effettuare il login</p>
                     </div>
                 </c:if>

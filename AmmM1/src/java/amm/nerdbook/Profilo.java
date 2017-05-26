@@ -87,6 +87,7 @@ public class Profilo extends HttpServlet {
                 }
 //                request.setAttribute("loggedUser", utente);
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                return;
                 
             }
             else {

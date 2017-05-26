@@ -44,7 +44,7 @@ public class Bacheca extends HttpServlet {
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
             // salvo l'utente per un utilizzo futuro
             Utente utente = (Utente)session.getAttribute("loggedUser");
-            System.out.println("(user_already_logged)");
+            System.out.println("[Bacheca-Servlet]-User already logged");
             
             // visualizzazione dei post di un utente
             if (request.getParameter("userIdToVisit") != null && request.getParameter("groupIdToVisit") == null) {

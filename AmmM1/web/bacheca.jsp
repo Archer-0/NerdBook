@@ -31,10 +31,8 @@
             <div id="bacheca">
                 <jsp:include page="sideBarSx.jsp"/>
                 <div id="content">
-                    <div id="writeStatus">
-                        <!-- postmaker -->
-                        <jsp:include page="newPost.jsp"/>
-                    </div>
+                    <!-- postmaker -->
+                    <jsp:include page="newPost.jsp"/>
                     <div id="postsDiv">
                         <c:forEach var="post" items="${posts}">
                             <div class="post">
