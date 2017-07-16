@@ -3,8 +3,22 @@
     Author     : archer
 */
 
-html {
-    zoom: 95%;
+#footer {
+    width: 98%;
+    border-top: 1px rgba(46,204,113, .08) solid;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#footer p#upIcon img {
+    border-radius: 100%;
+    border-width: 1px;
+    height: 40px;
+    width: 40px;
 }
 
 /* regole generali generali dei titoli */
@@ -340,7 +354,7 @@ header #logout img {
 #login input[type=submit], #profileData input[type=submit], #writeStatus input[type=submit], button {
     height: 44px;
     color: #FFFFFF;
-    background-color: #00695C;
+    background-color: #00695D;
     opacity: .8;
 }
 
@@ -498,6 +512,7 @@ div#writeStatusFullSize {
     overflow-y: scroll;
 }
 */
+
 #writeStatus input[type=submit], #writeStatus button {
     margin-bottom: 15px;
 }
@@ -609,7 +624,7 @@ div#writeStatusFullSize {
 
 .post {
     background-color: #f7f7f7;
-    box-shadow: 0px 0px 2px 3px rgba(46,204,113, .2);
+    box-shadow: 0px 0px 0px 2px rgba(46,204,113, .2);
     border-radius: 5px;
     width: 95%;
     height: auto;
@@ -749,14 +764,6 @@ div#writeStatusFullSize {
         background: rgba(46, 204, 113, 0.55);
     }
 
-    ::-webkit-scrollbar:hover {
-        background-color: rgba(46, 204, 113, 0.15);
-    }
-
-    ::webkit-scrollbar-thumb:hover {
-        background: rgba(46, 204, 113, 0.90);
-    }
-
     header {
         overflow: hidden;
     }
@@ -874,14 +881,6 @@ div#writeStatusFullSize {
 
     ::-webkit-scrollbar-thumb {
         background: rgba(46, 204, 113, 0.55);
-    }
-
-    ::-webkit-scrollbar:hover {
-        background-color: rgba(46, 204, 113, 0.15);
-    }
-
-    ::webkit-scrollbar-thumb:hover {
-        background: rgba(46, 204, 113, 0.90);
     }
     
     body {

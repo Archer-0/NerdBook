@@ -109,7 +109,7 @@ public class Login extends HttpServlet {
                         return;
                     }
                     else {
-                        request.getRequestDispatcher("Bacheca?userIdToVisit=" + loggedUserId).forward(request, response);
+                        response.sendRedirect("Bacheca?userIdToVisit=" + loggedUserId);
                         System.out.println(SERVNAME + "Redirecting User to Bacheca");
                         return;
                     }

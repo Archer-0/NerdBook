@@ -213,7 +213,8 @@ public class NewPost extends HttpServlet {
                     
                     request.setAttribute("revision", false);
                     request.getRequestDispatcher("Bacheca");
-                    request.getRequestDispatcher("/bacheca.jsp").forward(request, response);
+                    
+                    response.sendRedirect("Bacheca?" + toWho);                    
                     
                     return;
                 }
@@ -228,7 +229,7 @@ public class NewPost extends HttpServlet {
                         request.removeAttribute("urlAllegato");
                         request.removeAttribute("nomeAllegato");
                         
-                        request.getRequestDispatcher("/bacheca.jsp").forward(request, response);
+                        response.sendRedirect("Bacheca?userIdToVisit=" + session.getAttribute("loggedUserId"));
                         System.out.println(SERVNAME + "Post refused by user.");
                         
                         return;
@@ -236,7 +237,7 @@ public class NewPost extends HttpServlet {
                 }
             } // FINE opzioni post
             
-            request.getRequestDispatcher("/bacheca.jsp").forward(request, response);
+            request.getRequestDispatcher("Bacheca?userIdToVisit=" + session.getAttribute("loggedUserId")).forward(request, response);
             return;
         }
         else {

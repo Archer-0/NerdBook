@@ -21,8 +21,12 @@
           media="screen">
 </head>
 <body>
+    <!-- tag per tornare in altro alla pagina -->
+        <div id="pageHeader"></div>
+        
     <c:set var="page" value="profilo" scope="request"/>
     <jsp:include page="header.jsp"/>
+    
     <div id="divBody">
         <div id="profilo">
             <jsp:include page="sideBarSx.jsp"/>
@@ -127,6 +131,12 @@
             <div id="sideBarDx">
                 <!-- Da aggiungere -->
             </div>
+        </div>
+            
+        <div id="footer">
+            <!-- footer -->
+            <c:set var="tornaSuVar" value="#pageHeader" scope="request"/>
+            <jsp:include page="footer.jsp"/>          
         </div>
     </div>
 </body>

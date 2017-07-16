@@ -17,6 +17,9 @@
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     </head>
     <body>
+        <!-- tag per tornare in altro alla pagina -->
+        <div id="pageHeader"></div>
+        
         <c:set var="page" value="descrizione" scope="request"/>
         <jsp:include page="header.jsp"/>
         
@@ -79,6 +82,12 @@
                     <br/>
                     <h5>All rights reserved. <dfn title="Oh yeah">NerdBook</dfn> Corp.</h5>
                 </div>
+            </div>
+            
+            <div id="footer">
+                <!-- footer -->
+                <c:set var="tornaSuVar" value="#pageHeader" scope="request"/>
+                <jsp:include page="footer.jsp"/>          
             </div>
         </div>
     </body>

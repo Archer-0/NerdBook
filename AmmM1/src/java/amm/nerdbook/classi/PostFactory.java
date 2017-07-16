@@ -41,6 +41,7 @@ public class PostFactory {
         Post p1 = new Post();
         p1.setId(listaPost.size());
         p1.setAutore(uFactory.getUtenteById(1));
+        p1.setToUser(uFactory.getUtenteById(0));
         p1.setContenuto("Io suggerirei di cambiarla con un'altra migliore.");
         p1.setUrlAllegato("img/post0.jpg");
         p1.setNomeAllegato("Me me me me me me me me");
@@ -51,6 +52,7 @@ public class PostFactory {
         Post p2 = new Post();
         p2.setId(listaPost.size());
         p2.setAutore(uFactory.getUtenteById(2));
+        p2.setToUser(uFactory.getUtenteById(1));
         p2.setContenuto("Pff, dilettante.");
         p2.setUrlAllegato("https://www.youtube.com/watch?v=WkNL_cfVyWU");
         p2.setNomeAllegato("Guarda qui!");
@@ -107,7 +109,7 @@ public class PostFactory {
         List<Post> listaPostUser = new ArrayList<>();
         
         for(Post post : this.listaPost) {
-            if (post.getAutore().equals(user)) {
+            if (post.getAutore().equals(user) || (post.getToUser() != null && post.getToUser().equals(user))) {
                 listaPostUser.add(post);
             }
         }
