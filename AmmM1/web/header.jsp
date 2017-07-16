@@ -12,8 +12,14 @@
     <c:if test="${page != 'descrizione'}">
         <nav id="siteMap">
             <ul>
-                <li <c:if test="${page == 'bacheca'}"> class="active"</c:if>><a href="Bacheca?userIdToVisit=${loggedUserId}">Bacheca</a></li>
-                <li <c:if test="${page == 'profilo'}"> class="active"</c:if>><a href="profilo.jsp?user=${loggedUser.id}">Profilo</a></li>
+                <c:if test="${page == 'bacheca'}">
+                    <li class="active"><a href="Bacheca?userIdToVisit=${loggedUserId}">Bacheca</a></li>
+                    <li><a href="profilo.jsp?user=${loggedUser.id}">Profilo</a></li>
+                </c:if>
+                <c:if test="${page == 'profilo'}"> 
+                    <li class="active"><a href="profilo.jsp?user=${loggedUser.id}">Profilo</a></li>
+                    <li><a href="Bacheca?userIdToVisit=${loggedUserId}">Bacheca</a></li>
+                </c:if>
             </ul>
         </nav>
         <ul id="logout">

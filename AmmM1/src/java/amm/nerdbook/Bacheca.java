@@ -25,7 +25,9 @@ import javax.servlet.http.HttpSession;
  * @author archer
  */
 public class Bacheca extends HttpServlet {
-
+    
+    final String SERVNAME = "[Bacheca-Servlet]-";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,13 +40,14 @@ public class Bacheca extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        System.out.print("[Bacheca-Servlet]-Checking session...");
+        System.out.print(SERVNAME + "Checking session...");
         HttpSession session = request.getSession(false);
         
+        // utente gia' loggato
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
             // salvo l'utente per un utilizzo futuro
             Utente utente = (Utente)session.getAttribute("loggedUser");
-            System.out.println("[Bacheca-Servlet]-User already logged");
+            System.out.println(SERVNAME + "User already logged");
             
             // visualizzazione dei post di un utente
             if (request.getParameter("userIdToVisit") != null && request.getParameter("groupIdToVisit") == null) {
@@ -57,6 +60,7 @@ public class Bacheca extends HttpServlet {
                         List<Post>posts = PostFactory.getInstance().getPostList();
                         request.setAttribute("posts", posts);
                         request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                        return;
                     }
                     request.setAttribute("userToVisit", userToVisit);
                     List<Post>posts = PostFactory.getInstance().getPostListByUser(userToVisit);
@@ -81,7 +85,6 @@ public class Bacheca extends HttpServlet {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
             }
-            
             else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
@@ -89,7 +92,7 @@ public class Bacheca extends HttpServlet {
         else {
             System.out.println("(user not logged: illegal access)");
             request.setAttribute("illegalAccess", true);
-            request.getRequestDispatcher("login.jsp?logout=true").forward(request, response);
+            request.getRequestDispatcher("Login?logout=true").forward(request, response);
         }
     }
 

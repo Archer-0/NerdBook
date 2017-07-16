@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class UtenteFactory {
     //Pattern Design Singleton
     private static UtenteFactory singleton;
+    private static final String CLASSNAME = "[UtenteFactory-class]-";
 
     public static UtenteFactory getInstance() {
         if (singleton == null) {
@@ -107,7 +108,7 @@ public class UtenteFactory {
        
         listaUtenti.add(u5);
         
-        System.out.println("[Utente-Factory-class]-User creation completed");
+        System.out.println(CLASSNAME +  "User creation completed");
     }
     
     public Utente getUtenteById(int id) {

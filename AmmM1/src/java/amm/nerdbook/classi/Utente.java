@@ -20,7 +20,7 @@ public class Utente {
     private String citazione;
     
     public Utente() {
-        this.id = 0;
+        this.id = -2;
         this.nome = "";
         this.cognome = "";
         this.dataNascita = "0000-00-00";

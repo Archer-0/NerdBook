@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(loadOnStartup = 0)
 public class Login extends HttpServlet {
 
-    // variabile "loggedUser" = attributo sessione dell'utente che ha effettuato il  login
+    final String SERVNAME = "[Login-Servlet]-";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,27 +42,45 @@ public class Login extends HttpServlet {
        HttpSession session = request.getSession(true);
         
         if (request.getParameter("logout") != null) {
+            // log
+            System.out.print(SERVNAME + "User with id: " + request.getParameter("loggedUserId"));
+            
             session.invalidate();
             request.setAttribute("loggedIn", false);
             request.setAttribute("loggedUserId", "");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+            
+            // log
+            System.out.println("logged out.");
+            
             return;
         }
         
+        // log
+        System.out.println(SERVNAME + "Checking user... ");
+        
         // se l'utente e' loggato
-        System.out.println("[Login-Servlet]-Checking user...");
         if (session.getAttribute("loggedIn") !=  null && session.getAttribute("loggedIn").equals(true)) {
             int userId = (int)session.getAttribute("loggedUserId");
             Utente loggedUser = UtenteFactory.getInstance().getUtenteById(userId);
-            session.setAttribute("loggedUser", loggedUser);
-            System.out.println("[Login-Servlet]-User already logged");
+            
+            if (session.getAttribute("loggedUser") == null)
+                session.setAttribute("loggedUser", loggedUser);
+            
+            System.out.println(SERVNAME + "User already logged");
+            
             request.getRequestDispatcher("Bacehca").forward(request, response);
+            return;
         }
         else {
-            System.out.println("[Login-Servlet]-User not logged");
+            //log
+            System.out.println(SERVNAME + "User not logged");
+            
+            //recupero dati di accesso
             String email = request.getParameter("email");
             String passwd = request.getParameter("pass");
             
+            // se i campi di autenticazione non sono vuoti
             if (email != null && passwd != null) {
                 int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, passwd);
                 
@@ -70,45 +88,55 @@ public class Login extends HttpServlet {
                 if (loggedUserId != -2) {
                     Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
                     
-                    System.out.println("[Login-Servlet]-User login correct");
+                    System.out.println(SERVNAME + "User login correct");
                     
                     session.setAttribute("loggedIn", true);
                     session.setAttribute("loggedUserId", loggedUserId);
                     session.setAttribute("loggedUser", loggedUser);
+                    
+                    ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
+                    session.setAttribute("users", users);
+                    
+                    System.out.println(SERVNAME + "Users list loaded");
+
+                    ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
+                    session.setAttribute("groups", groups);
+                    System.out.println(SERVNAME + "Group list loaded");
+
+                    if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
+                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                        System.out.println(SERVNAME + "User details not completed. Redirecting user to profile page");
+                        return;
+                    }
+                    else {
+                        request.getRequestDispatcher("Bacheca?userIdToVisit=" + loggedUserId).forward(request, response);
+                        System.out.println(SERVNAME + "Redirecting User to Bacheca");
+                        return;
+                    }
                 }
                 else {
-                    System.out.println("[Login-Servlet]-User not registered. Reloading login page");
+                    System.out.println(SERVNAME + "User not registered. Reloading login page");
                     request.setAttribute("invalidAccountData", true);
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                     return;
-                }
-                
-                ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
-                session.setAttribute("users", users);
-        
-                ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
-                session.setAttribute("groups", groups);
-                
-                if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
-                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                    System.out.println("[Login-Servlet]-User details not completed. Redirecting user to profile page");
-                }
-                else {
-                    request.getRequestDispatcher("Bacheca?userIdToVisit=" + loggedUserId).forward(request, response);
-                    System.out.println("[Login-Servlet]-Redirecting User to Bacheca");
-                }
-                return;
+                } 
             }
             else {
-                System.out.println("[Login-Servlet]-Login fields not completed");
+                System.out.println(SERVNAME + "Login fields not completed");
                 request.setAttribute("invalidAccountData", true);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
                 return;
             }
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        //request.getRequestDispatcher("login.jsp").forward(request, response);
     }
     
+    
+    /**
+     * Controlla se tutti i dettagli di un account sono completi
+     * @param utente un oggetto di tipo Utente
+     * @return boolean true se tutti i dettagli dell'oggetto utente sono completi o false se anche solo uno e' vuoto
+     */
     public boolean userDetailsComplete(Utente loggedUser) {
         if (loggedUser.getNome().equals("") || loggedUser.getCognome().equals("") || loggedUser.getUrlFotoProfilo().equals("img/default.jpg") 
                 || loggedUser.getCitazione().equals("") || loggedUser.getDataNascita().equals("")) {
@@ -155,10 +183,4 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    /**
-     * Controlla se tutti i dettagli di un account sono completi
-     * @param utente un oggetto di tipo Utente
-     * @return boolean true se tutti i dettagli dell'oggetto utente sono completi o false se anche solo uno e' vuoto
-     */
 }

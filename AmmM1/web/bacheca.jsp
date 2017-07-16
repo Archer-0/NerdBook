@@ -6,10 +6,11 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>NerdBook: Bacheca di ${loggedUser.nome} ${loggedUser.cognome}</title>
+        <title>NerdBook: Bacheca di ${userToVisit.nome} ${userToVisit.cognome}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author"
@@ -27,57 +28,25 @@
         <jsp:include page="header.jsp"/>
         
         <!-- contenuto della pagina -->
-        <div id="divBody">
+        <div id="divBody">    
             <div id="bacheca">
+                <!-- sidebar sinistra -->
                 <jsp:include page="sideBarSx.jsp"/>
+                
                 <div id="content">
                     <!-- postmaker -->
                     <jsp:include page="newPost.jsp"/>
+                
                     <div id="postsDiv">
-                        <c:forEach var="post" items="${posts}">
-                            <div class="post">
-                                <h4 id='img'>
-                                    <a id="userImg" href="${post.autore.urlFotoProfilo}">
-                                        <img src="${post.autore.urlFotoProfilo}"
-                                             title="Foto profilo di ${post.autore.nome}"
-                                             alt="Foto profilo di ${post.autore.nome}"
-                                             height="50"
-                                             class="accountImage"/></a>
-                                             <a id="userName" href="Bacheca?userIdToVisit=${post.autore.id}">${post.autore.nome}</a>
-                                             <!-- se nel post sono taggate persone o gruppi -->
-                                             <c:if test="${post.toGroup != null && post.toUser == null}">
-                                                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?groupIdToVisit=${post.toGroup.id}">${post.toGroup.nome}</a> <a class="addOn">(Gruppo)</a>
-                                             </c:if>
-                                             <c:if test="${post.toGroup == null && post.toUser != null}">
-                                                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?userIdToVisit=${post.toUser.id}">${post.toUser.nome}</a> <a class="addOn">(Utente)</a>
-                                             </c:if>
-                                </h4>
-                                <c:if test="${post.postType == 'TEXT' || empty post.urlAllegato}">
-                                    <p>${post.contenuto}</p>
-                                </c:if>
-                                <c:if test="${post.postType == 'TEXT_AND_IMAGE' && not empty post.urlAllegato}">
-                                    <p>
-                                        ${post.contenuto}
-                                        <a href="${post.urlAllegato}">
-                                            <img src="${post.urlAllegato}"
-                                                 title="${post.nomeAllegato}"
-                                                 alt="Immagine postata da ${post.autore.nome}"
-                                                 height="200"/></a>
-                                    </p>
-                                </c:if>
-                                <c:if test="${post.postType == 'TEXT_AND_LINK' && not empty post.urlAllegato}">
-                                    <p>
-                                        ${post.contenuto} 
-                                        <a href="${post.urlAllegato}">${post.nomeAllegato}</a>
-                                    </p>
-                                </c:if>
-                            </div>
-                        </c:forEach>
+                        <!-- sezione post -->
+                        <jsp:include page="post.jsp"/>
                     </div>
                 </div>
+
                 <div id="sideBarDx">
-                    <!-- Da aggiungere -->
+                <!-- Da aggiungere -->
                 </div>
+            
             </div>
         </div>    
     </body>

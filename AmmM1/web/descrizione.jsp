@@ -30,7 +30,7 @@
                    <ul>
                     <!-- lista dei link interni -->
                         <li><a href="#signinDescription">Iscriviti subito!</a></li>
-                        <li><a href="#loginDescription">Sei gi&agrave; iscritto. Vai al login.</a></li>
+                        <li><a href="#loginDescription">Sei gi&agrave; iscritto? Vai al login.</a></li>
                         <li><a href="#chi_siamo">Chi siamo?</a></li>
                         <li><a href="#info_legali">Informazioni legali.</a></li>
                     </ul>

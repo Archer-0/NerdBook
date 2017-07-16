@@ -37,12 +37,6 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
-//        ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
-//        request.setAttribute("users", users);
-//        
-//        ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
-//        request.setAttribute("groups", groups);
-        
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {        
             Utente utente = (Utente)session.getAttribute("loggedUser");
             
@@ -97,7 +91,7 @@ public class Profilo extends HttpServlet {
         else {
             request.setAttribute("loggedIn", false);
             request.setAttribute("illegalAccess", true);
-            request.getRequestDispatcher("Login").forward(request, response);
+            request.getRequestDispatcher("Login?logout=true").forward(request, response);
             return;
         }
     }  

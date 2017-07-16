@@ -32,7 +32,7 @@ public class PostFactory {
         Post p0 = new Post();
         p0.setId(listaPost.size());
         p0.setAutore(uFactory.getUtenteById(0));
-        p0.setContenuto("Ci siamo stufati di questo meme. Basta. Non ne possiamo piu");
+        p0.setContenuto("Ci siamo stufati di questo meme. Basta. Non ne possiamo piu!");
         p0.setUrlAllegato("");
         p0.setPostType(Post.Type.TEXT);
         
@@ -136,17 +136,19 @@ public class PostFactory {
         postToAdd.setNomeAllegato(nomeAllegato);
         postToAdd.setPostType(postType);
         
-        if (idToUser == -1 && idToGroup == -1) {
+        if (idToUser == -2 && idToGroup == -2) {
             postToAdd.setToGroup(null);
             postToAdd.setToUser(null);
         }
         else {
-            if (idToUser != -1 && idToGroup == -1) {
+            if (idToUser > -2 && idToGroup == -2) {
                 postToAdd.setToUser(UtenteFactory.getInstance().getUtenteById(idToUser));
+                postToAdd.setToGroup(null);
             }
             else {
-                if (idToUser == -1 && idToGroup != -1) {
+                if (idToUser == -2 && idToGroup > -2) {
                     postToAdd.setToGroup(GruppoFactory.getInstance().getGroupById(idToGroup));
+                    postToAdd.setToUser(null);
                 }
             }
         }
@@ -155,7 +157,7 @@ public class PostFactory {
             return true;
         }
         else {
-            System.out.println("[Post-Factory-class]-Internal error while creating new post");
+            System.out.println("[Post-Factory-class]-Internal error while adding new post to DB");
             return false;
         }
     }
