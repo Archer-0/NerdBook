@@ -20,7 +20,7 @@ public class Post {
     private String contenuto;
     private String urlAllegato;
     private String nomeAllegato;
-    private Type postType;
+    private Post.Type tipo;
     private String oraPubblicazione;
     private String dataPubblicazione;
     
@@ -32,7 +32,7 @@ public class Post {
         this.contenuto = "";
         this.urlAllegato = "";
         this.nomeAllegato = "";
-        this.postType = Type.TEXT;
+        this.tipo = Type.TEXT;
         this.oraPubblicazione = "hh:mm:ss";
         this.dataPubblicazione = "yyyy:mm:dd";
     }
@@ -136,17 +136,17 @@ public class Post {
     }
 
     /**
-     * @return the postType
+     * @return the tipo
      */
-    public Type getPostType() {
-        return postType;
+    public Type getTipo() {
+        return tipo;
     }
 
     /**
-     * @param postType the postType to set
+     * @param tipo the postType to set
      */
-    public void setPostType(Type postType) {
-        this.postType = postType;
+    public void setTipo(Type tipo) {
+        this.tipo = tipo;
     }
 
     /**

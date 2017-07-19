@@ -5,6 +5,12 @@
  */
 package amm.nerdbook.classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +20,13 @@ import java.util.List;
  */
 public class PostFactory {
     private static PostFactory singleton;
+    private String connectionString;
+   
+    private static final String CLASSNAME = "[PostFactory-class]-";
+
+    private static final String USERNAME = "matt";
+    private static final String PASSWORD = "eggman";
+
     
     public static PostFactory getInstance() {
         if (singleton == null) {
@@ -21,157 +34,407 @@ public class PostFactory {
         }
         return singleton;
     }
-    
-    private ArrayList<Post> listaPost = new ArrayList<>();
-    
+        
     private PostFactory() {
-        UtenteFactory uFactory = UtenteFactory.getInstance();
-        GruppoFactory gFactory = GruppoFactory.getInstance();
-        
-        // Creazione dei post
-        Post p0 = new Post();
-        p0.setId(listaPost.size());
-        p0.setAutore(uFactory.getUtenteById(0));
-        p0.setContenuto("Ci siamo stufati di questo meme. Basta. Non ne possiamo piu!");
-        p0.setUrlAllegato("");
-        p0.setPostType(Post.Type.TEXT);
-        
-        listaPost.add(p0);
-        
-        Post p1 = new Post();
-        p1.setId(listaPost.size());
-        p1.setAutore(uFactory.getUtenteById(1));
-        p1.setToUser(uFactory.getUtenteById(0));
-        p1.setContenuto("Io suggerirei di cambiarla con un'altra migliore.");
-        p1.setUrlAllegato("img/post0.jpg");
-        p1.setNomeAllegato("Me me me me me me me me");
-        p1.setPostType(Post.Type.TEXT_AND_IMAGE);
-        
-        listaPost.add(p1);
-        
-        Post p2 = new Post();
-        p2.setId(listaPost.size());
-        p2.setAutore(uFactory.getUtenteById(2));
-        p2.setToUser(uFactory.getUtenteById(1));
-        p2.setContenuto("Pff, dilettante.");
-        p2.setUrlAllegato("https://www.youtube.com/watch?v=WkNL_cfVyWU");
-        p2.setNomeAllegato("Guarda qui!");
-        p2.setPostType(Post.Type.TEXT_AND_LINK);
-        
-        listaPost.add(p2);
-        
-        Post p3 = new Post();
-        p3.setId(listaPost.size());
-        p3.setAutore(uFactory.getUtenteById(4));
-        p3.setContenuto("Vorrei essere come voih!!!11!!1!");
-        p3.setUrlAllegato("");
-        p3.setPostType(Post.Type.TEXT);
-        p3.setToGroup(gFactory.getGroupById(0));
-        
-        listaPost.add(p3);
-        
-        Post p4 = new Post();
-        p4.setId(listaPost.size());
-        p4.setAutore(uFactory.getUtenteById(3));
-        p4.setContenuto("DIG");
-        p4.setUrlAllegato("https://www.youtube.com/watch?v=b4ozdiGys5g");
-        p4.setNomeAllegato("DOWWWWWWWWWN");
-        p4.setPostType(Post.Type.TEXT_AND_LINK);
-        p4.setToGroup(gFactory.getGroupById(0));
-        
-        listaPost.add(p4);
-        
-        Post p5 = new Post();
-        p5.setId(listaPost.size());
-        p5.setAutore(uFactory.getUtenteById(5));
-        p5.setContenuto("SAS");
-        p5.setUrlAllegato("");
-        p5.setPostType(Post.Type.TEXT);
-        p5.setToUser(uFactory.getUtenteById(0));
-        
-        listaPost.add(p5);
+        /* Ci siamo spostati, venite a trovarci nel database.*/
     }
     
     public Post getPostById(int id) {
-        for(Post post : this.listaPost) {
-            if (post.getId() == id) {
+        UtenteFactory uFact = UtenteFactory.getInstance();
+        GruppoFactory gFact = GruppoFactory.getInstance();
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            
+            // comando SQL
+            String query = "SELECT * FROM post JOIN post_type ON post.tipo = post_type.id" + 
+                           " WHERE id = ?";
+            
+            // Prepered Statement (giusto per evitare problemi)
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            // si associa al/ai "?" della query i parametri inserire nella query
+            prepStmt.setInt(1, id);
+            
+            // esecuzione della query
+            ResultSet res = prepStmt.executeQuery();
+            
+            // restituzione delle righe ottenute alla funzione chiamante
+            if (res.next()) {
+                
+                Post post = new Post();
+                
+                post.setId(res.getInt("id"));
+                post.setAutore(uFact.getUtenteById(res.getInt("autore")));
+                post.setToUser(uFact.getUtenteById(res.getInt("to_user")));
+                post.setToGroup(gFact.getGroupById(res.getInt("to_group")));
+                post.setContenuto(res.getString("contenuto"));
+                post.setUrlAllegato(res.getString("url_allegato"));
+                post.setNomeAllegato(res.getString("nome_allegato"));
+                post.setTipo(this.setType(res.getString("type_name")));
+                post.setOraPubblicazione(res.getTime("ora_pubblicazione").toString());
+                post.setDataPubblicazione(res.getDate("data_pubblicazione").toString());
+                
+                // rilascio delle risorse
+                prepStmt.close();
+                conn.close();
+                
+                // restituisco l'oggetto richiesto
                 return post;
             }
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            // log
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: getPostById(...))");
+            ex.printStackTrace();
         }
         return null;
     }
     
     public List<Post> getPostList() {
-        return this.listaPost;
+        UtenteFactory uFact = UtenteFactory.getInstance();
+        GruppoFactory gFact = GruppoFactory.getInstance();
+        
+        List<Post> listaPost = new ArrayList<>();
+        
+        try { 
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            // comando SQL
+            String query = "SELECT * FROM post JOIN post_type ON post.tipo = post_type.id" +
+                           " ORDER BY data_pubblicazione, ora_pubblicazione DESC";
+            
+            // Prepered Statement (giusto per evitare problemi)
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            // esecuzione della query
+            ResultSet res = prepStmt.executeQuery();
+            
+            // restituzione delle righe ottenute alla funzione chiamante
+            while (res.next()) {
+                
+                Post post = new Post();
+                
+                post.setId(res.getInt("id"));
+                post.setAutore(uFact.getUtenteById(res.getInt("autore")));
+                post.setToUser(uFact.getUtenteById(res.getInt("to_user")));
+                post.setToGroup(gFact.getGroupById(res.getInt("to_group")));
+                post.setContenuto(res.getString("contenuto"));
+                post.setUrlAllegato(res.getString("url_allegato"));
+                post.setNomeAllegato(res.getString("nome_allegato"));
+                post.setTipo(this.setType(res.getString("type_name")));
+                post.setOraPubblicazione(res.getTime("ora_pubblicazione").toString());
+                post.setDataPubblicazione(res.getDate("data_pubblicazione").toString());
+                
+                listaPost.add(post);
+                
+            }
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            // log
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: getPostList(...))");
+            ex.printStackTrace();
+        }
+        
+        return listaPost;
     }
     
     public List<Post> getPostListByUser(Utente user) {
-        List<Post> listaPostUser = new ArrayList<>();
-        
-        for(Post post : this.listaPost) {
-            if (post.getAutore().equals(user) || (post.getToUser() != null && post.getToUser().equals(user))) {
+        UtenteFactory uFact = UtenteFactory.getInstance();
+        GruppoFactory gFact = GruppoFactory.getInstance();
+        List<Post> listaPostUser = new ArrayList<>(); 
+               
+        try { 
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            // comando SQL
+            String query = "SELECT * FROM post JOIN post_type ON post.tipo = post_type.id" + 
+                           " WHERE to_user = ? OR autore = ?" +
+                           " ORDER BY data_pubblicazione, ora_pubblicazione DESC";
+            
+            // Prepered Statement (giusto per evitare problemi)
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, user.getId());
+            
+            prepStmt.setInt(2, user.getId());
+            
+            // esecuzione della query
+            ResultSet res = prepStmt.executeQuery();
+            
+            // restituzione delle righe ottenute alla funzione chiamante
+            while (res.next()) {
+                
+                Post post = new Post();
+                
+                post.setId(res.getInt("id"));
+                post.setAutore(uFact.getUtenteById(res.getInt("autore")));
+                post.setToUser(uFact.getUtenteById(res.getInt("to_user")));
+                post.setToGroup(gFact.getGroupById(res.getInt("to_group")));
+                post.setContenuto(res.getString("contenuto"));
+                post.setUrlAllegato(res.getString("url_allegato"));
+                post.setNomeAllegato(res.getString("nome_allegato"));
+                post.setTipo(this.setType(res.getString("type_name")));
+                post.setOraPubblicazione(res.getTime("ora_pubblicazione").toString());
+                post.setDataPubblicazione(res.getDate("data_pubblicazione").toString());
+                
                 listaPostUser.add(post);
+                
             }
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            // log
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: getPostByUser(...))");
+            ex.printStackTrace();
         }
+        
         return listaPostUser;
     }
     
     public List<Post> getPostListByGroup(Gruppo group) {
+        UtenteFactory uFact = UtenteFactory.getInstance();
+        GruppoFactory gFact = GruppoFactory.getInstance();
+        
         List<Post> listaPostGroup = new ArrayList<>();
         
-        for(Post post: this.listaPost) {
-            if (group.equals(post.getToGroup())) {
+        
+        try { 
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            // comando SQL
+            String query = "SELECT * FROM post JOIN post_type ON post.tipo = post_type.id" + 
+                           " WHERE to_group = ?" +
+                           " ORDER BY data_pubblicazione, ora_pubblicazione DESC";
+            
+            // Prepered Statement (giusto per evitare problemi)
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, group.getId());
+            
+            // esecuzione della query
+            ResultSet res = prepStmt.executeQuery();
+            
+            // restituzione delle righe ottenute alla funzione chiamante
+            while (res.next()) {
+                
+                Post post = new Post();
+                
+                post.setId(res.getInt("id"));
+                post.setAutore(uFact.getUtenteById(res.getInt("autore")));
+                post.setToUser(uFact.getUtenteById(res.getInt("to_user")));
+                post.setToGroup(gFact.getGroupById(res.getInt("to_group")));
+                post.setContenuto(res.getString("contenuto"));
+                post.setUrlAllegato(res.getString("url_allegato"));
+                post.setNomeAllegato(res.getString("nome_allegato"));
+                post.setTipo(this.setType(res.getString("type_name")));
+                post.setOraPubblicazione(res.getTime("ora_pubblicazione").toString());
+                post.setDataPubblicazione(res.getDate("data_pubblicazione").toString());
+                
                 listaPostGroup.add(post);
+                
             }
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            // log
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: getPostByGroup(...))");
+            ex.printStackTrace();
         }
+        
         return listaPostGroup;
     }
     
     public boolean newPost(int idAutore, int idToUser, int idToGroup, String content, String urlAllegato, String nomeAllegato, Post.Type postType) {
-        Post postToAdd = new Post();
+    //                             1            2               3               4                   5                   6                   7
         
-        // aggiunta elementi del post
-        postToAdd.setId(listaPost.size());
-        postToAdd.setAutore(UtenteFactory.getInstance().getUtenteById(idAutore));
-        postToAdd.setContenuto(content);
-        postToAdd.setUrlAllegato(urlAllegato);
-        postToAdd.setNomeAllegato(nomeAllegato);
-        postToAdd.setPostType(postType);
-        
-        if (idToUser == -2 && idToGroup == -2) {
-            postToAdd.setToGroup(null);
-            postToAdd.setToUser(null);
-        }
-        else {
-            if (idToUser > -2 && idToGroup == -2) {
-                postToAdd.setToUser(UtenteFactory.getInstance().getUtenteById(idToUser));
-                postToAdd.setToGroup(null);
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            
+            //                                      1       2         3         4           5               6         7             8               9
+            String query = "INSERT INTO post (id, autore, to_user, to_group, contenuto, url_allegato, nome_allegato, tipo, ora_pubblicazione, data_pubblicazione)" + 
+                           " VALUES (default, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIME, CURRENT_DATE)";
+            //                                1  2  3  4  5  6  7     8 (auto)      9 (auto)
+            
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, idAutore);
+            
+            // controlli addizionali
+            if (idToUser <= 1 || idToUser == idAutore) {
+                prepStmt.setNull(2, Types.INTEGER);
+            } else {
+                prepStmt.setInt(2, idToUser);
             }
-            else {
-                if (idToUser == -2 && idToGroup > -2) {
-                    postToAdd.setToGroup(GruppoFactory.getInstance().getGroupById(idToGroup));
-                    postToAdd.setToUser(null);
-                }
+            
+            if (idToGroup <= 1) {
+                prepStmt.setNull(3, Types.INTEGER);
+            } else {
+                prepStmt.setInt(3, idToGroup);
             }
-        }
-        if (this.listaPost.add(postToAdd) == true) {
-            System.out.println("[Post-Factory-class]-New post added (ID: " + postToAdd.getId() + ")");
-            return true;
-        }
-        else {
-            System.out.println("[Post-Factory-class]-Internal error while adding new post to DB");
+            
+            prepStmt.setString(4, content);
+            
+            // controlli addizionali
+            if (urlAllegato == null || urlAllegato.isEmpty()) {
+                prepStmt.setNull(5, Types.VARCHAR);
+                prepStmt.setNull(6, Types.VARCHAR);
+                prepStmt.setInt(7, this.getIntType(Post.Type.TEXT));
+            } else {
+                prepStmt.setInt(7, this.getIntType(postType));
+                prepStmt.setString(5, urlAllegato);
+                prepStmt.setString(6, nomeAllegato);
+            }
+            
+            
+            if (prepStmt.executeUpdate() == 1) 
+                System.out.println(CLASSNAME + "New post added to DB (Function: newPost(...))");
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            //log 
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: newPost(...))");
+            ex.printStackTrace();
             return false;
         }
+        
+        return true;
     }
     
     public boolean removePost(int postId) {
-        if (this.listaPost.remove(this.getPostById(postId)) == true) {
-            System.out.println("[Post-Factory-class]-Post removed by root");
-            return true;
-        }
-        else {
-            System.out.println("[Post-Factory-class]-Internal error while deleting post (ID: " + postId + ")");
+
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            
+            String query = "DELETE FROM post WHERE id = ?";
+            
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, postId);
+            
+            prepStmt.executeUpdate();
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: removePost(...))");
             return false;
         }
+
+        return true;
     }
+    
+    // da utilizzare solo per l'eliminazione di un utente
+    public boolean removePostListOfUser(int userId) {
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            
+            String query = "DELETE FROM post WHERE autore = ?";
+            
+            PreparedStatement prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, userId);
+            
+            prepStmt.executeUpdate();
+            
+            prepStmt.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: removePostListOfUser(...))");
+            return false;
+        }
+
+        return true;
+    }
+    
+    /* v2
+    
+    public boolean removePostListOfUser(int userId) throws SQLException {
+            
+        Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+            
+        String query = "DELETE FROM post WHERE autore = ?";
+
+        PreparedStatement prepStmt = null;
+            
+        boolean flag = true;
+        
+        try {
+            conn.setAutoCommit(false);
+            
+            prepStmt = conn.prepareStatement(query);
+            
+            prepStmt.setInt(1, userId);
+            
+            prepStmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations, trying transaction rollback (Function: removePostListOfUser(...))");
+            try {
+                conn.rollback();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+                System.err.println(CLASSNAME + "ERROR transaction rollback (Function: removePostListOfUser(...))");
+            }
+            
+            flag = false;
+        } finally {
+            
+            if (prepStmt != null)
+                prepStmt.close();
+            
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+        return flag;
+    }
+    */
+    
+    public Post.Type setType (String tipo) {
+        
+        switch (tipo) {
+            case "TEXT_AND_IMAGE":
+                return Post.Type.TEXT_AND_IMAGE;
+            case "TEXT_AND_LINK":
+                return Post.Type.TEXT_AND_LINK;
+            default:
+                return Post.Type.TEXT;
+        }
+        
+    }
+    
+    public int getIntType(Post.Type tipo) {
+        if (tipo == Post.Type.TEXT_AND_IMAGE) 
+            return 2;
+        else if (tipo == Post.Type.TEXT_AND_LINK) 
+            return 3;
+        else
+            return 1;
+    }
+    
+    public void setConnectionString(String s){
+	this.connectionString = s;
+    }
+    
+    public String getConnectionString(){
+	return this.connectionString;
+    }
+    
 }

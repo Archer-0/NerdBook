@@ -53,9 +53,9 @@ public class NewPost extends HttpServlet {
             
             // variabili
             String toWho            = null;     // contiene l'identificatore dell'utente o del gruppo su cui si sta scrivendo
-            int idToWho             = -2;       // e' usato per evitare di ripetere controlli 
-            Utente toUser           = null;     // id dell'utente visitato (-2 se si visita un gruppo)
-            Gruppo toGroup          = null;     // id del gruppo visitato (-2 se si visita un utente)
+            int idToWho             = -1;       // e' usato per evitare di ripetere controlli 
+            Utente toUser           = null;     // id dell'utente visitato (-1 se si visita un gruppo)
+            Gruppo toGroup          = null;     // id del gruppo visitato (-1 se si visita un utente)
             String contenuto        = null;     // contiene il testo del post
             Post.Type postType      = null;     // contiene il tipo di post (TEXT, TEXT_AND_IMAGE, TEXT_AND_LINK)
             String urlAllegato      = null;     // contiene il link all'allegato
@@ -63,7 +63,7 @@ public class NewPost extends HttpServlet {
             String allegatoType     = null;     // contiene il tipo di allegato (not, img, link)
             
             // impostazione toWho
-            if (request.getParameter("userIdToVisit") != null) {
+            if (request.getParameter("userIdToVisit") != null && !request.getParameter("userIdToVisit").equals("")) {
                 
                 toUser = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("userIdToVisit")));
                 idToWho = toUser.getId();
@@ -73,7 +73,7 @@ public class NewPost extends HttpServlet {
                 
 		toWho = "userIdToVisit=" + idToWho;
             }
-            else if (request.getParameter("groupIdToVisit") != null) {
+            else if (request.getParameter("groupIdToVisit") != null && !request.getParameter("groupIdToVisit").equals("")) {
                 
                 toGroup = GruppoFactory.getInstance().getGroupById(Integer.parseInt(request.getParameter("groupIdToVisit")));
                 idToWho = toGroup.getId();
@@ -198,8 +198,8 @@ public class NewPost extends HttpServlet {
                         }
                     }
                     
-                    int idToUser = -2;
-                    int idToGroup = -2;
+                    int idToUser = -1;
+                    int idToGroup = -1;
                     
                     if (toUser != null && toUser.getId() != utente.getId()) {
                         idToUser = toUser.getId();
@@ -212,7 +212,7 @@ public class NewPost extends HttpServlet {
                     PostFactory.getInstance().newPost(utente.getId(), idToUser, idToGroup, contenuto, urlAllegato, nomeAllegato, postType);
                     
                     request.setAttribute("revision", false);
-                    request.getRequestDispatcher("Bacheca");
+                    //request.getRequestDispatcher("Bacheca");
                     
                     response.sendRedirect("Bacheca?" + toWho);                    
                     

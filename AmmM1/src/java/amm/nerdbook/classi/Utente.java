@@ -26,7 +26,7 @@ public class Utente {
         this.dataNascita = "0000-00-00";
         this.email = "";
         this.password = "";
-        this.urlFotoProfilo = "img/default.jpg";
+        this.urlFotoProfilo = "img/default.png";
         this.citazione = "NerdBook does it better!";
     }
 

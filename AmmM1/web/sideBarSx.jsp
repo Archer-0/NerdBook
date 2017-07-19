@@ -24,7 +24,7 @@
         </h3>
         <ul>
             <c:forEach var="utente" items="${users}">
-                <c:if test="${utente.id != '-1' && utente.id != loggedUserId}">
+                <c:if test="${utente.id > 1 && utente.id != loggedUserId}">
                     <li><a href="Bacheca?userIdToVisit=${utente.id}">
                             <img src="${utente.urlFotoProfilo}" alt="Foto profilo di ${utente.nome} " title="Foto profilo di ${utente.nome}"/>
                         </a>
@@ -42,13 +42,15 @@
         </h3>
         <ul>
             <c:forEach var="gruppo" items="${groups}">
-            <li><a href="Bacheca?groupIdToVisit=${gruppo.id}">
-                    <img src="${gruppo.urlImmagine}" alt="Immagine di ${gruppo.nome}" title="Immagine di ${gruppo.nome}"/> 
-                </a>
-                <a href="Bacheca?groupIdToVisit=${gruppo.id}">
-                    <h5>${gruppo.nome}</h5>
-                </a>
-            </li>
+                <c:if test="${gruppo.id > 0}">   
+                    <li><a href="Bacheca?groupIdToVisit=${gruppo.id}">
+                            <img src="${gruppo.urlImmagine}" alt="Immagine di ${gruppo.nome}" title="Immagine di ${gruppo.nome}"/> 
+                        </a>
+                        <a href="Bacheca?groupIdToVisit=${gruppo.id}">
+                            <h5>${gruppo.nome}</h5>
+                        </a>
+                    </li>
+                </c:if>
             </c:forEach>
         </ul>
     </nav>

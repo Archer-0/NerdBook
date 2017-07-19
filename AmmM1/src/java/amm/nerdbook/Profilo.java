@@ -10,7 +10,10 @@ import amm.nerdbook.classi.GruppoFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpSession;
  * @author archer
  */
 public class Profilo extends HttpServlet {
+    
+    private final static String SERVNAME = "[Profilo-Servlet]-";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +42,13 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
-        if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {        
+        if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
             Utente utente = (Utente)session.getAttribute("loggedUser");
             
             if (utente != null) {
+                
                 if (request.getParameter("userDetailsUpdated") != null) {
+                    
                     if (request.getParameter("usrName").equals("") == false && request.getParameter("usrName").equals(utente.getNome()) == false) {
                         utente.setNome((String)request.getParameter("usrName"));
                         request.setAttribute("userDetailsUpdated", true);
@@ -65,23 +72,59 @@ public class Profilo extends HttpServlet {
                     
                     String passwd = request.getParameter("usrPass");
                     String passwdConfirm = request.getParameter("usrPassConfirm");
+                    
                     if (request.getParameter("usrPass").equals("") == false) {
                         if (passwd.equals(passwdConfirm) == true) {
                             utente.setPassword(passwd);
                             request.setAttribute("userDetailsUpdated", true);
+                            System.out.println(SERVNAME + "User details updated");
                         }
                         else {
                             request.setAttribute("passConfirmError", true);
                         }
                     }
                 }
-                else {
-                    request.getRequestDispatcher("profilo.jsp?userDetailsUpdated=false").forward(request, response);
-                    return;
+                
+                // eliminazione di un account
+                if (request.getParameter("selfDestruction") != null) {
+                    
+                    int userId = utente.getId();
+                    
+                    System.out.println(SERVNAME + "User with id: " + userId + " request to remove");
+                    
+                    // se la password e' giusta
+                    if (utente.getPassword().equals((String)request.getParameter("selfDestructionPass")) == true) {
+                        // tenta di cancellare l'utente. Se viene lanciata qualche eccezione verra' intercettata
+                        try {
+                            // log
+                            System.out.println(SERVNAME + "Deleting user with id: " + userId + "...");
+                            
+                            if (UtenteFactory.getInstance().removeUserCompletely(utente.getId()) == true) {
+                                // log
+                                System.out.println(SERVNAME + "User with id: " + userId + " and his posts sucesfully removed");
+                                // redirect alla pagina di addio
+                                response.sendRedirect("goodbye.jsp");
+                                
+                                return;
+                            }
+                            
+                        } catch (SQLException ex) {
+                            // log
+                            System.err.println(SERVNAME + "ERROR while deleting user with id: " + userId + " reloading profile page");
+                            ex.printStackTrace();
+                            
+                            request.setAttribute("removeErr", true);
+                            
+                            return;
+                        }
+                    } else {
+                        request.setAttribute("removeUserPassErr", true);
+                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                        return;
+                    }
                 }
-//                request.setAttribute("loggedUser", utente);
+                
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                return;
                 
             }
             else {

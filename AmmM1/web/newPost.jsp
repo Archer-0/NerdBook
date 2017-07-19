@@ -66,7 +66,7 @@
         </div>
     </c:when>
 
-        <%-- revisione del post: stesso modello dei post normali con aggiunta dei pulsanti --%>
+    <%-- revisione del post: stesso modello dei post normali con aggiunta dei pulsanti --%>
     <c:when test="${revision == true}">
         
         <div class="post" id="revisionPost">

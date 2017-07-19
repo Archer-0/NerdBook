@@ -1,0 +1,47 @@
+Utente {
+    id -> primary key
+    nome
+    cognome
+    data_di_nascita
+    email
+    password
+    url_foto_profilo
+    citazione
+}
+
+Gruppo {
+    id -> primary key
+    nome
+    numero_utenti
+    url_immagine
+}
+
+Gruppo_Utente {
+    id_gruppo -> primary/foreign key
+    id_utente -> primary/foreign key
+}
+
+Gruppo_Utente.id_gruppo - FA RIFERIMENTO A -> Gruppo.id
+Gruppo_Utente.id_utente - FA RIFERIMENTO A -> Utente.id
+
+Post_type {
+    id -> prymary key
+    nome_del_tipo
+}
+
+Post {
+    id -> primary key
+    autore -> foreign key
+    inidirizzato_a_utente (se si post sulla bacheca di un utente) -> foreign key
+    indirizzato_a_gruppo ( se si posta sulla bacheca di un gruppo) -> foreign key
+    contenuto
+    url_allegato
+    nome_allegato
+    tipo_del_post
+    ora_pubblicazione
+    data_pubblicazione
+}
+
+Post.utente - FA RIFERIMENTO A -> utente.id
+Post.inirizzato_a_utente - FA RIFERIMENTO A -> utente.id
+Post.inirizzato_a_gruppo - FA RIFERIMENTO A -> gruppo.id

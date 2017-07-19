@@ -7,10 +7,14 @@ package amm.nerdbook;
 
 import amm.nerdbook.classi.Gruppo;
 import amm.nerdbook.classi.GruppoFactory;
+import amm.nerdbook.classi.PostFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +28,27 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(loadOnStartup = 0)
 public class Login extends HttpServlet {
+    
+    private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+    private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
+    private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
+    
+    @Override
+    public void init(){
+       //String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
+       String dbConnection = "jdbc:derby://localhost:1527/ammdb";
+       
+       try {
+           Class.forName(JDBC_DRIVER);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       UtenteFactory.getInstance().setConnectionString(dbConnection);
+       GruppoFactory.getInstance().setConnectionString(dbConnection);
+       PostFactory.getInstance().setConnectionString(dbConnection);
+   }
 
-    final String SERVNAME = "[Login-Servlet]-";
+    private static final String SERVNAME = "[Login-Servlet]-";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,7 +93,6 @@ public class Login extends HttpServlet {
             System.out.println(SERVNAME + "User already logged");
             
             request.getRequestDispatcher("Bacehca").forward(request, response);
-            return;
         }
         else {
             //log
@@ -84,8 +106,8 @@ public class Login extends HttpServlet {
             if (email != null && passwd != null) {
                 int loggedUserId = UtenteFactory.getInstance().getIdByEmailAndPassword(email, passwd);
                 
-                // errore e' indicato con -2 perche' -1 e' l'utente root
-                if (loggedUserId != -2) {
+                // errore e' indicato con 0 perche' 1 e' l'utente root
+                if (loggedUserId >= 1) {
                     Utente loggedUser = UtenteFactory.getInstance().getUtenteById(loggedUserId);
                     
                     System.out.println(SERVNAME + "User login correct");
@@ -94,38 +116,34 @@ public class Login extends HttpServlet {
                     session.setAttribute("loggedUserId", loggedUserId);
                     session.setAttribute("loggedUser", loggedUser);
                     
-                    ArrayList<Utente> users = UtenteFactory.getInstance().getListaUtenti();
+                    List<Utente> users = UtenteFactory.getInstance().getListaUtenti(0);
                     session.setAttribute("users", users);
                     
                     System.out.println(SERVNAME + "Users list loaded");
 
-                    ArrayList<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi();
+                    List<Gruppo> groups = GruppoFactory.getInstance().getListaGruppi(0);
                     session.setAttribute("groups", groups);
                     System.out.println(SERVNAME + "Group list loaded");
 
                     if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
-                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                        response.sendRedirect("Profilo");
                         System.out.println(SERVNAME + "User details not completed. Redirecting user to profile page");
-                        return;
                     }
                     else {
                         response.sendRedirect("Bacheca?userIdToVisit=" + loggedUserId);
                         System.out.println(SERVNAME + "Redirecting User to Bacheca");
-                        return;
                     }
                 }
                 else {
                     System.out.println(SERVNAME + "User not registered. Reloading login page");
                     request.setAttribute("invalidAccountData", true);
                     request.getRequestDispatcher("login.jsp").forward(request, response);
-                    return;
                 } 
             }
             else {
                 System.out.println(SERVNAME + "Login fields not completed");
                 request.setAttribute("invalidAccountData", true);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-                return;
             }
         }
         //request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -134,16 +152,28 @@ public class Login extends HttpServlet {
     
     /**
      * Controlla se tutti i dettagli di un account sono completi
-     * @param utente un oggetto di tipo Utente
+     * @param loggedUser un oggetto di tipo Utente
      * @return boolean true se tutti i dettagli dell'oggetto utente sono completi o false se anche solo uno e' vuoto
      */
     public boolean userDetailsComplete(Utente loggedUser) {
-        if (loggedUser.getNome().equals("") || loggedUser.getCognome().equals("") || loggedUser.getUrlFotoProfilo().equals("img/default.jpg") 
-                || loggedUser.getCitazione().equals("") || loggedUser.getDataNascita().equals("")) {
+        if (loggedUser != null) {
+            return !(loggedUser.getNome() != null ||
+                     loggedUser.getCognome() != null ||
+                     loggedUser.getUrlFotoProfilo() != null ||
+                     loggedUser.getCitazione() != null ||
+                     loggedUser.getDataNascita() != null ||
+                     loggedUser.getNome().equals("") || 
+                     loggedUser.getCognome().equals("") || 
+                     loggedUser.getUrlFotoProfilo().equals("img/default.png") || 
+                     loggedUser.getUrlFotoProfilo().equals("") ||
+                     loggedUser.getCitazione().equals("") || 
+                     loggedUser.getDataNascita().equals(""));
+        }
+        else {
+            System.out.println(SERVNAME + "Logged user == null");
             return false;
         }
-        return true;
-    }
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

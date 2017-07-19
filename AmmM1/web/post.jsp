@@ -29,20 +29,22 @@
                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?userIdToVisit=${post.toUser.id}">${post.toUser.nome}</a><sup><img src="img/256x256_People.png" height="24px" width="24px" class="iconAddOn"/></sup>
             </c:if>
         </h4>
-        <c:if test="${post.postType == 'TEXT' || empty post.urlAllegato}">
+        <c:if test="${post.tipo == 'TEXT'}">
             <p>${post.contenuto}</p>
         </c:if>
-        <c:if test="${post.postType == 'TEXT_AND_IMAGE' && not empty post.urlAllegato}">
+        <c:if test="${post.tipo == 'TEXT_AND_IMAGE'}">
             <p>
                 ${post.contenuto}
+            </p>
+            <div id="image">
                 <a href="${post.urlAllegato}">
                     <img src="${post.urlAllegato}"
                          title="${post.nomeAllegato}"
                          alt="Immagine postata da ${post.autore.nome}"
                          height="200"/></a>
-            </p>
+            </div>
         </c:if>
-        <c:if test="${post.postType == 'TEXT_AND_LINK' && not empty post.urlAllegato}">
+        <c:if test="${post.tipo == 'TEXT_AND_LINK'}">
             <p>
                 ${post.contenuto} 
                 <a href="${post.urlAllegato}">${post.nomeAllegato}</a>

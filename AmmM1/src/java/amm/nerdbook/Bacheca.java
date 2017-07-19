@@ -54,9 +54,9 @@ public class Bacheca extends HttpServlet {
                 int userIdToVisit = Integer.parseInt(request.getParameter("userIdToVisit"));
                 Utente userToVisit = UtenteFactory.getInstance().getUtenteById(userIdToVisit);
                 
-                if (userToVisit != null && userToVisit.getId() != -2) {
+                if (userToVisit != null && userToVisit.getId() >= 1) {
                     // l'utente root puo vedere tutti i post
-                    if (utente.getId() == -1 && utente.getId() == userIdToVisit) {
+                    if (utente.getId() == 1 && utente.getId() == userIdToVisit) {
                         List<Post>posts = PostFactory.getInstance().getPostList();
                         request.setAttribute("posts", posts);
                         request.getRequestDispatcher("bacheca.jsp").forward(request, response);

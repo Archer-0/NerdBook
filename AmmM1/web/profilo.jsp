@@ -124,12 +124,38 @@
                                     </div>
                                 </c:if>
                         <!-- Tasti invio -->
-                        <input type="submit" value="Invia"/>
+                        <input type="submit" value="Accetta"/>
+                    </form>
+                </div>
+                <div id="selfDestruction">
+                    <form name="selfDestrunctionForm" action="Profilo?selfDestructionRequested=true" method="post">
+                        <strong>Attenzione</strong><br/>
+                        <c:if test="${removeUserPassErr != true && removeErr != true }">
+                            <p>Per eliminare il tuo profilo NerdBook digita la tua password personale e premi il <strong>TASTO ROSSO</strong></p>
+                        </c:if>
+                        <c:if test="${removeUserPassErr == true}">
+                            <strong>La password inserita non &egrave; esatta.</strong>
+                            <br/>
+                            <p>Hai avuto un'altra possibilit&agrave; per ripensarci.</p>
+                        </c:if>
+                        <c:if test="${removeErr == true}">
+                            <strong>Si &egrave; verificato un problema.</strong>
+                            <p>Probabilmente non era destino.</p><br/>
+                            <p>PS. Stiamo lavorando per risolvere il problema (credo)</p>
+                        </c:if>
+                        <input type="password"
+                               name="selfDestructionPass" 
+                               id="selfDestructionPass"
+                               size="30"
+                               required
+                               placeholder="Password" 
+                               title="Pensaci bene, non potrai pi&ugrave; tornare indietro dopo aver premuto il TASTO ROSSO"/>
+                        <button type="submit" name="selfDestruction" value="ON">Elimina il tuo account NerdBook :(</button>
                     </form>
                 </div>
             </div>
             <div id="sideBarDx">
-                <!-- Da aggiungere -->
+                
             </div>
         </div>
             

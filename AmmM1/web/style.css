@@ -274,6 +274,7 @@ header #logout img {
     margin-left: -16px;
     margin-top: 8px;
     box-shadow: 0px 0px 10px 3px rgba(46,204,113,0.5);
+    background-color: #FFFFFF;
 }
 
 #logout #userName {
@@ -615,11 +616,17 @@ div#writeStatusFullSize {
     font-size: 15px;
 }
 
-.post p img {
+.post div#image {
     display: block;
-    padding: 10px;
-    border-style: none;
-    border-radius: 5%;
+    text-align: center;
+}
+
+.post div#image a img {
+    border-radius: 1%;
+    border-width: 1px;
+    border-color: rgba(46, 204, 113, .2);
+    max-width: 90%;
+    max-height: 90%;
 }
 
 .post {
@@ -729,15 +736,15 @@ div#writeStatusFullSize {
     box-shadow: 0px 0px 10px rgba(46,204,113, .6);
 }
 
-#content #profileImage {
+#profilo #content #profileImage {
     position: relative;
 }
 
-#content #profileData {
+#profilo #content #profileData {
     margin-left: 0px;
 }
 
-#content #profileData h4 {
+#profilo #content #profileData h4 {
     text-align: center;
     margin-left: 0px;
     overflow: hidden;
@@ -745,11 +752,45 @@ div#writeStatusFullSize {
     margin-bottom: 0px;
 }
 
+#content #selfDestruction {
+    margin-top: 52px;
+    border-top: 5px #FF4626 solid;
+    background-color: rgba(255, 0, 0, 0.05);
+    border-radius: 5px;
+    text-align: center;
+}
+
+#content #selfDestruction strong {
+    color: #FF4626;
+}
+
+#content #selfDestruction form input, #content #selfDestruction form button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-bottom: 20px;
+    font-size: 65%;
+}
+
+#content #selfDestruction form input {
+    float: none;
+    clear: none;
+}
+
 #sommario ul {
     padding: 0px;
 }
 
 
+@media only screen and (min-width: 1023px) {
+    
+    #invalidAccountData, #illegalAccess {
+        width: 45%;
+        float: none;
+        margin: auto;
+    }
+}
 
 @media only screen and (min-width: 480px) and (max-width: 1023px) {
     
@@ -853,6 +894,15 @@ div#writeStatusFullSize {
     #profilo #content {
         width: 90%;
     }
+    
+    #profilo #content div#selfDestruction {
+        padding: 10px;
+    }
+    
+    #profilo div#content div#selfDestruction form input, #profilo div#content div#selfDestruction form button {
+        width: 80%;
+    }
+    
 
     header nav#logout {
         float: none;
@@ -867,6 +917,13 @@ div#writeStatusFullSize {
         border-radius: 5px;
         width: auto;
         border: none;
+    }
+    
+    #invalidAccountData, #illegalAccess {
+        width: 50%;
+        float: none;
+        margin: auto;
+        margin-bottom: 10px;
     }
 }
 
@@ -1047,6 +1104,14 @@ div#writeStatusFullSize {
     #profilo #content #profileData form input[type=submit] {
         margin-top: 20px;
     }
+    
+    #profilo #content div#selfDestruction {
+        padding: 10px;
+    }
+    
+    #profilo div#content div#selfDestruction form input, #profilo div#content div#selfDestruction form button {
+        width: 95%;
+    }
 
     #divBody #login {
         box-shadow: none;
@@ -1073,6 +1138,12 @@ div#writeStatusFullSize {
         width: auto;
         border: none;
     }
+    
+    #invalidAccountData, #illegalAccess {
+        width: 90%;
+        float: none;
+        margin: auto;
+    }
 }
 
 /* sezione visualizzazione errori */
@@ -1085,27 +1156,14 @@ div#writeStatusFullSize {
     display: block;
 }
 
-#invalidAccountData, #illegalAccess {
-    width: 462px;
-    float: none;
-    margin: auto;
-}
-
-#userDetailsUpdated {
+#userDetailsUpdated, #passConfirmError {
     width: 100%;
     float: right;
     clear: right;
     margin-top: 20px;
 }
 
-#passConfirmError {
-    float: right;
-    clear: right;
-    width: 100%;
-    margin-top: 20px;
-}
-
-#passConfirmError>p, #userDetailsUpdated>p, #postContentEmptyError>p {
+#passConfirmError p, #userDetailsUpdated p, #postContentEmptyError p {
     font: 20px/0px "Open Sans", sans-serif;
     text-decoration: none;
     color: #646464;
@@ -1129,23 +1187,55 @@ div#postSaveDecision form {
     display: inline-block;
 }
 
-#postSaveDecision button#refuse {
+#postSaveDecision button#refuse, #content #selfDestruction form button {
     background-color: #FF4626;
     margin-bottom: 20px;
 }
 
-#postSaveDecision button#refuse:hover {
+#postSaveDecision button#refuse:hover, #content #selfDestruction form button:hover {
     height: 44px;
     background-color: #FFFFFF;
     color: #FF4626;
     opacity: .8;
 }
 
-#postSaveDecision button#refuse:focus {
+#postSaveDecision button#refuse:focus, #content #selfDestruction form button:focus {
     height: 44px;
     background-color: #FFFFFF;
     color: #FF4626;
     opacity: .8;
     box-shadow: 0px 3px 8px 3px rgba(255, 70, 38, 0.38),
                 0px 0px 0px 3px rgba(255, 70, 38, 0.38);
+}
+
+
+#goodbyePage {
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+#goodbyePage div#saluti {
+    margin: auto;
+}
+
+#goodbyePage div#saluti h1#words {
+    font-size: 65px;
+    font-style: normal;
+    margin-bottom: 65px;
+}
+
+#goodbyePage div#saluti h1#smile {
+    transform: rotate(90deg);
+    font-size: 130px;
+    font-style: normal;
+    margin-top: 100px;
+    margin: auto;
+}
+
+#goodbyePage div#manualRedirect {
+    margin-top: 100px;
+}
+
+#goodbyePage div#manualRedirect p {
+    font-size: 13px;
 }
