@@ -42,8 +42,8 @@ public class Filter extends HttpServlet {
             if (cmd.equals("search")) {
                 
                 // si esegue la ricerca tra i gruppi e gli utenti
-                List<Utente> uList = UtenteFactory.getInstance().searchUsers((String)request.getParameter("searchQuery"));
-                List<Gruppo> gList = GruppoFactory.getInstance().searchGroups((String) request.getParameter("searchQuery"));
+                List<Utente> uList = UtenteFactory.getInstance().searchUsers((String)request.getParameter("q"));
+                List<Gruppo> gList = GruppoFactory.getInstance().searchGroups((String) request.getParameter("q"));
                 
                 // si restituiscono le liste
                 request.setAttribute("userList", uList);
@@ -55,7 +55,7 @@ public class Filter extends HttpServlet {
                 response.setHeader("Cache-Control", "no-store, no-cache, " + "must-revalidate");
                 
                 // viene generato il json con la jsp
-                request.getRequestDispatcher("searchResults.jsp").forward(request, response);
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             }
         }
         

@@ -6,7 +6,7 @@ function createElement(utente) {
             .attr("src", utente.urlFotoProfilo);
     var link = $("<a>").attr("href", "bacheca.html?userIdToVisit=" + utente.id)
             .html(utente.nome + " " + utente.cognome);
-    return $("<li>")
+    return $("<div>")
             .append(img)
             .append(link);
 }
@@ -63,7 +63,7 @@ $(document).ready(function(){
             url: "Filter",
             data:{
                 cmd:"search",
-                nomeGattoCercato: wantedUser
+                q: wantedUser
             },
             dataType:"json",
             success: function(data, state){
