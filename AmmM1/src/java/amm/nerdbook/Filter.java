@@ -55,7 +55,7 @@ public class Filter extends HttpServlet {
                 response.setHeader("Cache-Control", "no-store, no-cache, " + "must-revalidate");
                 
                 // viene generato il json con la jsp
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                request.getRequestDispatcher("searchResults.jsp").forward(request, response);
             }
         }
         

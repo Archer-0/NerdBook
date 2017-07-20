@@ -17,11 +17,12 @@ function stateSuccess(data){
     $(userListPage).empty();
     
     if (jQuery.isEmptyObject(data)) {
-        $(userListPage).append();
+        $(userListPage).append(ricercaFallita());
     }
-    
-    for(var instance in data){
-        $(userListPage).append(createElement(data[instance]));
+    else {
+        for(var instance in data){
+            $(userListPage).append(createElement(data[instance]));
+        }
     }
 }
 
