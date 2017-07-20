@@ -44,7 +44,7 @@ function updateResults() {
             cmd: "search", 
             q: result
         },
-        dataType: json, 
+        dataType: "json", 
         success: function(data, state) {
             stateSuccess(data);
         },
