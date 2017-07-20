@@ -5,15 +5,19 @@
  */
 package amm.nerdbook.classi;
 
+import java.io.Serializable;
+import java.sql.Date;
+
+
 /**
  *
  * @author archer
  */
-public class Utente {
+public class Utente implements Serializable{
     private int id;
     private String nome;
     private String cognome;
-    private String dataNascita;
+    private Date dataNascita;
     private String email;
     private String password;
     private String urlFotoProfilo;
@@ -23,7 +27,7 @@ public class Utente {
         this.id = -2;
         this.nome = "";
         this.cognome = "";
-        this.dataNascita = "0000-00-00";
+        this.dataNascita = new Date(0);
         this.email = "";
         this.password = "";
         this.urlFotoProfilo = "img/default.png";
@@ -75,14 +79,14 @@ public class Utente {
     /**
      * @return the dataNascita
      */
-    public String getDataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
 
     /**
      * @param dataNascita the dataNascita to set
      */
-    public void setDataNascita(String dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
 

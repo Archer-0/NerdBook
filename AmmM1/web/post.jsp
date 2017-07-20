@@ -29,6 +29,21 @@
                 <a class="addOn"> >>></a> <a class="toWho" href="Bacheca?userIdToVisit=${post.toUser.id}">${post.toUser.nome}</a><sup><img src="img/256x256_People.png" height="24px" width="24px" class="iconAddOn"/></sup>
             </c:if>
         </h4>
+        <%-- il form per la cancellazione e' visibile solo ai propietari di post o all'utente root --%>
+        <c:if test="${post.autore.id == loggedUser.id || loggedUser.id == 1}">
+            <form id="deletePost" action="DeletePost?deletePost=true">
+                <c:if test="${userIdToVisit != null}">
+                    <input type="hidden" hidden readonly name="userIdToVisit" value="${userIdToVisit}"/>
+                </c:if>
+                <c:if test="${groupIdToVisit != null}">
+                    <input type="hidden" hidden readonly name="groupIdToVisit" value="${groupIdToVisit}"/>
+                </c:if>
+                <input type="hidden" hidden readonly name="postId" value="${post.id}"/>
+                <input type="hidden" hidden readonly name="authorId" value="${post.autore.id}"/>
+                <button id="deletePostButton" class="redButton" name="deletePost" value="true">Elimina questo post</button>
+            </form>
+        </c:if>
+        
         <c:if test="${post.tipo == 'TEXT'}">
             <p>${post.contenuto}</p>
         </c:if>

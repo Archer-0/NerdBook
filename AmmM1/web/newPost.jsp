@@ -20,12 +20,14 @@
                     Scrivi un nuovo post
                 </c:if>
             </h4>
-            <c:if test="${postContentEmptyError == true}">
-                <div class="error" id="postContentEmptyError">
-                    <p>Il post deve contenere un testo</p>
-                </div>
-            </c:if>
-            <form action="NewPost" method="post">
+            
+            <form <c:if test="${userIdToVisit != null}">
+                      action="NewPost?userIdToVisit=${userToVisit.id}" 
+                  </c:if>
+                  <c:if test="${groupIdToVisit != null}">
+                      action="NewPost?groupIdToVisit=${groupToVisit.id}"
+                  </c:if>
+                method="post">    
                 <textarea rows="4" cols="22"
                           title="Scrivi un nuovo post"
                           placeholder="So già a cosa stai pensando, ma scrivilo comunque..."
@@ -114,17 +116,20 @@
             <div id="postSaveDecision">
                 <strong>Confermare l'attuale post?</strong>
 
-                <form action="NewPost" method="post">
+                <form <c:if test="${userIdToVisit != null}">
+                      action="NewPost?userIdToVisit=${userIdToVisit}" 
+                  </c:if>
+                  <c:if test="${groupIdToVisit != null}">
+                      action="NewPost?groupIdToVisit=${groupIdToVisit}"
+                  </c:if> method="post">
 
                     <input type="hidden" hidden readonly name="contenuto" value="${contenuto}"/>
-                    <input type="hidden" hidden readonly name="userIdToVisit" value="${userToVisit.id}"/>
-                    <input type="hidden" hidden readonly name="groupIdToVisit" value="${groupToVisit.id}"/>
                     <input type="hidden" hidden readonly name="urlAllegato" value="${urlAllegato}"/>
                     <input type="hidden" hidden readonly name="nomeAllegato" value="${nomeAllegato}"/>
                     <input type="hidden" hidden readonly name="allegatoType" value="${allegatoType}"/>
                     
 
-                    <button id="refuse" class="middleSizeButton" type="submit" name="newPostRequest" value="refused">Annulla</button>
+                    <button class="redButton" id="refuse" class="middleSizeButton" type="submit" name="newPostRequest" value="refused">Annulla</button>
                     <button id="approve" class="middleSizeButton" type="submit" name="newPostRequest" value="approved">Conferma</button>
                 </form>  
             </div>

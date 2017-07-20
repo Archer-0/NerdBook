@@ -42,100 +42,151 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
+        System.out.println(SERVNAME + "Checking session...");
+        
         if (session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true)) {
             Utente utente = (Utente)session.getAttribute("loggedUser");
+            boolean anyChange = false;
+            int userIdToVisit = 0;
+            int groupIdToVisit = 0;
+            
+            if (request.getParameter("userIdToVisit") != null) {
+                userIdToVisit = Integer.parseInt(request.getParameter("userIdToVisit"));
+                request.setAttribute("userIdToVisit", userIdToVisit);
+            }
+            
+            if (request.getParameter("groupIdToVisit") != null) {
+                groupIdToVisit = Integer.parseInt(request.getParameter("groupIdToVisit"));
+                request.setAttribute("groupIdToVisit", groupIdToVisit);
+            }
+                
+                
             
             if (utente != null) {
                 
-                if (request.getParameter("userDetailsUpdated") != null) {
-                    
-                    if (request.getParameter("usrName").equals("") == false && request.getParameter("usrName").equals(utente.getNome()) == false) {
-                        utente.setNome((String)request.getParameter("usrName"));
-                        request.setAttribute("userDetailsUpdated", true);
-                    }
-                    if (request.getParameter("usrSurname").equals("") == false && request.getParameter("usrSurname").equals(utente.getCognome()) == false) {
-                        utente.setCognome((String)request.getParameter("usrSurname"));
-                        request.setAttribute("userDetailsUpdated", true);
-                    }
-                    if (request.getParameter("usrBDay").equals("") == false && request.getParameter("usrBDay").equals(utente.getDataNascita()) == false) {
-                        utente.setDataNascita((String)request.getParameter("usrBDay"));
-                        request.setAttribute("userDetailsUpdated", true);
-                    }
-                    if (request.getParameter("usrImgURL").equals("") == false && request.getParameter("usrImgURL").equals(utente.getUrlFotoProfilo()) == false) {
-                        utente.setUrlFotoProfilo((String)request.getParameter("usrImgURL"));
-                        request.setAttribute("userDetailsUpdated", true);
-                    }
-                    if (request.getParameter("usrPresentation").equals("") == false && request.getParameter("usrPresentation").equals(utente.getCitazione()) == false) {
-                        utente.setCitazione((String)request.getParameter("usrPresentation"));
-                        request.setAttribute("userDetailsUpdated", true);
-                    }
-                    
-                    String passwd = request.getParameter("usrPass");
-                    String passwdConfirm = request.getParameter("usrPassConfirm");
-                    
-                    if (request.getParameter("usrPass").equals("") == false) {
-                        if (passwd.equals(passwdConfirm) == true) {
-                            utente.setPassword(passwd);
-                            request.setAttribute("userDetailsUpdated", true);
-                            System.out.println(SERVNAME + "User details updated");
-                        }
-                        else {
-                            request.setAttribute("passConfirmError", true);
-                        }
-                    }
-                }
+                System.out.println(SERVNAME + "User already logged");
                 
-                // eliminazione di un account
-                if (request.getParameter("selfDestruction") != null) {
+                request.setAttribute("loggedUser", utente);
+                
+                if (userIdToVisit != 0 && utente.getId() == userIdToVisit) {
                     
-                    int userId = utente.getId();
-                    
-                    System.out.println(SERVNAME + "User with id: " + userId + " request to remove");
-                    
-                    // se la password e' giusta
-                    if (utente.getPassword().equals((String)request.getParameter("selfDestructionPass")) == true) {
-                        // tenta di cancellare l'utente. Se viene lanciata qualche eccezione verra' intercettata
-                        try {
-                            // log
-                            System.out.println(SERVNAME + "Deleting user with id: " + userId + "...");
-                            
-                            if (UtenteFactory.getInstance().removeUserCompletely(utente.getId()) == true) {
+                    // aggiorna dati utente
+                    if (request.getParameter("userDetailsUpdated") != null) {
+
+                        if (request.getParameter("usrName").equals("") == false && !request.getParameter("usrName").equals(utente.getNome())) {
+                            utente.setNome((String)request.getParameter("usrName"));
+                            anyChange = true;
+                        }
+                        if (request.getParameter("usrSurname").equals("") == false && !request.getParameter("usrSurname").equals(utente.getCognome())) {
+                            utente.setCognome((String)request.getParameter("usrSurname"));
+                            anyChange = true;
+                        }
+                        if (request.getParameter("usrBDay").equals("") == false && !request.getParameter("usrBDay").equals(utente.getDataNascita().toString())) {
+                            utente.setDataNascita(java.sql.Date.valueOf(request.getParameter("usrBDay")));
+                            anyChange = true;
+                        }
+                        if (request.getParameter("usrImgURL").equals("") == false && !request.getParameter("usrImgURL").equals(utente.getUrlFotoProfilo())) {
+                            utente.setUrlFotoProfilo((String)request.getParameter("usrImgURL"));
+                            anyChange = true;
+                        }
+                        if (request.getParameter("usrPresentation").equals("") == false && !request.getParameter("usrPresentation").equals(utente.getCitazione())) {
+                            utente.setCitazione((String)request.getParameter("usrPresentation"));
+                            anyChange = true;
+                        }
+
+                        String passwd = request.getParameter("usrPass");
+                        String passwdConfirm = request.getParameter("usrPassConfirm");
+
+                        if (!request.getParameter("usrPass").equals("")) {
+                            if (passwd.equals(passwdConfirm) == true) {
+                                utente.setPassword(passwd);
+                                anyChange = true;
+                            }
+                            else {
+                                request.setAttribute("passConfirmError", true);
+                            }
+                        }
+
+                        if (anyChange) {
+
+                            System.out.println(SERVNAME + "Updating user (id: " + utente.getId() + ") details...");
+
+                            try {
+                                if(UtenteFactory.getInstance().updateUserInformations(utente)) {
+                                    request.setAttribute("userDetailsUpdated", true);
+                                    System.out.println(SERVNAME + "User (id: " + utente.getId() + ") details updated");
+                                }
+                            } catch (SQLException ex) {
+                                System.err.println(SERVNAME + "ERROR while updating user (id: " + utente.getId() + ") details");
+                                ex.printStackTrace();
+                            }
+                        }
+
+                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                    }
+
+                    // eliminazione di un account
+                    if (request.getParameter("selfDestructionRequested") != null) {
+
+                        int userId = utente.getId();
+
+                        System.out.println(SERVNAME + "User with id: " + userId + " request to remove");
+
+                        // se la password e' giusta
+                        if (utente.getPassword().equals((String)request.getParameter("selfDestructionPass")) == true) {
+                            // tenta di cancellare l'utente. Se viene lanciata qualche eccezione verra' intercettata
+                            try {
                                 // log
-                                System.out.println(SERVNAME + "User with id: " + userId + " and his posts sucesfully removed");
-                                // redirect alla pagina di addio
-                                response.sendRedirect("goodbye.jsp");
-                                
+                                System.out.println(SERVNAME + "Deleting user with id: " + userId + "...");
+
+                                if (UtenteFactory.getInstance().removeUserCompletely(utente.getId()) == true) {
+                                    // log
+                                    System.out.println(SERVNAME + "User with id: " + userId + " and his posts sucesfully removed");
+                                    // redirect alla pagina di addio
+                                    response.sendRedirect("goodbye.jsp");
+
+                                    return;
+                                }
+
+                            } catch (SQLException ex) {
+                                // log
+                                System.err.println(SERVNAME + "ERROR while deleting user with id: " + userId + " reloading profile page");
+                                ex.printStackTrace();
+
+                                request.setAttribute("removeErr", true);
+
                                 return;
                             }
-                            
-                        } catch (SQLException ex) {
-                            // log
-                            System.err.println(SERVNAME + "ERROR while deleting user with id: " + userId + " reloading profile page");
-                            ex.printStackTrace();
-                            
-                            request.setAttribute("removeErr", true);
-                            
+                        } else {
+                            request.setAttribute("removeUserPassErr", true);
+                            request.getRequestDispatcher("profilo.jsp").forward(request, response);
                             return;
                         }
-                    } else {
-                        request.setAttribute("removeUserPassErr", true);
-                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                        return;
                     }
+
+                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 }
-                
-                request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                
+                else {
+                    if (userIdToVisit != 0) {
+                        request.setAttribute("visitedUser", UtenteFactory.getInstance().getUtenteById(userIdToVisit));
+                    
+                    } else if (groupIdToVisit != 0) {
+                        request.setAttribute("visitedGroup", GruppoFactory.getInstance().getGroupById(groupIdToVisit));
+                    }
+                    
+                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                }
             }
             else {
+                System.err.println(SERVNAME + "ERROR user is null");
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
         }
         else {
+            System.out.println(SERVNAME + "User not logged: illegal access");
             request.setAttribute("loggedIn", false);
             request.setAttribute("illegalAccess", true);
             request.getRequestDispatcher("Login?logout=true").forward(request, response);
-            return;
         }
     }  
     

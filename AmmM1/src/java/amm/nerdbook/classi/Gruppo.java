@@ -5,11 +5,13 @@
  */
 package amm.nerdbook.classi;
 
+import java.io.Serializable;
+
 /**
  *
  * @author archer
  */
-public class Gruppo {
+public class Gruppo implements Serializable {
     private int id;
     private int nUtenti;
     private String nome;

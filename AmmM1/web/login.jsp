@@ -41,7 +41,7 @@
                 <!-- form per inserimento dati -->
                 <form name="user_data" action="Login" method="post">
                     <!-- spazio di inserimento username -->
-                    <input name="email" placeholder="E-mail" id="email" type="text" size="30" maxlength="70" title="Inserisci la tua e-mail"/>
+                    <input name="email" placeholder="E-mail" id="email" type="email" size="30" maxlength="70" title="Inserisci la tua e-mail"/>
                     <!-- spazio inserimento password -->
                     <input name="pass" placeholder="Password" id="pass" type="password" size="30" maxlength="70" title="Inserisci la tua password"/>
                     <!-- Tasto per invio dati -->

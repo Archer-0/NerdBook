@@ -99,7 +99,7 @@ public class Login extends HttpServlet {
             System.out.println(SERVNAME + "User not logged");
             
             //recupero dati di accesso
-            String email = request.getParameter("email");
+            String email = request.getParameter("email").toString();
             String passwd = request.getParameter("pass");
             
             // se i campi di autenticazione non sono vuoti
@@ -125,8 +125,8 @@ public class Login extends HttpServlet {
                     session.setAttribute("groups", groups);
                     System.out.println(SERVNAME + "Group list loaded");
 
-                    if (this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId)) == false) {
-                        response.sendRedirect("Profilo");
+                    if (!this.userDetailsComplete(UtenteFactory.getInstance().getUtenteById(loggedUserId))) {
+                        response.sendRedirect("Profilo?userIdToVisit=" + loggedUserId);
                         System.out.println(SERVNAME + "User details not completed. Redirecting user to profile page");
                     }
                     else {
@@ -157,17 +157,16 @@ public class Login extends HttpServlet {
      */
     public boolean userDetailsComplete(Utente loggedUser) {
         if (loggedUser != null) {
-            return !(loggedUser.getNome() != null ||
-                     loggedUser.getCognome() != null ||
-                     loggedUser.getUrlFotoProfilo() != null ||
-                     loggedUser.getCitazione() != null ||
-                     loggedUser.getDataNascita() != null ||
+            return !(loggedUser.getNome() == null ||
+                     loggedUser.getCognome() == null ||
+                     loggedUser.getUrlFotoProfilo() == null ||
+                     loggedUser.getCitazione() == null ||
+                     loggedUser.getDataNascita() == null ||
                      loggedUser.getNome().equals("") || 
                      loggedUser.getCognome().equals("") || 
                      loggedUser.getUrlFotoProfilo().equals("img/default.png") || 
                      loggedUser.getUrlFotoProfilo().equals("") ||
-                     loggedUser.getCitazione().equals("") || 
-                     loggedUser.getDataNascita().equals(""));
+                     loggedUser.getCitazione().equals(""));
         }
         else {
             System.out.println(SERVNAME + "Logged user == null");

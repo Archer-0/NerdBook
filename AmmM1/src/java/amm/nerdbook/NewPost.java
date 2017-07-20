@@ -49,10 +49,9 @@ public class NewPost extends HttpServlet {
             
             Utente utente = (Utente) session.getAttribute("loggedUser");
             
-            System.out.println("[NewPost-Servlet]-User already logged");
+            System.out.println(SERVNAME + "User already logged");
             
             // variabili
-            String toWho            = null;     // contiene l'identificatore dell'utente o del gruppo su cui si sta scrivendo
             int idToWho             = -1;       // e' usato per evitare di ripetere controlli 
             Utente toUser           = null;     // id dell'utente visitato (-1 se si visita un gruppo)
             Gruppo toGroup          = null;     // id del gruppo visitato (-1 se si visita un utente)
@@ -62,30 +61,20 @@ public class NewPost extends HttpServlet {
             String nomeAllegato     = null;     // contiene il nome breve dell'allegato (opzionale)
             String allegatoType     = null;     // contiene il tipo di allegato (not, img, link)
             
-            // impostazione toWho
-            if (request.getParameter("userIdToVisit") != null && !request.getParameter("userIdToVisit").equals("")) {
-                
-                toUser = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("userIdToVisit")));
-                idToWho = toUser.getId();
-                
-                // log
-                System.out.println(SERVNAME + "idToWho (user) value: " + idToWho);
-                
-		toWho = "userIdToVisit=" + idToWho;
-            }
-            else if (request.getParameter("groupIdToVisit") != null && !request.getParameter("groupIdToVisit").equals("")) {
-                
-                toGroup = GruppoFactory.getInstance().getGroupById(Integer.parseInt(request.getParameter("groupIdToVisit")));
-                idToWho = toGroup.getId();
-                
-                // log
-                System.out.println(SERVNAME + "idToWho (group) value: " + idToWho);
-                
-                toWho = "groupIdToVisit=" + idToWho;
+            int userIdToVisit = 0;
+            int groupIdToVisit = 0;
+            
+            if (request.getParameter("userIdToVisit") != null) {
+                userIdToVisit = Integer.parseInt(request.getParameter("userIdToVisit"));
+                request.setAttribute("userIdToVisit", userIdToVisit);
+                toUser = UtenteFactory.getInstance().getUtenteById(userIdToVisit);
             }
             
-            // log
-            System.out.println(SERVNAME + "toWho value: " + toWho);
+            if (request.getParameter("groupIdToVisit") != null) {
+                groupIdToVisit = Integer.parseInt(request.getParameter("groupIdToVisit"));
+                request.setAttribute("groupIdToVisit", groupIdToVisit);
+                toGroup = GruppoFactory.getInstance().getGroupById(groupIdToVisit);
+            }
             
             // nuovo post
             if (request.getParameter("newPostRequest") != null) {
@@ -108,8 +97,6 @@ public class NewPost extends HttpServlet {
 
                     /* recupero parametri allegato */
                     allegatoType = request.getParameter("allegatoType");
-                    
-                    postType = Post.Type.TEXT;
                     
                     // controllo contenuto allegato
 
@@ -158,6 +145,7 @@ public class NewPost extends HttpServlet {
                     
                     
                     request.setAttribute("revision", true);
+                    
                     request.getRequestDispatcher("Bacheca").forward(request, response);
                     
                     return;
@@ -214,7 +202,10 @@ public class NewPost extends HttpServlet {
                     request.setAttribute("revision", false);
                     //request.getRequestDispatcher("Bacheca");
                     
-                    response.sendRedirect("Bacheca?" + toWho);                    
+                    if (userIdToVisit != 0)
+                        response.sendRedirect("Bacheca?userIdToVisit=" + userIdToVisit);
+                    else
+                        response.sendRedirect("Bacheca?groupIdToVisit=" + groupIdToVisit);
                     
                     return;
                 }
@@ -229,7 +220,11 @@ public class NewPost extends HttpServlet {
                         request.removeAttribute("urlAllegato");
                         request.removeAttribute("nomeAllegato");
                         
-                        response.sendRedirect("Bacheca?userIdToVisit=" + session.getAttribute("loggedUserId"));
+                        if (userIdToVisit != 0)
+                            response.sendRedirect("Bacheca?userIdToVisit=" + userIdToVisit);
+                        else
+                            response.sendRedirect("Bacheca?groupIdToVisit=" + groupIdToVisit);
+                        
                         System.out.println(SERVNAME + "Post refused by user.");
                         
                         return;
@@ -237,14 +232,15 @@ public class NewPost extends HttpServlet {
                 }
             } // FINE opzioni post
             
-            request.getRequestDispatcher("Bacheca?userIdToVisit=" + session.getAttribute("loggedUserId")).forward(request, response);
-            return;
+            if (userIdToVisit != 0)
+                response.sendRedirect("Bacheca?userIdToVisit=" + userIdToVisit);
+            else
+                response.sendRedirect("Bacheca?groupIdToVisit=" + groupIdToVisit);        
         }
         else {
             request.setAttribute("illegalAccess", true);          
             System.out.println(SERVNAME + "User not logged (illegal access) redirecting user to login");
             request.getRequestDispatcher("Login?logout=true").forward(request, response);
-            return;
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">  
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>NewPost</servlet-name>
         <servlet-class>amm.nerdbook.NewPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePost</servlet-name>
+        <servlet-class>amm.nerdbook.DeletePost</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewPost</servlet-name>
@@ -48,13 +52,21 @@
         <servlet-name>Profilo</servlet-name>
         <url-pattern>/profilo.html</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Filter</servlet-name>
+        <servlet-class>amm.nerdbook.Filter</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>NewPost</servlet-name>
-        <url-pattern>/NewPost</url-pattern>
+        <servlet-name>Filter</servlet-name>
+        <url-pattern>/filter.json</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewPost</servlet-name>
-        <url-pattern>/newPost.html</url-pattern>
+        <servlet-name>Filter</servlet-name>
+        <url-pattern>/Filter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePost</servlet-name>
+        <url-pattern>/DeletePost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

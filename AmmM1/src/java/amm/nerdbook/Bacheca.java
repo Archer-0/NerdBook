@@ -12,6 +12,7 @@ import amm.nerdbook.classi.PostFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -53,10 +54,12 @@ public class Bacheca extends HttpServlet {
             if (request.getParameter("userIdToVisit") != null && request.getParameter("groupIdToVisit") == null) {
                 int userIdToVisit = Integer.parseInt(request.getParameter("userIdToVisit"));
                 Utente userToVisit = UtenteFactory.getInstance().getUtenteById(userIdToVisit);
+                request.setAttribute("userIdToVisit", userToVisit.getId());
                 
                 if (userToVisit != null && userToVisit.getId() >= 1) {
-                    // l'utente root puo vedere tutti i post
+                    // l'utente root puo vedere tutti i post di tutti gli utenti nella sua bacheca (compresi i suoi)
                     if (utente.getId() == 1 && utente.getId() == userIdToVisit) {
+                        request.setAttribute("userToVisit", userToVisit);
                         List<Post>posts = PostFactory.getInstance().getPostList();
                         request.setAttribute("posts", posts);
                         request.getRequestDispatcher("bacheca.jsp").forward(request, response);
@@ -74,7 +77,8 @@ public class Bacheca extends HttpServlet {
             else if (request.getParameter("groupIdToVisit") != null && request.getParameter("userIdToVisit") == null) {
                 int groupIdToVisit = Integer.parseInt(request.getParameter("groupIdToVisit"));
                 Gruppo groupToVisit = GruppoFactory.getInstance().getGroupById(groupIdToVisit);
-            
+                request.setAttribute("groupIdToVisit", groupToVisit.getId());
+                
                 if (groupToVisit != null) {
                     request.setAttribute("groupToVisit", groupToVisit);
                     List<Post>posts = PostFactory.getInstance().getPostListByGroup(groupToVisit);
@@ -90,7 +94,8 @@ public class Bacheca extends HttpServlet {
             }
         }
         else {
-            System.out.println("(user not logged: illegal access)");
+            System.out.println(SERVNAME + "User not logged: illegal access");
+            request.setAttribute("loggedIn", false);
             request.setAttribute("illegalAccess", true);
             request.getRequestDispatcher("Login?logout=true").forward(request, response);
         }

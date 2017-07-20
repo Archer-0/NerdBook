@@ -327,8 +327,8 @@ public class PostFactory {
             conn.close();
             
         } catch (SQLException ex) {
-            ex.printStackTrace();
             System.err.println(CLASSNAME + "ERROR while executing SQL operations (Function: removePost(...))");
+            ex.printStackTrace();
             return false;
         }
 

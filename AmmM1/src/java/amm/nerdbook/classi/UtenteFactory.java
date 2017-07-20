@@ -65,7 +65,7 @@ public class UtenteFactory {
                 user.setId(res.getInt("id"));
                 user.setNome(res.getString("nome"));
                 user.setCognome(res.getString("cognome"));
-                user.setDataNascita(res.getDate("data_nascita").toString());
+                user.setDataNascita(res.getDate("data_nascita"));
                 user.setEmail(res.getString("email"));
                 user.setPassword(res.getString("passwd"));
                 user.setUrlFotoProfilo(res.getString("url_foto_profilo"));
@@ -162,7 +162,7 @@ public class UtenteFactory {
                 user.setId(res.getInt("id"));
                 user.setNome(res.getString("nome"));
                 user.setCognome(res.getString("cognome"));
-                user.setDataNascita(res.getDate("data_nascita").toString());
+                user.setDataNascita(res.getDate("data_nascita"));
                 user.setEmail(res.getString("email"));
                 user.setPassword(res.getString("passwd"));
                 user.setUrlFotoProfilo(res.getString("url_foto_profilo"));
@@ -242,7 +242,7 @@ public class UtenteFactory {
                 user.setId(res.getInt("id"));
                 user.setNome(res.getString("nome"));
                 user.setCognome(res.getString("cognome"));
-                user.setDataNascita(res.getDate("data_nascita").toString());
+                user.setDataNascita(res.getDate("data_nascita"));
                 user.setEmail(res.getString("email"));
                 user.setPassword(res.getString("passwd"));
                 user.setUrlFotoProfilo(res.getString("url_foto_profilo"));
@@ -338,6 +338,158 @@ public class UtenteFactory {
         }
         
         return flag;
+    }
+    
+    public boolean updateUserInformations(Utente updatedUser) throws SQLException {
+        
+        Connection conn = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
+        
+            String query = null;
+            int userId = updatedUser.getId();
+            String email = updatedUser.getEmail();
+            
+            Utente oldUser = UtenteFactory.getInstance().getUtenteById(userId);
+            
+            // Prepered Statement (giusto per evitare problemi)
+            PreparedStatement prepUser = null;
+            
+            boolean flag = true;
+        
+        try {
+            
+            System.out.println(CLASSNAME + "Trying to update user (id: " + userId + ") details...");
+            
+            conn.setAutoCommit(false);
+            // aggiorna le informazioni una ad una
+            
+            
+            
+            // aggionrameto nome
+            if (updatedUser.getNome() != null && !updatedUser.getNome().equals(oldUser.getNome())) {
+                query = "UPDATE utente SET nome = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+                
+                prepUser.setString(1, updatedUser.getNome());
+                prepUser.setInt(2, userId) ;
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"nome\" updated");
+            }
+            
+            // aggionrameto cognome
+            if (updatedUser.getCognome() != null && !updatedUser.getCognome().equals(oldUser.getCognome())) {
+                query = "UPDATE utente SET cognome = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+                
+                prepUser.setString(1, updatedUser.getCognome());
+                prepUser.setInt(2, userId);
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"cognome\" updated");
+            }
+            
+            // aggionrameto dataNascita
+            if (updatedUser.getDataNascita() != null && !updatedUser.getDataNascita().toString().equals(oldUser.getDataNascita().toString())) {
+                query = "UPDATE utente SET data_nascita = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+                
+                prepUser.setDate(1, updatedUser.getDataNascita());
+                prepUser.setInt(2, userId);
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"data_nascita\" updated");
+            }
+            
+            // aggionrameto password
+            if (updatedUser.getPassword() != null && !updatedUser.getPassword().equals(oldUser.getPassword())) {
+                query = "UPDATE utente SET passwd = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+                
+                prepUser.setString(1, updatedUser.getPassword());
+                prepUser.setInt(2, userId);
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"passwd\" updated");
+            }
+            
+            // aggionrameto url foto profilo
+            if (updatedUser.getUrlFotoProfilo() != null && !updatedUser.getUrlFotoProfilo().equals(oldUser.getUrlFotoProfilo())) {
+                query = "UPDATE utente SET url_foto_profilo = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+
+                prepUser.setString(1, updatedUser.getUrlFotoProfilo());
+                prepUser.setInt(2, userId);
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"url_foto_profilo\" updated");
+            }
+            
+            // aggionrameto citazione
+            if (updatedUser.getCitazione() != null && !updatedUser.getCitazione().equals(oldUser.getCitazione())) {
+                query = "UPDATE utente SET citazione = ? WHERE id = ? AND email = ?";
+                prepUser = conn.prepareStatement(query);
+                
+                prepUser.setString(1, updatedUser.getCitazione());
+                prepUser.setInt(2, userId);
+                prepUser.setString(3, email);
+                
+                prepUser.executeUpdate();
+                
+                conn.commit();
+                
+                System.out.println(CLASSNAME + "User (id: " + userId + ") \"citazione\" updated");
+            }
+            
+            System.out.println(CLASSNAME + "User (id: " + userId + ") details updated");
+            
+        } catch (SQLException ex) {
+            // log
+            System.err.println(CLASSNAME + "ERROR while executing SQL operations, trying transaction rollback [Function: updateUserInformations(...)]");
+            ex.printStackTrace();
+            flag = false;
+            
+            try {
+                // in caso di errore si ripristina tutto all'ultimo commit
+                conn.rollback();
+                System.out.println(CLASSNAME + "Transaction rollback successfully executed [Function: updateUserInformations(...)]");
+                
+            } catch (SQLException excep) {
+                
+                excep.printStackTrace();
+                System.err.println(CLASSNAME + "ERROR transaction rollback failed [Function: updateUserInformations(...)]");
+            
+            }
+        } finally {
+            if (prepUser != null)
+                prepUser.close();
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+        
+        return flag;
+        
     }
 
     public void setConnectionString(String s){
