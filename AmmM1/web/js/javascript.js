@@ -17,7 +17,7 @@ function stateSuccess(data){
     $(userListPage).empty();
     
     if (jQuery.isEmptyObject(data)) {
-        $(userListPage).append()
+        $(userListPage).append();
     }
     
     for(var instance in data){
